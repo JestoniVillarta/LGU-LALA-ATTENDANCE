@@ -1,61 +1,159 @@
-/* Form Container */
-.container {
-    max-width: 400px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
 }
 
-/* Form Heading */
-.container h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-/* Form Inputs */
-.container input[type="text"],
-.container input[type="email"],
-.container input[type="submit"] {
+body {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-/* Gender Selection */
-.gender-container {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
 }
 
-.gender-container label {
-    font-size: 16px;
-    color: #555;
-}
 
-/* Submit Button */
-.container input[type="submit"] {
-    background: #007bff;
+/* Sidebar Styles */
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    background: #2C3E50;
     color: white;
-    border: none;
-    cursor: pointer;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
     transition: 0.3s;
 }
 
-.container input[type="submit"]:hover {
-    background: #0056b3;
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
 }
 
-/* Responsive */
-@media (max-width: 500px) {
-    .container {
-        width: 90%;
-    }
+.sidebar ul li:hover {
+    background: #1A252F;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 80%;
+}
+
+.sidebar ul li:hover {
+    background: #1A252F;
+    transform: scale(1.05); /* Slightly enlarges */
+}
+
+/* Left Border Indicator on Hover */
+.sidebar ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: #FFD700; /* Golden Yellow */
+    transform: scaleY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Show the left border on hover */
+.sidebar ul li:hover::before {
+    transform: scaleY(1);
+}
+
+
+/* Form Container */
+.container {
+    width: 80%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+      
+}
+
+.container {
+    width: ;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Styling */
+fieldset {
+    width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+legend h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    padding: 12px;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Back link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
 }
