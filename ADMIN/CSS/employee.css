@@ -1,110 +1,41 @@
-/* Center the table on the right side */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: monospace;
-}
-
 body {
     width: 100%;
-    min-height: 100vh;
     display: flex;
-}
-
-
-/* Sidebar Styles */
-.sidebar {
-    width: 20%;
     height: 100vh;
-    background: #2C3E50;
-    color: white;
-    padding-top: 20px;
+    background-color: #f4f4f4;
 }
 
-.sidebar h2 {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 15px;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-}
-
-.sidebar ul li:hover {
-    background: #1A252F;
-}
-
-/* Main Content */
+/* Main Content Styling */
 .main-content {
-    width: 80%;
-}
-
-.sidebar ul li:hover {
-    background: #1A252F;
-    transform: scale(1.05); /* Slightly enlarges */
-}
-
-/* Left Border Indicator on Hover */
-.sidebar ul li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 5px;
-    background: #FFD700; /* Golden Yellow */
-    transform: scaleY(0);
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Show the left border on hover */
-.sidebar ul li:hover::before {
-    transform: scaleY(1);
-}
-
-
-.main-content {
+    padding-top: 30px;
+    width: 100%;
     display: flex;
-    flex-direction: ;
+    flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centers content horizontally */
+    align-items: center;
+}
+
+/* Sidebar Navigation */
+.nav {
+    width: 20%;
+}
+
+/* Table Container to enable scrolling */
+.table-container {
+    max-height: 600px; /* Adjust height as needed */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    width: 90%;
+    border-radius: 8px;
 }
 
 /* Table Styling */
 table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Styling the "Employee List" title row */
-table tr:first-child th {
-    background-color: #2c3e50;
-    color: white;
-    font-size: 20px;
-    padding: 15px;
-    text-align: center;
-    border: 1px solid #2c3e50;
 }
 
 /* Table Header Styling */
@@ -114,6 +45,9 @@ th {
     padding: 12px;
     text-transform: uppercase;
     border: 1px solid #2c3e50;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 /* Table Cell Styling */
@@ -144,4 +78,18 @@ tr:hover {
 
 .delete-btn:hover {
     background-color: #c0392b;
+}
+
+/* Add Employee Button */
+.add-btn {
+    text-decoration: none;
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-btn:hover {
+    background-color: #27ae60;
 }

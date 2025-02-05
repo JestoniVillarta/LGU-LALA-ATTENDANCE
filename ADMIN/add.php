@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="CSS/add.css">
+    <link rel="stylesheet" href="CSS/sidenav.css">
 
 
 
@@ -32,31 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 
+<div class="nav">
+   <?php include 'sidenav.php'; ?>
+</div>
 
-    <!-- Sidebar Navigation -->
-    <div class="sidebar">
-        <h2>Admin Panel</h2>
-        <ul>
-            <button>
-                <li><a href="dashboard.php">Dashboard</a></li>
-            </button>
-            <button>
-                <li><a href="employee.php">Employee</a></li>
-            </button>
-            <button>
-                <li><a href="settings.php">Settings</a></li>
-            </button>
-            <button>
-                <li><a href="setup_time.php">Setup Time</a></li>
-            </button>
-            <button>
-                <li><a href="reports.php">Reports</a></li>
-            </button>
-            <button>
-                <li><a href="../logout.php">Logout</a></li>
-            </button>
-        </ul>
-    </div>
+
+
+
 
     <!-- Container for Form -->
     <div class="container">

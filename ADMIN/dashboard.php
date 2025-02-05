@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,15 +11,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/sidenav.css">
+
+
 
 </head>
 
 <body>
 
-   
 
-    <img src="../img/tonix.jpg" alt="">
+    <div class="nav">
+        <?php include 'sidenav.php'; ?>
+    </div>
 
-    <!-- Main Content -->
+ 
+
 
 </body>
+
+</html>
