@@ -7,15 +7,9 @@ body {
 
 
 .nav {
-    width: 20%;
+    width: 15%;
 }
 
-
-form{
-    padding-top: 30px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.ero {
+    width: 85%;
 }

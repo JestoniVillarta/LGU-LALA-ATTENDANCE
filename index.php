@@ -1,88 +1,82 @@
 <?php
-
 include 'CONNECTION/connection.php';
 
-// Ensure the database connection is successful
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Set the timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
+
+$current_time = new DateTime(); // Current time with the default timezone set to 'Asia/Manila'
+
+// Fetch attendance settings from the database
+$query = "SELECT START_TIME, END_TIME FROM attendance_settings_tbl LIMIT 1";
+$result = $conn->query($query);
+
+if ($result && $result->num_rows > 0) {
+    $attendance_time = $result->fetch_assoc();
+
+    // Convert stored times from the database (assuming they are stored in 24-hour format)
+    $start_time = DateTime::createFromFormat('H:i:s', $attendance_time['START_TIME'], new DateTimeZone('Asia/Manila'));
+    $end_time = DateTime::createFromFormat('H:i:s', $attendance_time['END_TIME'], new DateTimeZone('Asia/Manila'));
+
+    // Set the date for the start and end time to match today's date
+    $start_time->setDate($current_time->format('Y'), $current_time->format('m'), $current_time->format('d'));
+    $end_time->setDate($current_time->format('Y'), $current_time->format('m'), $current_time->format('d'));
+} else {
+    echo "Error fetching attendance settings.";
+    exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate input
-    $employee_id = isset($_POST['employee_id']) ? trim($_POST['employee_id']) : '';
-    
+// Check if the current time exceeds the attendance window (END_TIME)
+$attendance_window_exceeded = $current_time > $end_time;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['employee_id'])) {
+    // Sanitize input
+    $employee_id = filter_input(INPUT_POST, 'employee_id', FILTER_SANITIZE_STRING);
+
     if (empty($employee_id)) {
         echo "Employee ID cannot be empty.";
         exit();
     }
 
-    // Get current time as DateTime object, assuming UTC for consistency
-    date_default_timezone_set('UTC');  // Set timezone to UTC or your desired timezone
-    $current_time = new DateTime();
+    // Get current time in 24-hour format
+    $formatted_time_in = $current_time->format('Y-m-d H:i:s'); // Store formatted time in 24-hour format
 
-    // Fetch allowed attendance time
-    $query = "SELECT START_TIME, END_TIME FROM attendance_settings_tbl";
-    $result = $conn->query($query);
+    // Fetch Employee Details
+    $query = "SELECT NAME, GENDER FROM employee_tbl WHERE EMPLOYEE_ID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $employee_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($result && $result->num_rows > 0) {
-        $attendance_time = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $employee = $result->fetch_assoc();
+        $name = $employee['NAME'];
+        $gender = $employee['GENDER'];
 
-        $start_time = new DateTime($attendance_time['START_TIME']);
-        $end_time = new DateTime($attendance_time['END_TIME']);
-
-        // Check if the current time is within the allowed attendance window
-        if ($current_time >= $start_time && $current_time <= $end_time) {
-            
-            // Check if employee exists and fetch details
-            $query = "SELECT * FROM employee_tbl WHERE EMPLOYEE_ID = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('s', $employee_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
-                // Employee found
-                $employee = $result->fetch_assoc();
-                $name = $employee['NAME'];
-                $gender = $employee['GENDER'];
-
-                // Assuming the office start time is 9:00 AM (you can adjust it as needed)
-                $office_start_time = new DateTime($attendance_time['START_TIME']);
-                
-                // Check the employee's status based on the current time and office start time
-                if ($current_time > $office_start_time) {
-                    $status = 'Late'; // Employee is late if they arrive after start time
-                } elseif ($current_time < $office_start_time) {
-                    $status = 'Early'; // Employee is early if they arrive before start time
-                } else {
-                    $status = 'On Time'; // Employee is on time if they arrive exactly at start time
-                }
-
-                // Prepare the query to insert attendance with start time and status
-                $query = "INSERT INTO attendance_tbl (EMPLOYEE_ID, NAME, GENDER, START_TIME, END_TIME, STATUS) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param('ssssss', $employee_id, $name, $gender, $current_time->format('Y-m-d H:i:s'), $end_time->format('Y-m-d H:i:s'), $status);
-
-                // Execute the statement
-                if ($stmt->execute()) {
-                    echo "Attendance recorded successfully!";
-                } else {
-                    echo "Error recording attendance.";
-                }
-
-                // Close the prepared statement
-                $stmt->close();
-            } else {
-                echo "Employee not found.";
-            }
-        } else {
-            echo "You are outside of the allowed attendance window.";
+        // Determine Status based on current time and the attendance window
+        if ($attendance_window_exceeded) {
+            $status = 'Closed'; // Attendance window closed
+        } elseif ($current_time < $start_time) {
+            $status = 'Early';
+        } elseif ($current_time >= $start_time && $current_time <= $end_time) {
+            $status = 'On Time';
         }
+
+        // Insert Attendance Record
+        $query = "INSERT INTO attendance_tbl (EMPLOYEE_ID, NAME, GENDER, TIME_IN, STATUS) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('sssss', $employee_id, $name, $gender, $formatted_time_in, $status);
+
+        if ($stmt->execute()) {
+            echo "Attendance recorded successfully! Status: $status";
+        } else {
+            echo "Error recording attendance.";
+        }
+
+        $stmt->close();
     } else {
-        echo "Error fetching attendance settings.";
+        echo "Employee not found.";
     }
 
-    // Close the connection
     $conn->close();
 }
 ?>
@@ -92,14 +86,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Attendance</title>
+    <title>Employee - Mark Attendance</title>
 </head>
 <body>
     <h1>Mark Your Attendance</h1>
-    <form action="index.php" method="post">
-        <label for="EMPLOYEE_ID">Employee ID:</label>
-        <input type="text" id="EMPLOYEE_ID" name="employee_id" required>
-        <button type="submit">Submit</button>
-    </form>
+    <?php if ($attendance_window_exceeded): ?>
+        <p>Sorry, the attendance window has closed for today. You can no longer mark your attendance.</p>
+    <?php else: ?>
+        <form action="" method="post">
+            <label for="employee_id">Employee ID:</label>
+            <input type="text" id="employee_id" name="employee_id" required>
+            <button type="submit">Submit</button>
+        </form>
+    <?php endif; ?>
 </body>
 </html>
+ 

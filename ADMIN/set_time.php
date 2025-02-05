@@ -1,13 +1,25 @@
 <?php
 include '../CONNECTION/connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['start_time']) && isset($_POST['end_time'])) {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Validate that the times are not empty and properly formatted
     if (empty($start_time) || empty($end_time)) {
         echo "Start time and end time are required.";
+        exit();
+    }
+
+    // Convert to 12-hour format with AM/PM
+    $start_time_12hr = date("h:i A", strtotime($start_time));
+    $end_time_12hr = date("h:i A", strtotime($end_time));
+
+    // Check if start time is earlier than end time
+    $start_time_object = new DateTime($start_time_12hr);
+    $end_time_object = new DateTime($end_time_12hr);
+
+    if ($start_time_object >= $end_time_object) {
+        echo "Start time must be earlier than end time.";
         exit();
     }
 
@@ -17,15 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         // Update existing settings
-        $query = "UPDATE attendance_settings_tbl SET START_TIME = ?, END_TIME = ? WHERE id = 1"; // Assuming 'id' is the unique identifier for the settings
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('ss', $start_time, $end_time);
+        $query = "UPDATE attendance_settings_tbl SET START_TIME = ?, END_TIME = ? WHERE id = 1";
     } else {
         // Insert new settings
         $query = "INSERT INTO attendance_settings_tbl (START_TIME, END_TIME) VALUES (?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('ss', $start_time, $end_time);
     }
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ss', $start_time_12hr, $end_time_12hr);
 
     if ($stmt->execute()) {
         echo "Attendance time updated successfully!";
@@ -33,10 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error updating attendance time!";
     }
 
-    // Close the prepared statement
     $stmt->close();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Admin - Set Attendance Time</title>
 </head>
 <body>
-    <h1>Set Attendance Time</h1>
+    <h1>Set Attendance Time (Admin)</h1>
     <form action="" method="post">
         <label for="start_time">Start Time:</label>
         <input type="time" id="start_time" name="start_time" required>

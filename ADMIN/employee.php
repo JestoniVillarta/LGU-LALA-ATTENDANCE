@@ -1,7 +1,7 @@
 <?php
 include '../CONNECTION/connection.php';
 
-$sql = "SELECT EMPLOYEE_ID, NAME, GENDER, EMAIL, CONTACT, ADDRESS, STATUS FROM employee_tbl";
+$sql = "SELECT EMPLOYEE_ID, NAME, GENDER, EMAIL, PHONE, ADDRESS FROM employee_tbl";
 $result = $conn->query($sql);
 ?>
 
@@ -37,7 +37,6 @@ $result = $conn->query($sql);
                     <th>Email</th>
                     <th>Contact</th>
                     <th>Address</th>
-                    <th>Status</th> <!-- New Column for Status -->
                     <th>Action</th>
                 </tr>
 
@@ -49,9 +48,8 @@ $result = $conn->query($sql);
                                 <td>" . htmlspecialchars($row["NAME"]) . "</td>
                                 <td>" . htmlspecialchars($row["GENDER"]) . "</td>
                                 <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
-                                <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
+                                <td>" . htmlspecialchars($row["PHONE"]) . "</td>
                                 <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
-                                <td>" . htmlspecialchars($row["STATUS"]) . "</td> <!-- Display Status -->
                                 <td><a href='delete_employee.php?id=" . $row["EMPLOYEE_ID"] . "' class='delete-btn'>Delete</a></td>
                               </tr>";
                     }
