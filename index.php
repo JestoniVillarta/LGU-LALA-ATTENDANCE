@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['employee_id'])) {
     }
 
     // Get attendance settings
-    $query = "SELECT START_TIME, END_TIME FROM attendance_settings_tbl WHERE id = 1";
+    $query = "SELECT MORNING_TIME_IN, MORNING_TIME_OUT FROM attendance_settings_tbl WHERE id = 2";
     $result = $conn->query($query);
     
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $start_time = date("H:i:s", strtotime($row['START_TIME']));
-        $end_time = date("H:i:s", strtotime($row['END_TIME']));
+        $start_time = date("H:i:s", strtotime($row['MORNING_TIME_IN']));
+        $end_time = date("H:i:s", strtotime($row['MORNING_TIME_OUT']));
     } else {
         echo "Attendance time settings not found.";
         exit();
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['employee_id'])) {
     }
 
     // Insert attendance record
-    $query = "INSERT INTO attendance_tbl (EMPLOYEE_ID, NAME, GENDER, START_TIME, STATUS) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO attendance_tbl (EMPLOYEE_ID, NAME, GENDER, MORNING_TIME_IN, STATUS) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('sssss', $employee_id, $name, $gender, $current_time, $status);
     
