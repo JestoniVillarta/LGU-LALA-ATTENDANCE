@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['start_time']) && isset
 
     if ($result->num_rows > 0) {
         // Update existing settings
-        $query = "UPDATE attendance_settings_tbl SET MORNING_TIME_IN = ?, MORNING_TIME_OUT = ? WHERE id = 2";
+        $query = "UPDATE attendance_settings_tbl SET MORNING_TIME_IN = ?, TIME_IN_END = ? WHERE id = 1";
     } else {
         // Insert new settings
-        $query = "INSERT INTO attendance_settings_tbl (MORNING_TIME_IN, MORNING_TIME_OUT) VALUES (?, ?)";
+        $query = "INSERT INTO attendance_settings_tbl (MORNING_TIME_IN, TIME_IN_END) VALUES (?, ?)";
     }
 
     $stmt = $conn->prepare($query);
@@ -60,10 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['start_time']) && isset
 <body>
     <h1>Set Attendance Time (Admin)</h1>
     <form action="" method="post">
-        <label for="start_time">MORNING TIME IN:</label>
+        <label for="start_time">MORNING START TIME:</label>
         <input type="time" id="start_time" name="start_time" required>
         <br>
-        <label for="end_time">MORNING TIME OUT:</label>
+        <label for="end_time">MORNING END TIME:</label>
         <input type="time" id="end_time" name="end_time" required>
         <br>
         <!-- <label for="end_time">AFTERNOON TIME IN:</label>

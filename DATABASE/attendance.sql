@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 03:19 AM
+-- Generation Time: Feb 06, 2025 at 03:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,17 +49,21 @@ INSERT INTO `admin_tbl` (`ID`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`) VALUES
 CREATE TABLE `attendance_settings_tbl` (
   `id` int(11) NOT NULL,
   `MORNING_TIME_IN` varchar(10) NOT NULL,
+  `TIME_IN_END` varchar(10) NOT NULL,
   `MORNING_TIME_OUT` varchar(10) NOT NULL,
-  `AFTERNOON_TIME_IN` varchar(50) NOT NULL,
-  `AFTERNOON_TIME_OUT` varchar(10) NOT NULL
+  `TIME_OUT_END` varchar(10) NOT NULL,
+  `AFTERNOON_TIME_IN` varchar(10) NOT NULL,
+  `AFTERNOON_TIME_IN_END` varchar(10) NOT NULL,
+  `AFTERNOON_TIME_OUT` varchar(10) NOT NULL,
+  `AFTERNOON_TIME_OUT_END` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attendance_settings_tbl`
 --
 
-INSERT INTO `attendance_settings_tbl` (`id`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`) VALUES
-(2, '09:17 AM', '10:22 AM', '', '');
+INSERT INTO `attendance_settings_tbl` (`id`, `MORNING_TIME_IN`, `TIME_IN_END`, `MORNING_TIME_OUT`, `TIME_OUT_END`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_IN_END`, `AFTERNOON_TIME_OUT`, `AFTERNOON_TIME_OUT_END`) VALUES
+(1, '10:16 PM', '10:21 PM', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -72,7 +76,7 @@ CREATE TABLE `attendance_tbl` (
   `EMPLOYEE_ID` varchar(20) DEFAULT NULL,
   `NAME` varchar(100) DEFAULT NULL,
   `GENDER` enum('Male','Female','Other') DEFAULT NULL,
-  `DATE` date NOT NULL,
+  `DATE` date NOT NULL DEFAULT current_timestamp(),
   `MORNING_TIME_IN` time NOT NULL,
   `MORNING_TIME_OUT` time DEFAULT NULL,
   `AFTERNOON_TIME_IN` time DEFAULT NULL,
@@ -85,9 +89,7 @@ CREATE TABLE `attendance_tbl` (
 --
 
 INSERT INTO `attendance_tbl` (`ATTENDANCE_ID`, `EMPLOYEE_ID`, `NAME`, `GENDER`, `DATE`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `STATUS`) VALUES
-(17, '123', 'TONIX', 'Male', '0000-00-00', '10:01:38', NULL, NULL, NULL, 'Late'),
-(18, '123', 'TONIX', 'Male', '0000-00-00', '10:14:25', NULL, NULL, NULL, 'Late'),
-(19, '123', 'TONIX', 'Male', '0000-00-00', '10:18:03', NULL, NULL, NULL, 'On Time');
+(4, '123', 'TONIX', 'Male', '2025-02-06', '22:17:19', NULL, NULL, NULL, 'On Time');
 
 -- --------------------------------------------------------
 
@@ -172,13 +174,13 @@ ALTER TABLE `admin_tbl`
 -- AUTO_INCREMENT for table `attendance_settings_tbl`
 --
 ALTER TABLE `attendance_settings_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `ATTENDANCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ATTENDANCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `employee_tbl`
