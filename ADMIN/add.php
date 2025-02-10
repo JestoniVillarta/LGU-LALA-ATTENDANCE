@@ -9,23 +9,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $_POST['contact'];
     $address = $_POST['address'];
 
-    // Use Prepared Statements to prevent SQL injection
-    $sql = "INSERT INTO employee_tbl (EMPLOYEE_ID, NAME, GENDER, EMAIL, PHONE, ADDRESS) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+    // Check if the employee already exists
+    $check_sql = "SELECT * FROM employee_tbl WHERE EMPLOYEE_ID = ?";
+    $check_stmt = $conn->prepare($check_sql);
+    $check_stmt->bind_param("s", $emp_id);
+    $check_stmt->execute();
+    $check_stmt->store_result();
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $emp_id, $name, $gender, $email, $contact, $address);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Employee added successfully!');</script>";
+    if ($check_stmt->num_rows > 0) {
+        echo "<script>alert('Employee ID already exists!');</script>";
     } else {
-        echo "<script>alert('Error adding employee: " . $stmt->error . "');</script>";
+        // Use Prepared Statements to prevent SQL injection
+        $sql = "INSERT INTO employee_tbl (EMPLOYEE_ID, NAME, GENDER, EMAIL, CONTACT, ADDRESS) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssss", $emp_id, $name, $gender, $email, $contact, $address);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Employee added successfully!');</script>";
+        } else {
+            echo "<script>alert('Error adding employee: " . $stmt->error . "');</script>";
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
+    $check_stmt->close();
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>

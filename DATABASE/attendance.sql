@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 03:18 PM
+-- Generation Time: Feb 10, 2025 at 02:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,7 @@ CREATE TABLE `attendance_settings_tbl` (
 --
 
 INSERT INTO `attendance_settings_tbl` (`id`, `MORNING_TIME_IN`, `TIME_IN_END`, `MORNING_TIME_OUT`, `TIME_OUT_END`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_IN_END`, `AFTERNOON_TIME_OUT`, `AFTERNOON_TIME_OUT_END`) VALUES
-(1, '10:16 PM', '10:21 PM', '', '', '', '', '', '');
+(1, '06:00 AM', '07:00 AM', '11:00 AM', '11:30 AM', '01:00 PM', '01:30 PM', '05:00 PM', '05:30 PM');
 
 -- --------------------------------------------------------
 
@@ -72,24 +72,24 @@ INSERT INTO `attendance_settings_tbl` (`id`, `MORNING_TIME_IN`, `TIME_IN_END`, `
 --
 
 CREATE TABLE `attendance_tbl` (
-  `ATTENDANCE_ID` int(11) NOT NULL,
-  `EMPLOYEE_ID` varchar(20) DEFAULT NULL,
-  `NAME` varchar(100) DEFAULT NULL,
-  `GENDER` enum('Male','Female','Other') DEFAULT NULL,
-  `DATE` date NOT NULL DEFAULT current_timestamp(),
-  `MORNING_TIME_IN` time NOT NULL,
+  `ID` int(11) NOT NULL,
+  `EMPLOYEE_ID` varchar(50) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `GENDER` enum('Male','Female') NOT NULL,
+  `MORNING_TIME_IN` time DEFAULT NULL,
   `MORNING_TIME_OUT` time DEFAULT NULL,
   `AFTERNOON_TIME_IN` time DEFAULT NULL,
   `AFTERNOON_TIME_OUT` time DEFAULT NULL,
-  `STATUS` enum('Early','On Time','Late') NOT NULL
+  `DUTY_HOURS` varchar(6) DEFAULT NULL,
+  `DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attendance_tbl`
 --
 
-INSERT INTO `attendance_tbl` (`ATTENDANCE_ID`, `EMPLOYEE_ID`, `NAME`, `GENDER`, `DATE`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `STATUS`) VALUES
-(4, '123', 'TONIX', 'Male', '2025-02-06', '22:17:19', NULL, NULL, NULL, 'On Time');
+INSERT INTO `attendance_tbl` (`ID`, `EMPLOYEE_ID`, `NAME`, `GENDER`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `DUTY_HOURS`, `DATE`) VALUES
+(7, '123', 'TONIX', 'Male', '10:52:52', '10:53:00', '10:53:07', '10:53:13', '00:00:', '2025-02-07');
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,8 @@ INSERT INTO `employee_tbl` (`ID`, `EMPLOYEE_ID`, `NAME`, `GENDER`, `EMAIL`, `CON
 (19, 123, 'das', 'sfds', 'fsd', 0, 'dfs'),
 (20, 0, 'ASD', 'asda', 'ASD', 0, 'ASD'),
 (21, 23423, 'asdsa', 'asda', 'sdfa', 0, 'sadfas'),
-(22, 0, 'ID', 'Male', 'sdfasd@gmai.com', 967686766, 'sdfas');
+(22, 0, 'ID', 'Male', 'sdfasd@gmai.com', 967686766, 'sdfas'),
+(23, 556, 'JESTONI', 'Male', 'sdfasd@gmai.com', 0, 'sdfas');
 
 --
 -- Indexes for dumped tables
@@ -152,7 +153,7 @@ ALTER TABLE `attendance_settings_tbl`
 -- Indexes for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  ADD PRIMARY KEY (`ATTENDANCE_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `employee_tbl`
@@ -180,13 +181,13 @@ ALTER TABLE `attendance_settings_tbl`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `ATTENDANCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employee_tbl`
 --
 ALTER TABLE `employee_tbl`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

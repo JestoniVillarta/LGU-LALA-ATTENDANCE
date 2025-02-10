@@ -1,7 +1,7 @@
 <?php
 include '../CONNECTION/connection.php';
 
-$sql = "SELECT EMPLOYEE_ID, NAME, GENDER, EMAIL, PHONE, ADDRESS FROM employee_tbl";
+$sql = "SELECT EMPLOYEE_ID, NAME, GENDER, EMAIL, CONTACT, ADDRESS FROM employee_tbl";
 $result = $conn->query($sql);
 ?>
 
@@ -14,6 +14,9 @@ $result = $conn->query($sql);
     <title>Dashboard</title>
     <link rel="stylesheet" href="CSS/employee.css">
     <link rel="stylesheet" href="CSS/sidenav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -22,47 +25,59 @@ $result = $conn->query($sql);
         <?php include 'sidenav.php'; ?>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
 
-        <h2>Employee List</h2>
-        <a href="add.php" class="add-btn">Add Employee</a>
+    <h2>Employee List</h2>
+
+    
+    <div class="table-button-wrapper">
+  <a href="#" class="add-btn">Add Employee</a>
+  <div class="table-wrapper">
+    <!-- Your table goes here -->
+  </div>
+</div>
+
+
+
+    <!-- Wrapper div to center the table -->
+    <div class="table-wrapper">
+
 
         <div class="table-container">
-            <table>
-                <tr>
-                    <th>Employee ID</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Address</th>
-                    <th>Action</th>
-                </tr>
 
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>" . htmlspecialchars($row["EMPLOYEE_ID"]) . "</td>
-                                <td>" . htmlspecialchars($row["NAME"]) . "</td>
-                                <td>" . htmlspecialchars($row["GENDER"]) . "</td>
-                                <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
-                                <td>" . htmlspecialchars($row["PHONE"]) . "</td>
-                                <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
-                                <td><a href='delete_employee.php?id=" . $row["EMPLOYEE_ID"] . "' class='delete-btn'>Delete</a></td>
-                              </tr>";
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                      <td>" . htmlspecialchars($row["EMPLOYEE_ID"]) . "</td>
+                      <td>" . htmlspecialchars($row["NAME"]) . "</td>
+                      <td>" . htmlspecialchars($row["GENDER"]) . "</td>
+                      <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
+                      <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
+                      <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
+                      <td><a href='delete_employee.php?id=" . $row["EMPLOYEE_ID"] . "' class='delete-btn'>Delete</a></td>
+                    </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>No employees found</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='8'>No employees found</td></tr>";
-                }
-                $conn->close();
-                ?>
+                    $conn->close();
+                    ?>
+                </tbody>
             </table>
         </div>
-
-        <br>
-      
     </div>
 
 </body>
