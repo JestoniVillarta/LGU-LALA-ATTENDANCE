@@ -25,10 +25,11 @@ $result = $conn->query($sql);
     </div>
 
 
-    <h2>Employee List</h2>
+  
 
     
     <div class="table-button-wrapper">
+    <h1>Employee List</h1>
   <a href="add.php" class="add-btn"> <i class="fa-solid fa-user-plus"></i> Add Student</a>
 </div>
 
