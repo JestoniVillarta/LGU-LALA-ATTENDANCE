@@ -1,19 +1,20 @@
 /* Sidebar Styles */
 .sidebar {
-    height: 100vh; /* Full height */
-    width: 250px; /* Sidebar width */
-    position: fixed; /* Fixed position */
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light grayish white */
+    color: #242525; /* Dark gray for contrast */
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: #333; /* Dark background */
     padding-top: 20px;
-    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
+
 
 .sidebar h2 {
     text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #555;
+    padding-bottom: 40px;
 }
 
 .sidebar ul {
@@ -23,26 +24,25 @@
 }
 
 .sidebar ul li {
-    padding: 10px;
+    padding: 0.5px;
     text-align: center;
 }
 
 .sidebar ul li button {
     width: 100%;
-    padding: 10px;
+    padding: 40px;
     border: none;
-    background-color: #444;
+    background-color: #009879;
     color: white;
     cursor: pointer;
     font-size: 16px;
     transition: 0.3s;
-    border-radius: 5px;
 }
 
 .sidebar ul li button:hover {
-    background-color: #555;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    background-color: #00745e; /* Darker shade of green */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 152, 121, 0.3); /* Softer glow effect */
 }
 
 /* Ensure content is not hidden behind the sidebar */
