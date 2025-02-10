@@ -73,32 +73,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <h1>Set Attendance Time (Admin)</h1>
-    <form action="" method="post">
-        <label>Morning Start Time:</label>
-        <input type="time" name="start_time" required>
-        <label >End Time:</label>
-        <input type="time"  name="start_time_end" required>
+
+
+  <form action="" method="post">
+    <div class="time-container">
+        <div class="time-group">
+            <label for="start_time">Morning Start Time:</label>
+            <input type="time" id="start_time" name="start_time" required>
+            <label for="start_time_end" class="end-label">End Time:</label>
+            <input type="time" id="start_time_end" name="start_time_end" required>
+        </div>
+
+        <div class="time-group">
+            <label for="morning_time_out">Morning Time Out:</label>
+            <input type="time" id="morning_time_out" name="morning_time_out" required>
+            <label for="morning_time_out_end" class="end-label">End Time:</label>
+            <input type="time" id="morning_time_out_end" name="morning_time_out_end" required>
+        </div>
+
+        <br>
+        <br>
         <br>
 
-        <label >Morning Time Out:</label>
-        <input type="time"  name="morning_time_out" required>
-        <label >End Time:</label>
-        <input type="time"  name="morning_time_out_end" required>
-        <br>
+        <div class="time-group">
+            <label for="afternoon_time_in">Afternoon Time In:</label>
+            <input type="time" id="afternoon_time_in" name="afternoon_time_in" required>
+            <label for="afternoon_time_in_end" class="end-label">End Time:</label>
+            <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" required>
+        </div>
 
-        <label >Afternoon Time In:</label>
-        <input type="time"  name="afternoon_time_in" required>
-        <label >End Time:</label>
-        <input type="time"  name="afternoon_time_in_end" required>
-        <br>
+        <div class="time-group">
+            <label for="afternoon_time_out">Afternoon Time Out:</label>
+            <input type="time" id="afternoon_time_out" name="afternoon_time_out" required>
+            <label for="afternoon_time_out_end" class="end-label">End Time:</label>
+            <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" required>
+        </div>
+    </div>
 
-        <label>Afternoon Time Out:</label>
-        <input type="time"  name="afternoon_time_out" required>
-        <label >End Time:</label>
-        <input type="time"  name="afternoon_time_out_end" required>
-        <br>
+    <button type="submit">Set Time</button>
+</form>
 
-        <button type="submit">Set Time</button>
-    </form>
+
 </body>
 </html>
