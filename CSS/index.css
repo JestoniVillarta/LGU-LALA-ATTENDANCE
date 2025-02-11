@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    text-align: center;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -9,69 +10,62 @@ body {
     margin: 0;
 }
 
-.container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-}
-
 h1 {
-    color: #333;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin: 0;
 }
 
-label {
-    font-size: 16px;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
+p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+form {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    width: calc(100% - 20px);
+    padding: 20px 100px 20px 15px; /* 0 sa left padding */
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    text-align: left;
 }
+
+input[type="text"]::placeholder {
+    text-align: left; /* Sigurado nga wala */
+    font-size: 16px;
+    color: #888;
+    padding-left: 0; /* Sigurado nga duol sa gilay-on sa input */
+}
+
+
 
 button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+    width: 50%;
+    padding: 15px;
+    margin: 5px 0;
     border: none;
     border-radius: 5px;
+    background-color: #007bff;
+    color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s ease;
-
-}
-
-button[name="morning_in"] {
-    background-color: #4CAF50;
-    color: white;
-}
-
-button[name="morning_out"] {
-    background-color: #f39c12;
-    color: white;
-}
-
-button[name="afternoon_in"] {
-    background-color: #3498db;
-    color: white;
-}
-
-button[name="afternoon_out"] {
-    background-color: #e74c3c;
-    color: white;
+    transition: background 0.3s;
 }
 
 button:hover {
-    opacity: 0.8;
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
 }
