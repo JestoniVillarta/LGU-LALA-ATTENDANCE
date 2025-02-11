@@ -14,7 +14,7 @@
         <ul>
         <li><button onclick="location.href='dashboard.php'">Dashboard</button></li>
         <li><button onclick="location.href='attendance.php'">Attendance</button></li>
-        <li><button onclick="location.href='employee.php'">Student</button></li>
+        <li><button onclick="location.href='student.php'">Student</button></li>
             <li><button onclick="location.href='settings.php'">Settings</button></li>
             <li><button onclick="location.href='set_time.php'">Setup Time</button></li>
             <li><button onclick="location.href='reports.php'">Reports</button></li>

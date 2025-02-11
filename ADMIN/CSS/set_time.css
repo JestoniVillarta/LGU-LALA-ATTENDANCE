@@ -3,11 +3,42 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+   
 }
 
+.header-container, .form_wrapper {
+    width: 90%;
+    margin: 0 auto; /* Ensures both are centered */
+}
+
+h3 {
+    padding-left: 20px;
+}
+
+.header-container {
+    width: 90%;
+    border-radius: 4px;
+    background-color:  #f9f9f9;
+    margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
+    height: 80px;
+    padding-right: 0; /* Remove unnecessary right padding */
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.form_wrapper {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+
 form {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,13 +56,13 @@ h1 {
 .time-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     gap: 10px;
 }
 
 .time-group {
     display: flex;
-    justify-content: space-between;
+justify-content: center;
     align-items: center;
     width: 100%;
 }
@@ -43,7 +74,7 @@ h1 {
 }
 
 .time-group input {
-    width: 30%;
+    width: 20%;
 }
 
 .time-group .end-label {
@@ -51,16 +82,17 @@ h1 {
     width: 20%;
 }
 
-button {
-    background: #007BFF;
+.set_time {
+    background: #009879;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 40px;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #0e5e4e;
 }

@@ -71,57 +71,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Set Attendance Time</title>
     <link rel="stylesheet" href="CSS/set_time.css">
 </head>
+
 <body>
 
     <div class="nav">
         <?php include 'sidenav.php'; ?>
     </div>
 
-    <h1>Set Attendance Time (Admin)</h1>
+    <div class="header-container">
+        <h3>Set Attendance Time </h3>
+    </div>
 
-    <form action="" method="post">
-        <div class="time-container">
-            <div class="time-group">
-                <label for="start_time">Morning Start Time:</label>
-                <input type="time" id="start_time" name="start_time" value="<?php echo $start_time; ?>" required>
-                <label for="start_time_end" class="end-label">End Time:</label>
-                <input type="time" id="start_time_end" name="start_time_end" value="<?php echo $start_time_end; ?>" required>
+    <div class="form_wrapper">
+        <form action="" method="post">
+            <div class="time-container">
+                <div class="time-group">
+                    <label for="start_time">Morning Start Time:</label>
+                    <input type="time" id="start_time" name="start_time" value="<?php echo $start_time; ?>" required>
+                    <label for="start_time_end" class="end-label">End Time:</label>
+                    <input type="time" id="start_time_end" name="start_time_end" value="<?php echo $start_time_end; ?>" required>
+                </div>
+
+                <div class="time-group">
+                    <label for="morning_time_out">Morning Time Out:</label>
+                    <input type="time" id="morning_time_out" name="morning_time_out" value="<?php echo $morning_time_out; ?>" required>
+                    <label for="morning_time_out_end" class="end-label">End Time:</label>
+                    <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="<?php echo $morning_time_out_end; ?>" required>
+                </div>
+
+                <br>
+                <br>
+                <br>
+
+                <div class="time-group">
+                    <label for="afternoon_time_in">Afternoon Time In:</label>
+                    <input type="time" id="afternoon_time_in" name="afternoon_time_in" value="<?php echo $afternoon_time_in; ?>" required>
+                    <label for="afternoon_time_in_end" class="end-label">End Time:</label>
+                    <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="<?php echo $afternoon_time_in_end; ?>" required>
+                </div>
+
+                <div class="time-group">
+                    <label for="afternoon_time_out">Afternoon Time Out:</label>
+                    <input type="time" id="afternoon_time_out" name="afternoon_time_out" value="<?php echo $afternoon_time_out; ?>" required>
+                    <label for="afternoon_time_out_end" class="end-label">End Time:</label>
+                    <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="<?php echo $afternoon_time_out_end; ?>" required>
+                </div>
             </div>
 
-            <div class="time-group">
-                <label for="morning_time_out">Morning Time Out:</label>
-                <input type="time" id="morning_time_out" name="morning_time_out" value="<?php echo $morning_time_out; ?>" required>
-                <label for="morning_time_out_end" class="end-label">End Time:</label>
-                <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="<?php echo $morning_time_out_end; ?>" required>
-            </div>
+            <button type="submit" class="set_time">Set Time</button>
+        </form>
+    </div>
 
-            <br>
-            <br>
-            <br>
 
-            <div class="time-group">
-                <label for="afternoon_time_in">Afternoon Time In:</label>
-                <input type="time" id="afternoon_time_in" name="afternoon_time_in" value="<?php echo $afternoon_time_in; ?>" required>
-                <label for="afternoon_time_in_end" class="end-label">End Time:</label>
-                <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="<?php echo $afternoon_time_in_end; ?>" required>
-            </div>
 
-            <div class="time-group">
-                <label for="afternoon_time_out">Afternoon Time Out:</label>
-                <input type="time" id="afternoon_time_out" name="afternoon_time_out" value="<?php echo $afternoon_time_out; ?>" required>
-                <label for="afternoon_time_out_end" class="end-label">End Time:</label>
-                <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="<?php echo $afternoon_time_out_end; ?>" required>
-            </div>
-        </div>
-
-        <button type="submit">Set Time</button>
-    </form>
 
 </body>
+
 </html>
