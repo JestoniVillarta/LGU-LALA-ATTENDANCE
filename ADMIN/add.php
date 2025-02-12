@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <input type="text" id="PHONE" name="contact" placeholder="Contact" required><br><br>
 
-            <textarea id="ADDRESS" name="address" rows="3" placeholder="Address" required></textarea><br><br>
+            <input type="text" id="ADDRESS" name="address" placeholder="Address" required><br><br>
 
             <button type="submit" class="add-btn">Add Student</button>
     </form>

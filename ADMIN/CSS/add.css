@@ -48,6 +48,7 @@ form {
     flex-direction: column;
     width: 50%;
     height: 60vh;
+    margin-top: 40px;
 }
 
 label {

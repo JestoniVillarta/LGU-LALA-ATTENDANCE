@@ -12,12 +12,12 @@ if (isset($_GET['id'])) {
     if ($stmt->execute()) {
         echo "<script>
             alert('Student deleted successfully!');
-            window.location.href = 'students_list.php'; // Ibalik sa main list
+            window.location.href = 'student.php'; // Ibalik sa main list
         </script>";
     } else {
         echo "<script>
             alert('Error deleting student.');
-            window.location.href = 'ADMIN/student.php';
+            window.location.href = 'student.php';
         </script>";
     }
 
