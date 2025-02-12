@@ -16,14 +16,17 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="CSS/student.css">
     <link rel="stylesheet" href="CSS/sidenav.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
 </head>
+
 <body>
 
     <div class="nav">
@@ -58,23 +61,31 @@ $result = $conn->query($sql);
                         <th>Action</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <?php
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<tr>
-                                <td>" . htmlspecialchars($row["STUDENT_ID"]) . "</td>
-                                <td>" . htmlspecialchars($row["FIRST_NAME"]) . "</td>
-                                <td>" . htmlspecialchars($row["LAST_NAME"]) . "</td>
-                                <td>" . htmlspecialchars($row["GENDER"]) . "</td>
-                                <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
-                                <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
-                                <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
-                                <td>
-                <a href='edit_students.php?id=" . $row["STUDENT_ID"] . "' class='edit-btn'>Edit</a>
-                <a href='delete_students.php?id=" . $row["STUDENT_ID"] . "' class='delete-btn' onclick='return confirm(\"Are you sure you want to delete this student?\")'>Delete</a>
-            </td>
-                            </tr>";
+                            echo "<tr class='student-row' onclick='toggleOptions(this)'>
+                <td>" . htmlspecialchars($row["STUDENT_ID"]) . "</td>
+                <td>" . htmlspecialchars($row["FIRST_NAME"]) . "</td>
+                <td>" . htmlspecialchars($row["LAST_NAME"]) . "</td>
+                <td>" . htmlspecialchars($row["GENDER"]) . "</td>
+                <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
+                <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
+                <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
+                <td class='action-cell'>
+                    <button class='toggle-btn'>
+                       <i class='fa-solid fa-ellipsis'></i>
+                    </button>
+                    <div class='options' > 
+                        
+                        <a href='edit_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' >   <i class='fa-solid fa-file-pen' style='color: blue;'> </i> Edit</a>
+                        <a href='delete_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'   class='delete'> <i class='fa-solid fa-trash'></i> Delete</a>
+                        <a href='view_attendance.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "'>View Attendance</a>
+                    </div>
+                </td>
+            </tr>";
                         }
                     } else {
                         echo "<tr><td colspan='8'>No students found</td></tr>";
@@ -82,9 +93,18 @@ $result = $conn->query($sql);
                     $conn->close();
                     ?>
                 </tbody>
+
+
+
+
+
+
             </table>
         </div>
     </div>
 
 </body>
+
+<script src="JS/students.js"></script>
+
 </html>

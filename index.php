@@ -142,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
-    <h1>STUDENT ATTENDANCE SYSTEM</h1>
+    <h1>TRAINEE ATTENDANCE SYSTEM</h1>
     
     <form action="" method="post">
         <input type="text" id="student_id" placeholder="ENTER YOUR ID:" name="student_id" required>
