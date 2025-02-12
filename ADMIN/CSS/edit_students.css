@@ -16,7 +16,7 @@ body {
 }
 
 
-.header-text {
+.header_text {
     width: 90%;
     border-radius: 4px;
     background-color:  #f9f9f9;
@@ -64,7 +64,7 @@ input, select {
     font-size: 16px;
 }
 
-.add-btn {
+.update-btn {
     margin-top: 20px;
     padding: 20px;
     border: none;
@@ -72,3 +72,16 @@ input, select {
     color: white;
 }
 
+
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

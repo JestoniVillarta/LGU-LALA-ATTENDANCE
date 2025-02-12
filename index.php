@@ -186,8 +186,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['employee_id'])) {
         <input type="text" id="employee_id" placeholder="ENTER YOUR ID:" name="employee_id"  required>
         <br>
 
-        <?php if ($show_morning_in) echo '<button type="submit" name="morning_in">Morning Time In </button>'; ?>
-        <?php if ($show_morning_out) echo '<button type="submit" name="morning_out">Morning Time Out</button>'; ?>
+        <?php if ($show_morning_in) echo '<button type="submit" name="morning_in" >Morning Time In </button>'; ?>
+        <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" style="background-color: red;">Morning Time Out</button>'; ?>
         <?php if ($show_afternoon_in) echo '<button type="submit" name="afternoon_in">Afternoon Time In </button>'; ?>
         <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out">Afternoon Time Out </button>'; ?>
     </form>

@@ -39,7 +39,7 @@ $result = $conn->query($sql);
                     <button type="submit">🔍</button>
                 </form>
             </div>
-            <a href="add.php" class="add-btn">Add Employee</a>
+            <a href="add.php" class="add-btn">Add Student</a>
         </div>
     </div>
 
@@ -70,7 +70,10 @@ $result = $conn->query($sql);
                                 <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
                                 <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
                                 <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
-                                <td><a href='delete_student.php?id=" . $row["STUDENT_ID"] . "' class='delete-btn'>Delete</a></td>
+                                <td>
+                <a href='edit_students.php?id=" . $row["STUDENT_ID"] . "' class='edit-btn'>Edit</a>
+                <a href='delete_students.php?id=" . $row["STUDENT_ID"] . "' class='delete-btn' onclick='return confirm(\"Are you sure you want to delete this student?\")'>Delete</a>
+            </td>
                             </tr>";
                         }
                     } else {

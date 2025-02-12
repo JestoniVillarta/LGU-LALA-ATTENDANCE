@@ -1,7 +1,7 @@
 <?php
 include '../CONNECTION/connection.php'; // Include the database connection file
 
-$sql = "SELECT `ID`, `EMPLOYEE_ID`, `NAME`, `GENDER`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, 
+$sql = "SELECT `ID`, `STUDENT_ID`, `NAME`, `GENDER`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, 
                `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `DUTY_HOURS`, `DATE` 
         FROM `attendance_tbl`";
 $result = $conn->query($sql);

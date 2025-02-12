@@ -16,6 +16,7 @@ body {
 
 h3 {
     padding-left: 20px;
+    color: black;
 }
 
 /* Button wrapper: aligns the add button to the right */
@@ -66,7 +67,7 @@ table {
 
 /* Table Header Styling */
 table th {
-    background-color: #009879;
+    background-color:  #222d33;;
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;

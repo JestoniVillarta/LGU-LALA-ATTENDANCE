@@ -2,15 +2,14 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #f8f9fa; /* Light grayish white */
-    color: #242525; /* Dark gray for contrast */
+    background-color: #222d33; /* Dark background color */
+    color: #fff; /* White text for contrast */
     position: fixed;
     top: 0;
     left: 0;
     padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .sidebar h2 {
     text-align: center;
@@ -24,19 +23,19 @@
 }
 
 .sidebar ul li {
-    padding: 0.5px;
-    text-align: center;
+    text-align: left;
 }
 
 .sidebar ul li button {
     width: 100%;
-    padding: 40px;
+    padding: 20px 25px;
     border: none;
-    background-color: #009879;
-    color: white;
     cursor: pointer;
     font-size: 16px;
     transition: 0.3s;
+    text-align: left;
+    background-color: #222d33; /* Sidebar button same as sidebar bg */
+    color: #fff;
 }
 
 .sidebar ul li button:hover {
@@ -45,7 +44,8 @@
     box-shadow: 0 4px 8px rgba(0, 152, 121, 0.3); /* Softer glow effect */
 }
 
-/* Ensure content is not hidden behind the sidebar */
+/* Apply background color to the entire page */
 body {
     margin-left: 250px; /* Offset for the sidebar */
+    color: #fff; /* Ensure text is readable */
 }

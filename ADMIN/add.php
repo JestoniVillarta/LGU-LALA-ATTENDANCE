@@ -59,13 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    <?php include 'sidenav.php'; ?>
 </div>
 
-<!-- Container for Form -->
-<div class="container">
-    <form method="POST" action="">
-        <fieldset>
-            <legend>
+            <div class="header-text">
                 <h3>Add Student</h3>
-            </legend>
+            </div>
+                
+        
+<div class="form-wrapper">
+    
+    <form method="POST" action="">    
 
             <input type="text" id="STUDENT_ID" name="student_id" placeholder="Student ID" required><br><br>
 
@@ -86,8 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <textarea id="ADDRESS" name="address" rows="3" placeholder="Address" required></textarea><br><br>
 
-            <input type="submit" value="Add Student">
-        </fieldset>
+            <button type="submit" class="add-btn">Add Student</button>
     </form>
 </div>
 

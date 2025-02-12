@@ -1,9 +1,12 @@
+
+
 /* Basic page styling */
 body {
 
     margin: 0;
     padding: 0;
     background-color: #f0f2f5;
+    
 }
 
 /* Table wrapper: centers the table container */
@@ -16,6 +19,7 @@ body {
 
 h3 {
     padding-left: 20px;
+    color: black;
 }
 
 
@@ -38,7 +42,7 @@ h3 {
 .add-btn {
     padding: 10px 30px; /* Increase right padding */   
     margin-right: 10px;
-    background-color: #009879;
+    background-color: #009879; 
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -66,7 +70,7 @@ thead th {
     position: sticky;
     top: 0;
     z-index: 10; /* Ensures header stays above table rows */
-    background-color: #009879; /* Solid background for visibility */
+      background-color: #222d33; /* Solid background for visibility */
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;
@@ -77,11 +81,12 @@ table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    color: black;
 }
 
 /* Table Header Styling */
 table th {
-    background-color: #009879;
+      background-color: #222d33;
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;
