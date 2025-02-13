@@ -80,7 +80,7 @@ $result = $conn->query($sql);
                 <div class='actions'>
                        <a href='edit_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='edit' title='Edit Student'>   <i class='fa-sharp fa-solid fa-pen'></i></a>
                         <a href='delete_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'   class='delete' title='Delete Student'> <i class='fa-sharp fa-solid fa-xmark'></i></a> 
-                       <a href='student_records.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='view' title='View Student Records'> <i class='fa-regular fa-rectangle-list'></i></a>
+                       <a href='student_records.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='view' title='View Attendance Records'> <i class='fa-regular fa-rectangle-list'></i></a>
         
                        </div>
                   
