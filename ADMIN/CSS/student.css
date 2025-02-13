@@ -105,7 +105,8 @@ table tr:nth-of-type(even) {
 
 /* Hover Effect for Table Rows */
 table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f3f3f3;
+
 }
 
 /* Delete Button Styling */
@@ -158,5 +159,55 @@ table tr:hover {
     padding: 7px 12px; /* Adjust button padding */
     font-size: 14px; /* Match input font size */
 
+ 
+}
+
+.action-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+     
+}
+
+
+.toggle-btn{
+ 
+    background: none;
+    font-size: 20px;
+    border: none;
+
+}
+.student-row {
+    transition: height 0.3s ease-in-out;
+}
+
+.options {
+    display: none;
+    padding-top: 5px;
+
+}
+
+
+
+
+
+
+.options a {
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    color: white;
+   
+  
+}
+
+
+
+
+
+
+.delete{
+    background-color: #fa1919;
  
 }

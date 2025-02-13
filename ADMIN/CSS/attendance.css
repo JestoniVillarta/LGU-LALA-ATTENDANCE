@@ -26,7 +26,7 @@ h3 {
   background-color: #f8f9fa;
   margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   height: 80px;
   padding-right: 0; /* Remove unnecessary right padding */
@@ -63,8 +63,6 @@ table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    color: black;
-    margin-top: 0;
 }
 
 /* Table Header Styling */
@@ -88,7 +86,10 @@ table tr:nth-of-type(even) {
 
 /* Hover Effect for Table Rows */
 table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #00745e; /* Darker shade of green */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 152, 121, 0.3); /* Softer glow effect */
+    color: white;
 }
 
 /* Delete Button Styling */
@@ -105,3 +106,65 @@ table tr:hover {
     background-color: #ffdddd;
     text-decoration: underline;
 }
+
+
+/* Container for search bar and calendar */
+.button-search-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduce spacing between elements */
+}
+
+/* Search container */
+.search-container {
+    margin: 0; /* Remove extra margin */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduce spacing between input and button */
+}
+
+.search-container form {
+    border-radius: 25px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+/* Adjusted search input size */
+.search-container input {
+    width: 180px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Adjust search button size */
+.search-container button {
+    padding: 7px 12px;
+    font-size: 14px;
+}
+
+/* Calendar container: placed near search button */
+.calendar-container {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.calendar-container form {
+    border-radius: 25px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+/* Adjusted calendar input size */
+.calendar-container input {
+    width: 140px; /* Adjust width as needed */
+    padding: 7px 10px;
+    font-size: 14px;
+}
+
+
+
