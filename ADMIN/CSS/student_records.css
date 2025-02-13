@@ -163,15 +163,8 @@ table tr:hover {
 }
 
 
-.actions a:hover {
-    color: white; /* Change color when hovered */
-    transform: scale(1.2); /* Slight zoom effect */
-    transition: all 0.2s ease-in-out;
-}
 
-.actions a:hover i {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow to icon */
-}
+
 
 
 .edit {
@@ -187,12 +180,8 @@ table tr:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-   
 
 }
-
-
-
 
 .delete {
     color: white;
@@ -223,25 +212,26 @@ table tr:hover {
     align-items: center;
 }
 
-
-.actions a:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 5px 8px;
-    border-radius: 5px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+/* Calendar container: placed near search button */
+.calendar-container {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: black;
 }
 
-.actions a:hover::after {
-    opacity: 1;
+.calendar-container form {
+    border-radius: 25px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
 }
 
+/* Adjusted calendar input size */
+.calendar-container input {
+    width: 140px; /* Adjust width as needed */
+    padding: 7px 10px;
+    font-size: 14px;
+}
 

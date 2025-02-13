@@ -74,18 +74,19 @@ $result = $conn->query($sql);
                 <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
                 <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
                 <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
+
                 <td class='action-cell'>
-                    <button class='toggle-btn'>
-                      <i class='fa-solid fa-ellipsis'></i>
-                    </button>
-                    <div class='options' > 
-                        
-                        <a href='edit_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' >   <i class='fa-solid fa-file-pen' style='color: blue;'> </i> Edit</a>
-                        <a href='delete_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'   class='delete'> <i class='fa-solid fa-trash'></i> Delete</a>
-                        <a href='view_attendance.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "'>View Attendance</a>
-                    </div>
+
+                <div class='actions'>
+                       <a href='edit_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='edit' title='Edit Student'>   <i class='fa-sharp fa-solid fa-pen'></i></a>
+                        <a href='delete_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'   class='delete' title='Delete Student'> <i class='fa-sharp fa-solid fa-xmark'></i></a> 
+                       <a href='student_records.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='view' title='View Student Records'> <i class='fa-regular fa-rectangle-list'></i></a>
+        
+                       </div>
+                  
                 </td>
             </tr>";
+
                         }
                     } else {
                         echo "<tr><td colspan='8'>No students found</td></tr>";
@@ -104,6 +105,8 @@ $result = $conn->query($sql);
     </div>
 
 </body>
+
+
 
 <script src="JS/students.js"></script>
 

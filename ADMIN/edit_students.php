@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    WHERE STUDENT_ID = '$student_id'";
     
     if ($conn->query($update_sql) === TRUE) {
-        echo "<script>alert('Student updated successfully!'); window.location.href='dashboard.php';</script>";
+        echo "<script>alert('Student updated successfully!'); window.location.href='student.php';</script>";
     } else {
         echo "Error updating record: " . $conn->error;
     }
