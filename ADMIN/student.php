@@ -76,7 +76,7 @@ $result = $conn->query($sql);
                 <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
                 <td class='action-cell'>
                     <button class='toggle-btn'>
-                       <i class='fa-solid fa-ellipsis'></i>
+                      <i class='fa-solid fa-ellipsis'></i>
                     </button>
                     <div class='options' > 
                         
