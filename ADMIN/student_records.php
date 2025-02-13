@@ -55,13 +55,16 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance Records</title>
     <link rel="stylesheet" href="CSS/student_records.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+
 </head>
 <body>
     <div class="nav">
         <?php include 'sidenav.php'; ?>
     </div>
 
-    <div class="table-button-wrapper">
+    <div class="table-calendar-wrapper">
         
         <h3>
         <label> Name: </label>
@@ -86,7 +89,7 @@ $stmt->close();
             </form>
         </div>
 
-        <a href="dashboard.php" class="back-btn">Back</a>
+        <a href="student.php" class="back-btn"><i class="fa-solid fa-backward"></i> Back</a>
     </div>
 
     <div class="table-wrapper">

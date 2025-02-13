@@ -25,7 +25,7 @@ h3 {
 
 
 /* Table button wrapper: aligns both search bar and add button to the right */
-.table-button-wrapper {
+.table-calendar-wrapper {
     max-width: 90%; /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
@@ -38,21 +38,6 @@ h3 {
     margin-top: 20px;
 }
 
-/* Add Employee Button */
-.add-btn {
-    padding: 10px 30px; /* Increase right padding */   
-    margin-right: 10px;
-    background-color: #009879; 
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-}
-
-.add-btn:hover {
-    background-color: #007f65;
-}
 
 /* Table container: scrollable container with padding and border */
 .table-container {
@@ -109,108 +94,23 @@ table tr:hover {
 
 }
 
-
-
-
-/* Container for search bar and add button */
-.button-search-group {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adjust spacing between search and button */
-}
-
-/* Adjusted search bar styling */
-.search-container {
-    margin: 0; /* Remove margin to align properly */
-}
-
-.search-container form {
-    border-radius: 25px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    gap: 1px;
-}
-
-/* Adjusted search input size */
-.search-container input {
-    width: 180px; /* Reduce width (adjust as needed) */
-    padding: 8px 12px; /* Adjust padding */
-    font-size: 14px; /* Smaller font */
- 
-}
-
-/* Adjust search button size */
-.search-container button {
-    padding: 7px 12px; /* Adjust button padding */
-    font-size: 14px; /* Match input font size */
-
- 
-}
-
-
-
-
-
-
-
-.actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-
-}
-
-
-
-
-
-
-.edit {
-
-    color: white;
-    font-size: 10px;
-    background-color: #1a71e4;
-    border-radius: 50%; /* Makes it circular */
-    width: 30px;
-    height: 30px;
+/* Add Employee Button */
+.back-btn {
+    padding: 10px 30px; /* Increase right padding */   
+    margin-right: 10px;
+    background-color: #38425A;
+    color: #fff;
     text-decoration: none;
-    text-align: center; /* Centers the text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
-.delete {
-    color: white;
-    background-color: #d82626;
-    border-radius: 50%; /* Makes it circular */
-    text-decoration: none;
-    font-size: 10px;
-    width: 30px;
-    height: 30px;
-    text-align: center; /* Centers the text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.add-btn:hover {
+    background-color: #007f65;
 }
 
 
-.view {
-    color: rgb(253, 249, 249);
-    background-color: #413d3d;
-    border-radius: 50%; /* Makes it circular */
-    text-decoration: none;
-    font-size: 10px;
-    width: 30px;
-    height: 30px;
-    text-align: center; /* Centers the text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 /* Calendar container: placed near search button */
 .calendar-container {

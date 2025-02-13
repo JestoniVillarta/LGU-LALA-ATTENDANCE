@@ -98,7 +98,6 @@ $result = $conn->query($sql);
                         <th>Afternoon Time Out</th>
                         <th>Duty Hours</th>
                         <th>Date</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,10 +115,6 @@ $result = $conn->query($sql);
                                     <td>{$row['AFTERNOON_TIME_OUT']}</td>
                                     <td>{$row['DUTY_HOURS']}</td>
                                     <td>{$row['DATE']}</td>
-                                    <td>
-                                      <a href='delete_employee.php?id={$row['ID']}' class='delete-btn' 
-                                      onclick='return confirm(\"Are you sure you want to delete this record?\")'>Delete</a>
-                                    </td>
                                 </tr>";
                         }
                     } else {

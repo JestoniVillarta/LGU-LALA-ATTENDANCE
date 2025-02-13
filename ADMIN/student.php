@@ -24,7 +24,8 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="CSS/student.css">
     <link rel="stylesheet" href="CSS/sidenav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
+    
+      
 </head>
 
 <body>
@@ -38,7 +39,7 @@ $result = $conn->query($sql);
         <div class="button-search-group">
             <div class="search-container">
                 <form method="GET">
-                    <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
+                    <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>">
                     <button type="submit">🔍</button>
                 </form>
             </div>
@@ -61,32 +62,44 @@ $result = $conn->query($sql);
                         <th>Action</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <?php
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr class='student-row' onclick='toggleOptions(this)'>
-                <td>" . htmlspecialchars($row["STUDENT_ID"]) . "</td>
-                <td>" . htmlspecialchars($row["FIRST_NAME"]) . "</td>
-                <td>" . htmlspecialchars($row["LAST_NAME"]) . "</td>
-                <td>" . htmlspecialchars($row["GENDER"]) . "</td>
-                <td>" . htmlspecialchars($row["EMAIL"]) . "</td>
-                <td>" . htmlspecialchars($row["CONTACT"]) . "</td>
-                <td>" . htmlspecialchars($row["ADDRESS"]) . "</td>
-
+                <td>" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['FIRST_NAME'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['LAST_NAME'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['GENDER'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['EMAIL'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['CONTACT'], ENT_QUOTES, 'UTF-8') . "</td>
+                <td>" . htmlspecialchars($row['ADDRESS'], ENT_QUOTES, 'UTF-8') . "</td>
+                
                 <td class='action-cell'>
-
-                <div class='actions'>
-                       <a href='edit_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='edit' title='Edit Student'>   <i class='fa-sharp fa-solid fa-pen'></i></a>
-                        <a href='delete_students.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'   class='delete' title='Delete Student'> <i class='fa-sharp fa-solid fa-xmark'></i></a> 
-                       <a href='student_records.php?id=" . htmlspecialchars($row["STUDENT_ID"]) . "' class='view' title='View Attendance Records'> <i class='fa-regular fa-rectangle-list'></i></a>
-        
-                       </div>
-                  
+                    <div class='actions'>
+                        <a href='edit_students.php?id=" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "' class='edit'>
+                            <span class='tooltip'>
+                                <i class='fa-sharp fa-solid fa-pen icon-background'></i>
+                                <span class='tooltiptext'>Edit Student</span>
+                            </span>
+                        </a>
+                        <a href='delete_students.php?id=" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "' 
+                           onclick='return confirm(\"Are you sure you want to delete this student?\")' 
+                           class='delete'>
+                            <span class='tooltip'>
+                               <i class='fa-solid fa-trash'></i>
+                                <span class='tooltiptext'>Delete Student</span>
+                            </span>
+                        </a>
+                        <a href='student_records.php?id=" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "' class='view' >
+                            <span class='tooltip'>
+                                <i class='fa-regular fa-rectangle-list icon-background'></i>
+                                <span class='tooltiptext'>View Attendance</span>
+                            </span>
+                        </a>
+                    </div>
                 </td>
             </tr>";
-
                         }
                     } else {
                         echo "<tr><td colspan='8'>No students found</td></tr>";
@@ -94,20 +107,10 @@ $result = $conn->query($sql);
                     $conn->close();
                     ?>
                 </tbody>
-
-
-
-
-
-
             </table>
         </div>
     </div>
-
 </body>
 
-
-
 <script src="JS/students.js"></script>
-
 </html>

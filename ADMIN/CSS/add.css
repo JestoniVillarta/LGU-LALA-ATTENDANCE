@@ -26,7 +26,20 @@ body {
     margin-top: 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
+
+.back-btn {
+    padding: 10px 30px; /* Increase right padding */   
+    margin-right: 10px;
+    background-color: #38425A;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
 
 
 

@@ -63,7 +63,9 @@ h3 {
     max-height: calc(100vh - 150px); /* Adjust as needed */
     overflow-y: auto;
     overflow-x: auto;
+    padding-bottom: 30px; /* Adjust the padding as needed */
 }
+
 
 /* Sticky Table Header */
 thead th {
@@ -149,11 +151,6 @@ table tr:hover {
 }
 
 
-
-
-
-
-
 .actions {
     display: flex;
     justify-content: center;
@@ -163,8 +160,15 @@ table tr:hover {
 }
 
 
+.actions a  i{
+    font-size: 15px;
+  
+    
+}
+
+
 .actions a:hover {
-    color: white; /* Change color when hovered */
+   
     transform: scale(1.2); /* Slight zoom effect */
     transition: all 0.2s ease-in-out;
 }
@@ -176,9 +180,9 @@ table tr:hover {
 
 .edit {
 
-    color: white;
+    color: #2079df;
+    background-color: rgb(231, 231, 235);
     font-size: 10px;
-    background-color: #1a71e4;
     border-radius: 50%; /* Makes it circular */
     width: 30px;
     height: 30px;
@@ -195,8 +199,8 @@ table tr:hover {
 
 
 .delete {
-    color: white;
-    background-color: #d82626;
+    color: rgb(235, 9, 9);
+    background-color: rgb(231, 231, 235);
     border-radius: 50%; /* Makes it circular */
     text-decoration: none;
     font-size: 10px;
@@ -210,8 +214,8 @@ table tr:hover {
 
 
 .view {
-    color: rgb(253, 249, 249);
-    background-color: #413d3d;
+    color: #009879;
+    background-color: rgb(231, 231, 235);
     border-radius: 50%; /* Makes it circular */
     text-decoration: none;
     font-size: 10px;
@@ -222,6 +226,9 @@ table tr:hover {
     justify-content: center;
     align-items: center;
 }
+
+
+
 
 
 .actions a:hover::after {
@@ -245,3 +252,81 @@ table tr:hover {
 }
 
 
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 9998; /* Ensure tooltip container is on top */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 9999; /* Ensure tooltip text is on top */
+    top: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    margin-top: 5px;
+
+    opacity: 1;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+.table-container {
+    position: relative;
+    z-index: 1;
+    overflow: visible; /* Allow tooltips to be displayed outside the container */
+}
+        
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 9999; /* Ensure tooltip is on top */
+            top: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+   
+        
+
+    
