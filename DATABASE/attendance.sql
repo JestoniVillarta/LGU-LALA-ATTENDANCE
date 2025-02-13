@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2025 at 09:12 AM
+-- Generation Time: Feb 13, 2025 at 03:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,7 @@ CREATE TABLE `attendance_settings_tbl` (
 --
 
 INSERT INTO `attendance_settings_tbl` (`id`, `MORNING_TIME_IN`, `TIME_IN_END`, `MORNING_TIME_OUT`, `TIME_OUT_END`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_IN_END`, `AFTERNOON_TIME_OUT`, `AFTERNOON_TIME_OUT_END`) VALUES
-(1, '06:00 AM', '10:00 AM', '08:00 AM', '12:00 PM', '01:00 PM', '03:00 PM', '03:00 PM', '06:00 PM');
+(1, '06:00 AM', '10:00 AM', '08:00 AM', '12:00 PM', '01:00 PM', '03:00 PM', '07:00 PM', '11:03 PM');
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,9 @@ CREATE TABLE `attendance_tbl` (
 --
 
 INSERT INTO `attendance_tbl` (`ID`, `STUDENT_ID`, `NAME`, `GENDER`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `DUTY_HOURS`, `DATE`) VALUES
-(1, '214315', 'Jestoni Villarta', 'Male', '', NULL, NULL, '04:10 PM', '0.00', '2025-02-13');
+(1, '214315', 'Jestoni Villarta', 'Male', '', NULL, NULL, '04:10 PM', '0.00', '2025-02-13'),
+(2, '123457', 'Jestoni Villarta', 'Male', '', NULL, NULL, '10:05 PM', '0.00', '2025-02-13'),
+(3, '123', 'Jestoni Villarta', 'Male', '', NULL, NULL, '10:05 PM', '0.00', '2025-02-13');
 
 -- --------------------------------------------------------
 
@@ -98,14 +100,14 @@ INSERT INTO `attendance_tbl` (`ID`, `STUDENT_ID`, `NAME`, `GENDER`, `MORNING_TIM
 --
 
 CREATE TABLE `student_tbl` (
-  `ID` varchar(20) NOT NULL,
-  `STUDENT_ID` varchar(20) DEFAULT NULL,
+  `ID` int(11) NOT NULL,
+  `STUDENT_ID` varchar(50) NOT NULL,
   `FIRST_NAME` varchar(50) NOT NULL,
   `LAST_NAME` varchar(50) NOT NULL,
-  `GENDER` enum('Male','Female') NOT NULL,
-  `EMAIL` varchar(100) NOT NULL,
-  `CONTACT` varchar(15) NOT NULL,
-  `ADDRESS` text NOT NULL
+  `GENDER` varchar(50) NOT NULL,
+  `EMAIL` varchar(50) NOT NULL,
+  `CONTACT` varchar(50) NOT NULL,
+  `ADDRESS` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -113,7 +115,8 @@ CREATE TABLE `student_tbl` (
 --
 
 INSERT INTO `student_tbl` (`ID`, `STUDENT_ID`, `FIRST_NAME`, `LAST_NAME`, `GENDER`, `EMAIL`, `CONTACT`, `ADDRESS`) VALUES
-('', '214315', 'Jestoni', 'Villarta', 'Male', 'villartaJestoni27@gmaill.com', '09093295254', 'Riverside, Baroy, Lanao del Norte');
+(2, '123457', 'Jestoni', 'Villarta', 'Male', 'villartajestoni27@gmail.com', '9306837284', 'riverside'),
+(3, '123', 'Jestoni', 'Villarta', 'Male', 'villartajestoni27@gmail.com', '9306837284', 'riverside');
 
 --
 -- Indexes for dumped tables
@@ -141,8 +144,7 @@ ALTER TABLE `attendance_tbl`
 -- Indexes for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `EMAIL` (`EMAIL`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -164,7 +166,13 @@ ALTER TABLE `attendance_settings_tbl`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `student_tbl`
+--
+ALTER TABLE `student_tbl`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
