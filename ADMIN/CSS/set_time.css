@@ -4,6 +4,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
+    background-color: #f0f2f5;
 }
 
 .header-container, .form_wrapper {

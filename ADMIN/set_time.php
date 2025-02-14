@@ -63,11 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ssssssss', $start_time_12hr, $start_time_end_12hr, $morning_time_out_12hr, $morning_time_out_end_12hr, $afternoon_time_in_12hr, $afternoon_time_in_end_12hr, $afternoon_time_out_12hr, $afternoon_time_out_end_12hr);
     
-    if ($stmt->execute()) {
-        echo "Attendance time updated successfully!";
-    } else {
-        echo "Error updating attendance time: " . $stmt->error;
-    }
+  
 
     $stmt->close();
 }

@@ -44,6 +44,13 @@
     box-shadow: 0 4px 8px rgba(0, 152, 121, 0.3); /* Softer glow effect */
 }
 
+/* Active Button Style */
+.sidebar ul li button.active {
+    background-color: #009879; 
+    color: white;
+    font-weight: bold;
+}
+
 /* Apply background color to the entire page */
 body {
     margin-left: 250px; /* Offset for the sidebar */

@@ -1,18 +1,15 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f0f2f5;
 }
 
-.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .table-wrapper {
     max-width: 90%;
     margin: 0 auto; /* Centers the container horizontally */
     gap: 20px;
+
    
 }
 
@@ -35,28 +32,63 @@ h3 {
 }
 
 .card i {
-    font-size: 100px; /* Adjust icon size */
+    font-size: 40px; /* Adjust icon size */
     margin-bottom: 10px; /* Space between icon and text */
     color: #869188;
+    padding: 20px;
+    border-radius: 50%; /* Make the icon background a perfect circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    
 }
 
+
 .card {
+    color: black;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
-    color: white;
     font-size: 20px;
+    background-color: #f8f9fa;
+ 
 }
 
-.card.blue { background-color: #2b83d2; } /* A brighter shade of blue */
-.card.green { background-color: #28a745; } /* A fresh shade of green */
-.card.red { background-color: #d33f3f; } /* A vibrant red */
-.card.orange { background-color: #e67e22; } /* A rich orange */
+.card.blue i{     
+    color: #98bee0;
+    background-color: #dfe4e0;
+    width: 40px;
+    height: 40px;
+} 
+
+.card.green i{ 
+    color: #28a745;
+    background-color: #dfe4e0;
+    width: 40px;
+    height: 40px;
+ } 
+
+.card.red i{ 
+    color: #d33f3f; 
+    background-color: #dfe4e0;
+    width: 40px;
+    height: 40px;
+
+} 
+
+.card.orange i{ 
+    color: #e67e22;
+    background-color: #dfe4e0;
+    width: 40px;
+    height: 40px;
+
+ } 
 
 
 
 .card {
-    text-align: center;
+   
     color: white;
     border-radius: 5px;
     font-size: 18px;
@@ -73,6 +105,16 @@ h3 {
     align-items: center;
     width: 100%;
     gap: 20px; /* Adds gap between cards */
+}
+
+span {
+
+text-align: left;
+margin-bottom: 40px;
+margin-left: 40px;
+width: 100%;
+color: rgb(65, 63, 63);
+font-weight: bold;
 }
 
 
