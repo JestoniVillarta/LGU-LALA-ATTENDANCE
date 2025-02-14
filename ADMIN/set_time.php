@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param('ssssssss', $start_time_12hr, $start_time_end_12hr, $morning_time_out_12hr, $morning_time_out_end_12hr, $afternoon_time_in_12hr, $afternoon_time_in_end_12hr, $afternoon_time_out_12hr, $afternoon_time_out_end_12hr);
     
   
-
+    $stmt->execute();
     $stmt->close();
 }
 ?>
@@ -129,22 +129,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit" class="set_time">Set Time</button>
 
-                    <!-- Success Modal -->
-<div id="successModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
-    </div>
-</div>
+            <!-- Success Modal -->
+            <div id="successModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
+                </div>
+            </div>
 
         </form>
-
-
-
     </div>
-
-
-
 
     <script>
         function showModal(event) {
