@@ -31,11 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $afternoon_time_out = $_POST['afternoon_time_out'];
     $afternoon_time_out_end = $_POST['afternoon_time_out_end'];
 
+    // Validate the input fields
     if (empty($start_time) || empty($start_time_end) || empty($morning_time_out) || empty($morning_time_out_end) || empty($afternoon_time_in) || empty($afternoon_time_in_end) || empty($afternoon_time_out) || empty($afternoon_time_out_end)) {
         echo "All fields are required.";
         exit();
     }
 
+    // Convert time to 12-hour format
     $start_time_12hr = date("h:i A", strtotime($start_time));
     $start_time_end_12hr = date("h:i A", strtotime($start_time_end));
     $morning_time_out_12hr = date("h:i A", strtotime($morning_time_out));
@@ -45,11 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $afternoon_time_out_12hr = date("h:i A", strtotime($afternoon_time_out));
     $afternoon_time_out_end_12hr = date("h:i A", strtotime($afternoon_time_out_end));
 
+    // Check the time sequence
     if (strtotime($start_time) >= strtotime($start_time_end) || strtotime($morning_time_out) >= strtotime($morning_time_out_end) || strtotime($afternoon_time_in) >= strtotime($afternoon_time_in_end) || strtotime($afternoon_time_out) >= strtotime($afternoon_time_out_end)) {
         echo "Invalid time order! Please check the sequence.";
         exit();
     }
 
+    // Update the attendance settings
     if ($result->num_rows > 0) {
         $query = "UPDATE attendance_settings_tbl SET MORNING_TIME_IN = ?, TIME_IN_END = ?, MORNING_TIME_OUT = ?, TIME_OUT_END = ?, AFTERNOON_TIME_IN = ?, AFTERNOON_TIME_IN_END = ?, AFTERNOON_TIME_OUT = ?, AFTERNOON_TIME_OUT_END = ? WHERE id = 1";
     } else {
@@ -58,16 +62,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ssssssss', $start_time_12hr, $start_time_end_12hr, $morning_time_out_12hr, $morning_time_out_end_12hr, $afternoon_time_in_12hr, $afternoon_time_in_end_12hr, $afternoon_time_out_12hr, $afternoon_time_out_end_12hr);
-
+    
     if ($stmt->execute()) {
         echo "Attendance time updated successfully!";
     } else {
-        echo "Error updating attendance time!";
+        echo "Error updating attendance time: " . $stmt->error;
     }
 
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,20 +82,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Set Attendance Time</title>
     <link rel="stylesheet" href="CSS/set_time.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<body>
 
+<body>
     <div class="nav">
         <?php include 'sidenav.php'; ?>
     </div>
 
     <div class="header-container">
-        <h3>Set Attendance Time </h3>
+        <h3>Set Attendance Time</h3>
     </div>
 
     <div class="form_wrapper">
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="showModal(event)">
             <div class="time-container">
                 <div class="time-group">
                     <label for="start_time">Morning Start Time:</label>
@@ -126,12 +132,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <button type="submit" class="set_time">Set Time</button>
+
+                    <!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
+    </div>
+</div>
+
         </form>
+
+
+
     </div>
 
 
 
 
+    <script>
+        function showModal(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+            var modal = document.getElementById("successModal");
+            modal.style.display = "block";
+
+            // Submit the form after showing the modal
+            setTimeout(function() {
+                event.target.submit();
+            }, 2000); // Adjust the delay as needed
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById("successModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
 
 </html>

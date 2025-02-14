@@ -4,12 +4,11 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
-   
 }
 
 .header-container, .form_wrapper {
     width: 90%;
-    margin: 0 auto; /* Ensures both are centered */
+    margin: 0 auto;
 }
 
 h3 {
@@ -19,24 +18,20 @@ h3 {
 .header-container {
     width: 90%;
     border-radius: 4px;
-    background-color:  #f9f9f9;
+    background-color: #f9f9f9;
     color: black;
-    margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
+    margin: 20px auto 5px;
     height: 80px;
-    padding-right: 0; /* Remove unnecessary right padding */
-    margin-top: 20px;
     display: flex;
     align-items: center;
 }
-
 
 .form_wrapper {
     display: flex;
     justify-content: center;
     width: 90%;
-    height: 40vh;
+    min-height: 40vh;
 }
-
 
 form {
     width: 100%;
@@ -65,9 +60,10 @@ h1 {
 
 .time-group {
     display: flex;
-justify-content: center;
+    justify-content: center;
     align-items: center;
     width: 100%;
+    gap: 20px;
 }
 
 .time-group label {
@@ -77,12 +73,12 @@ justify-content: center;
 }
 
 .time-group input {
-    width: 20%;
+    width: 40%;
 }
 
 .time-group .end-label {
-    text-align: right;
-    width: 20%;
+    text-align: left;
+    width: 15%;
 }
 
 .set_time {
@@ -96,6 +92,67 @@ justify-content: center;
     margin-top: 40px;
 }
 
-button:hover {
+.set_time:hover {
     background: #0e5e4e;
+}
+
+/* CSS for Success Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #333; /* Add this line to set the text color */
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* CSS for Success Modal with Icon */
+.modal-content p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.modal-content .fas {
+    margin-right: 10px;
+    color: green;
+    font-size: 24px;
 }
