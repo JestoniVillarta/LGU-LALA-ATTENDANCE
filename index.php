@@ -147,10 +147,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
     <form action="" method="post">
         <input type="text" id="student_id" placeholder="ENTER YOUR ID:" name="student_id" required>
         <br>
-        <?php if ($show_morning_in) echo '<button type="submit" name="morning_in">Morning Time In</button>'; ?>
-        <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" style="background-color: red;">Morning Time Out</button>'; ?>
+        <?php if ($show_morning_in) echo '<button type="submit" name="morning_in" >Morning Time In</button>'; ?>
+        <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" class="morning_out">Morning Time Out</button>'; ?>
         <?php if ($show_afternoon_in) echo '<button type="submit" name="afternoon_in">Afternoon Time In</button>'; ?>
-        <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out">Afternoon Time Out</button>'; ?>
+        <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out" class="afternoon_out">Afternoon Time Out</button>'; ?>
     </form>
 </body>
 </html>

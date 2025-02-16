@@ -16,17 +16,21 @@
             <li><button id="attendance" data-url="attendance.php">Attendance</button></li>
             <li><button id="student" data-url="student.php">Student</button></li>
             <li><button id="set_time" data-url="set_time.php">Setup Time</button></li>
-            <li><button id="logout" data-url="../logout.php">Logout</button></li>
+            <li><button id="logout">Logout</button></li>
         </ul>
     </div>
 
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="logout_modal">
+        <div class="logout_modal-content">
+        <i class="fa-regular fa-circle-question"></i>
+            <p>Are you sure you want to logout?</p>
+            <button id="confirmLogout">Yes</button>
+            <button id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+
+    <script src="JS/sidenav.js"></script>
 
 </body>
-
-
-<script src="JS/sidenav.js"></script>
-
 </html>
-
-
-

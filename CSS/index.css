@@ -29,8 +29,9 @@ form {
 }
 
 input[type="text"] {
-    width: calc(100% - 20px);
-    padding: 20px 100px 20px 15px; /* 0 sa left padding */
+    width: 80%;
+    padding: 20px 100px 20px 15px;
+    /* 0 sa left padding */
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -39,10 +40,12 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-    text-align: left; /* Sigurado nga wala */
+    text-align: left;
+    /* Sigurado nga wala */
     font-size: 16px;
     color: #888;
-    padding-left: 0; /* Sigurado nga duol sa gilay-on sa input */
+    padding-left: 0;
+    /* Sigurado nga duol sa gilay-on sa input */
 }
 
 
@@ -53,7 +56,7 @@ button {
     margin: 5px 0;
     border: none;
     border-radius: 5px;
-    background-color: #009879; 
+    background-color: #009879;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -61,11 +64,25 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #0f7c66;
 }
+
+.morning_out,
+.afternoon_out {
+    background-color: rgba(231, 12, 12, 0.849);
+}
+
+.morning_out:hover {
+    background-color: #920c0cea;
+}
+
+.afternoon_out:hover {
+    background-color: #920c0cea;
+}
+
 
 @media (max-width: 600px) {
     form {
-        width: 90%;
+        width: 70%;
     }
 }

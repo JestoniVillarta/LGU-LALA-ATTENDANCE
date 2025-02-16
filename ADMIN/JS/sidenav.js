@@ -26,3 +26,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("logout");
+    const logoutModal = document.getElementById("logoutModal");
+    const confirmLogout = document.getElementById("confirmLogout");
+    const cancelLogout = document.getElementById("cancelLogout");
+
+    // Show modal when logout button is clicked
+    logoutBtn.addEventListener("click", function () {
+        logoutModal.style.display = "flex";
+    });
+
+    // Redirect to logout page if confirmed
+    confirmLogout.addEventListener("click", function () {
+        window.location.href = "../logout.php";
+    });
+
+    // Hide modal if canceled
+    cancelLogout.addEventListener("click", function () {
+        logoutModal.style.display = "none";
+    });
+});

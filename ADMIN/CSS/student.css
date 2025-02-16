@@ -1,20 +1,20 @@
-
-
 /* Basic page styling */
 body {
 
     margin: 0;
     padding: 0;
     background-color: #f0f2f5;
-    
+
 }
 
 /* Table wrapper: centers the table container */
 .table-wrapper {
     max-width: 90%;
-    margin: 0 auto; /* Centers the container horizontally */
+    margin: 0 auto;
+    /* Centers the container horizontally */
     background-color: #f0f2f5;
-   
+    height: 80vh;
+
 }
 
 h3 {
@@ -26,23 +26,27 @@ h3 {
 
 /* Table button wrapper: aligns both search bar and add button to the right */
 .table-button-wrapper {
-    max-width: 90%; /* Match the table wrapper */
+    max-width: 90%;
+    /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
-    margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
+    margin: 0 auto 5px;
+    /* Centers horizontally and adds bottom margin */
     display: flex;
-    justify-content: space-between; /* Ensures spacing between title and buttons */
+    justify-content: space-between;
+    /* Ensures spacing between title and buttons */
     align-items: center;
     height: 80px;
-    padding: 0 ;
+    padding: 0;
     margin-top: 20px;
 }
 
 /* Add Employee Button */
 .add-btn {
-    padding: 10px 30px; /* Increase right padding */   
+    padding: 10px 30px;
+    /* Increase right padding */
     margin-right: 10px;
-    background-color: #009879; 
+    background-color: #009879;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -56,14 +60,17 @@ h3 {
 
 /* Table container: scrollable container with padding and border */
 .table-container {
+    position: relative;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-height: calc(100vh - 150px); /* Adjust as needed */
+    max-height: 50%;
     overflow-y: auto;
     overflow-x: auto;
-    padding-bottom: 30px; /* Adjust the padding as needed */
+    padding-bottom: 30px;
+    overflow: overlay;
+
 }
 
 
@@ -71,8 +78,9 @@ h3 {
 thead th {
     position: sticky;
     top: 0;
-    z-index: 10; /* Ensures header stays above table rows */
-      background-color: #222d33; /* Solid background for visibility */
+    /* Ensures header stays above table rows */
+    background-color: #222d33;
+    /* Solid background for visibility */
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;
@@ -84,14 +92,17 @@ table {
     border-collapse: collapse;
     text-align: left;
     color: black;
+
 }
 
 /* Table Header Styling */
 table th {
-      background-color: #222d33;
+    background-color: #222d33;
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;
+    z-index: 1;
+
 }
 
 /* Table Data Cell Styling */
@@ -118,12 +129,14 @@ table tr:hover {
 .button-search-group {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust spacing between search and button */
+    gap: 10px;
+    /* Adjust spacing between search and button */
 }
 
 /* Adjusted search bar styling */
 .search-container {
-    margin: 0; /* Remove margin to align properly */
+    margin: 0;
+    /* Remove margin to align properly */
 }
 
 .search-container form {
@@ -136,18 +149,23 @@ table tr:hover {
 
 /* Adjusted search input size */
 .search-container input {
-    width: 180px; /* Reduce width (adjust as needed) */
-    padding: 8px 12px; /* Adjust padding */
-    font-size: 14px; /* Smaller font */
- 
+    width: 180px;
+    /* Reduce width (adjust as needed) */
+    padding: 8px 12px;
+    /* Adjust padding */
+    font-size: 14px;
+    /* Smaller font */
+
 }
 
 /* Adjust search button size */
 .search-container button {
-    padding: 7px 12px; /* Adjust button padding */
-    font-size: 14px; /* Match input font size */
+    padding: 7px 12px;
+    /* Adjust button padding */
+    font-size: 14px;
+    /* Match input font size */
 
- 
+
 }
 
 
@@ -160,21 +178,23 @@ table tr:hover {
 }
 
 
-.actions a  i{
+.actions a i {
     font-size: 15px;
-  
-    
+
+
 }
 
 
 .actions a:hover {
-   
-    transform: scale(1.2); /* Slight zoom effect */
+
+    transform: scale(1.2);
+    /* Slight zoom effect */
     transition: all 0.2s ease-in-out;
 }
 
 .actions a:hover i {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow to icon */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Add shadow to icon */
 }
 
 
@@ -183,15 +203,17 @@ table tr:hover {
     color: #2079df;
     background-color: rgb(231, 231, 235);
     font-size: 10px;
-    border-radius: 50%; /* Makes it circular */
+    border-radius: 50%;
+    /* Makes it circular */
     width: 30px;
     height: 30px;
     text-decoration: none;
-    text-align: center; /* Centers the text */
+    text-align: center;
+    /* Centers the text */
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
 
 }
 
@@ -201,12 +223,14 @@ table tr:hover {
 .delete {
     color: rgb(235, 9, 9);
     background-color: rgb(231, 231, 235);
-    border-radius: 50%; /* Makes it circular */
+    border-radius: 50%;
+    /* Makes it circular */
     text-decoration: none;
     font-size: 10px;
     width: 30px;
     height: 30px;
-    text-align: center; /* Centers the text */
+    text-align: center;
+    /* Centers the text */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,12 +240,14 @@ table tr:hover {
 .view {
     color: #009879;
     background-color: rgb(231, 231, 235);
-    border-radius: 50%; /* Makes it circular */
+    border-radius: 50%;
+    /* Makes it circular */
     text-decoration: none;
     font-size: 10px;
     width: 30px;
     height: 30px;
-    text-align: center; /* Centers the text */
+    text-align: center;
+    /* Centers the text */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,12 +278,14 @@ table tr:hover {
 }
 
 
- /* Tooltip container */
+
+
+/* Tooltip container */
 .tooltip {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    z-index: 9998; /* Ensure tooltip container is on top */
+    /* Ensure tooltip container is on top */
 }
 
 /* Tooltip text */
@@ -270,7 +298,7 @@ table tr:hover {
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    z-index: 9999; /* Ensure tooltip text is on top */
+    /* Ensure tooltip text is on top */
     top: 125%;
     left: 50%;
     margin-left: -60px;
@@ -297,36 +325,26 @@ table tr:hover {
     border-color: transparent transparent #555 transparent;
 }
 
-.table-container {
-    position: relative;
-    z-index: 1;
-    overflow: visible; /* Allow tooltips to be displayed outside the container */
+
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
-        
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 9999; /* Ensure tooltip is on top */
-            top: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-   
-        
-
-    
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    /* Ensure tooltip is on top */
+    top: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}

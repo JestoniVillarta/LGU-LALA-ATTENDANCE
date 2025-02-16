@@ -43,7 +43,7 @@ $result = $conn->query($sql);
                     <button type="submit">🔍</button>
                 </form>
             </div>
-            <a href="add.php" class="add-btn">Add Student</a>
+            <a href="add.php" class="add-btn"><i class="fa-solid fa-user-plus"></i> Add Student</a>
         </div>
     </div>
 
