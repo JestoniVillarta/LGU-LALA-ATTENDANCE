@@ -30,11 +30,9 @@ h3 {
     /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
-    margin: 0 auto 5px;
-    /* Centers horizontally and adds bottom margin */
+    margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
     display: flex;
-    justify-content: space-between;
-    /* Ensures spacing between title and buttons */
+    justify-content: space-between; /* Ensures spacing between title and buttons */
     align-items: center;
     height: 80px;
     padding: 0;
