@@ -46,6 +46,9 @@ h3 {
     max-height: calc(100vh - 150px); /* Adjust as needed */
     overflow-y: auto;
     overflow-x: auto;
+    padding-bottom: 20px;
+    overflow: overlay;
+
 }
 
 /* Sticky Table Header */

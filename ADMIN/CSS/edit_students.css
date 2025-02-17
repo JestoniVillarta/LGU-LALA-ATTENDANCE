@@ -101,3 +101,12 @@ a {
     text-decoration: none;
 }
 
+
+.name-container {
+    display: flex;
+    gap: 10px;  /* Adds spacing between first and last name */
+}
+
+.name-container input {
+    flex: 1;  /* Makes both inputs equal width */
+}

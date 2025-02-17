@@ -49,6 +49,7 @@ h3 {
     padding-left: 20px;
 }
 
+
 .form-wrapper {
     display: flex;
     justify-content: center;
@@ -78,11 +79,33 @@ input, select {
     font-size: 16px;
 }
 
+.name-container {
+    display: flex;
+    gap: 10px;  /* Adds spacing between first and last name */
+}
+
+.name-container input {
+    flex: 1;  /* Makes both inputs equal width */
+}
+
+
+/* Center the button */
 .add-btn {
-    margin-top: 20px;
-    padding: 20px;
-    border: none;
+    display: block;
+    margin: 20px auto;  /* Centers the button */
+    padding: 15px;  /* Adjusts padding */
+    width: 50%;  /* Adjust width (50% of the form) */
     background-color: #009879; /* Solid background for visibility */
     color: white;
+    border: none;
+    border-radius: 3px; /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Button hover effect */
+.add-btn:hover {
+    background-color: #117a65; /* Solid background for visibility */
 }
 

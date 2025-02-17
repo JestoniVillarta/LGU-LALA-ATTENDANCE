@@ -112,8 +112,8 @@ p {
 }
 
 #cancelLogout {
-    background: none;
-    color: rgb(49, 48, 48);
+    background-color: gray;
+    color: #fff;
     border: 1px solid gray;
     font-weight: bold;
 }

@@ -77,9 +77,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <input type="text" id="STUDENT_ID" name="student_id" placeholder="Student ID" required><br><br>
 
-            <input type="text" id="FIRST_NAME" name="first_name" placeholder="First Name" required><br><br>
-            
-            <input type="text" id="LAST_NAME" name="last_name" placeholder="Last Name" required><br><br>
+            <div class="name-container">
+
+           <input type="text" id="FIRST_NAME" name="first_name" placeholder="First Name" required>
+          <input type="text" id="LAST_NAME" name="last_name" placeholder="Last Name" required>
+     
+            </div><br><br>
+
 
             <select id="GENDER" name="gender" required>
                 <option value="">Select Gender</option>
@@ -93,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <input type="text" id="ADDRESS" name="address" placeholder="Address" required><br><br>
 
+           
             <button type="submit" class="add-btn">Add Student</button>
     </form>
 </div>
