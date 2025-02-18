@@ -93,9 +93,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form_wrapper">
         <form action="" method="post" onsubmit="showModal(event)">
+            
             <div class="time-container">
+
                 <div class="time-group">
-                    <label for="start_time">Morning Start Time:</label>
+                    <label for="start_time">Morning Time In:</label>
                     <input type="time" id="start_time" name="start_time" value="<?php echo $start_time; ?>" required>
                     <label for="start_time_end" class="end-label">to</label>
                     <input type="time" id="start_time_end" name="start_time_end" value="<?php echo $start_time_end; ?>" required>
@@ -125,9 +127,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="afternoon_time_out_end" class="end-label">to</label>
                     <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="<?php echo $afternoon_time_out_end; ?>" required>
                 </div>
+
+                <button type="submit" class="set_time">Set Time</button>
+
             </div>
 
-            <button type="submit" class="set_time">Set Time</button>
+       
 
             <!-- Success Modal -->
             <div id="successModal" class="modal">
