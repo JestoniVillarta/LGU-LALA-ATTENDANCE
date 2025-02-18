@@ -57,12 +57,12 @@ $result = $conn->query($sql);
 
         <!-- Grouping search and calendar filters -->
         <div class="button-search-group">
-            
+
             <!-- Date Picker -->
             <div class="calendar-container">
                 <form method="GET" id="dateForm">
                     <label for="dateSelect">Select Date:</label>
-                    <input type="date" name="search_date" id="dateSelect" 
+                    <input type="date" name="search_date" id="dateSelect"
                         value="<?php echo htmlspecialchars($search_date); ?>"
                         min="<?php echo !empty($dates) ? min($dates) : ''; ?>"
                         max="<?php echo !empty($dates) ? max($dates) : ''; ?>"
@@ -74,7 +74,7 @@ $result = $conn->query($sql);
             <div class="search-container">
                 <form method="GET">
                     <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
-                    <input type="text" name="search" placeholder="Enter Student ID or Name" 
+                    <input type="text" name="search" placeholder="Enter Student ID or Name"
                         value="<?php echo htmlspecialchars($search); ?>">
                     <button type="submit">🔍</button>
                 </form>

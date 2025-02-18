@@ -55,12 +55,41 @@ h3 {
  
 }
 
+
 .card.blue i{     
     color: #98bee0;
     background-color: #dfe4e0;
     width: 40px;
     height: 40px;
 } 
+
+.card.blue {
+    display: flex; /* Gamiton ang flexbox */
+    justify-content: center; /* I-center vertically */
+    align-items: center; /* I-center horizontally */
+}
+
+
+
+.total-count {
+    font-size: 60px; /* Adjust as needed */
+    font-weight: bold;
+    color: rgba(21, 71, 180, 0.74);
+}
+
+.label {
+    font-size: 16px; /* Adjust as needed */
+    text-align: left;
+    margin-left: 3;
+    margin-top: 30px;
+  
+}
+
+.fa-users {
+    font-size: 20px; /* Adjust icon size if needed */
+    color: #000; /* Change color if necessary */
+}
+
 
 .card.green i{ 
     color: #28a745;
