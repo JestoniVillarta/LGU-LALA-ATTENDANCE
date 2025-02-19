@@ -11,7 +11,6 @@ body {
 .table-wrapper {
     max-width: 90%;
     margin: 0 auto;
-    /* Centers the container horizontally */
     background-color: #f0f2f5;
     height: 80vh;
 
@@ -26,23 +25,21 @@ h3 {
 
 /* Table button wrapper: aligns both search bar and add button to the right */
 .table-button-wrapper {
-    max-width: 90%;
-    /* Match the table wrapper */
+    max-width: 90%; /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
     margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
     display: flex;
-    justify-content: space-between; /* Ensures spacing between title and buttons */
+    justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding: 0;
+    padding-right: 0; /* Remove unnecessary right padding */
     margin-top: 20px;
 }
 
 /* Add Employee Button */
 .add-btn {
-    padding: 10px 30px;
-    /* Increase right padding */
+    padding: 10px 30px; /* Increase right padding */
     margin-right: 10px;
     background-color: #009879;
     color: #fff;
@@ -66,8 +63,19 @@ h3 {
     max-height: 90%;
     overflow-y: auto;
     overflow-x: auto;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     overflow: overlay;
+
+}
+
+
+/* Table Styling */
+table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    text-align: left;
+    color: black;
 
 }
 
@@ -84,14 +92,7 @@ thead th {
     border: 1px solid #ddd;
 }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    color: black;
 
-}
 
 /* Table Header Styling */
 table th {
@@ -101,6 +102,12 @@ table th {
     border: 1px solid #ddd;
     z-index: 1;
 
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Ensures that long content does not break into multiple lines */
 }
 
 /* Table Data Cell Styling */
