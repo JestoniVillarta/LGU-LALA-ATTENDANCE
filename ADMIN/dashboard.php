@@ -45,8 +45,11 @@ $conn->close();
 
 
             <div class="table-wrapper">
+
                 <div class="main-content">
+
                     <div class="cards">
+                        
                         <div class="card blue">
                             <br>
 

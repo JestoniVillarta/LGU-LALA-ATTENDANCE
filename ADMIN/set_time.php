@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check the time sequence
     if (strtotime($start_time) >= strtotime($start_time_end) || strtotime($morning_time_out) >= strtotime($morning_time_out_end) || strtotime($afternoon_time_in) >= strtotime($afternoon_time_in_end) || strtotime($afternoon_time_out) >= strtotime($afternoon_time_out_end)) {
-        echo "Invalid time order! Please check the sequence.";
+     
         exit();
     }
 
@@ -140,46 +140,205 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
 
-
-                    <!-- Success Modal -->
-                    <div id="successModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeModal()">&times;</span>
-                            <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-
+                    <!-- Add this HTML right before the closing </body> tag -->
+<div id="successModal" class="modal">
+    <div class="modal-content success">
+        <div class="modal-header">
+            <i class="fas fa-check-circle"></i>
+            <h2>Success!</h2>
+        </div>
+        <div class="modal-body">
+            <p>Time settings have been successfully updated.</p>
+        </div>
+        <div class="modal-footer">
+            <button onclick="handleSuccessClose()" class="modal-btn">OK</button>
         </div>
     </div>
+</div>
 
-    <script>
-        function showModal(event) {
-            event.preventDefault(); // Prevent form from submitting normally
-            var modal = document.getElementById("successModal");
-            modal.style.display = "block";
+<div id="invalidModal" class="modal">
+    <div class="modal-content invalid">
+        <div class="modal-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <h2>Invalid Time Settings</h2>
+        </div>
+        <div class="modal-body">
+            <p>Please ensure that end times are later than start times for each period.</p>
+        </div>
+        <div class="modal-footer">
+            <button onclick="handleInvalidClose()" class="modal-btn">OK</button>
+        </div>
+    </div>
+</div>
 
-            // Submit the form after showing the modal
-            setTimeout(function() {
-                event.target.submit();
-            }, 2000); // Adjust the delay as needed
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-header i {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.success .modal-header i {
+    color: #28a745;
+}
+
+.invalid .modal-header i {
+    color: #dc3545;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.modal-body {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-btn {
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.modal-btn:hover {
+    background-color: #0056b3;
+}
+
+.success .modal-btn {
+    background-color: #28a745;
+}
+
+.success .modal-btn:hover {
+    background-color: #218838;
+}
+
+.invalid .modal-btn {
+    background-color: #dc3545;
+}
+
+.invalid .modal-btn:hover {
+    background-color: #c82333;
+}
+</style>
+
+<script>
+function showModal(event) {
+    event.preventDefault();
+    
+    // Get all the time inputs
+    const startTime = document.getElementById('start_time').value;
+    const startTimeEnd = document.getElementById('start_time_end').value;
+    const morningTimeOut = document.getElementById('morning_time_out').value;
+    const morningTimeOutEnd = document.getElementById('morning_time_out_end').value;
+    const afternoonTimeIn = document.getElementById('afternoon_time_in').value;
+    const afternoonTimeInEnd = document.getElementById('afternoon_time_in_end').value;
+    const afternoonTimeOut = document.getElementById('afternoon_time_out').value;
+    const afternoonTimeOutEnd = document.getElementById('afternoon_time_out_end').value;
+
+    // Validate time sequence
+    if (startTime >= startTimeEnd || 
+        morningTimeOut >= morningTimeOutEnd || 
+        afternoonTimeIn >= afternoonTimeInEnd || 
+        afternoonTimeOut >= afternoonTimeOutEnd) {
+        document.getElementById('invalidModal').style.display = 'block';
+        return;
+    }
+
+    // If validation passes, submit the form
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show success modal after successful submission
+            document.getElementById('successModal').style.display = 'block';
+        } else {
+            throw new Error('Network response was not ok');
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
-        function closeModal() {
-            var modal = document.getElementById("successModal");
-            modal.style.display = "none";
-        }
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
 
-        // Close the modal when the user clicks outside of it
-        window.onclick = function(event) {
-            var modal = document.getElementById("successModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
+function handleSuccessClose() {
+    // First submit the form traditionally
+    document.querySelector('form').submit();
+    
+    // Then close the modal and redirect
+    closeModal('successModal');
+    window.location.href = 'set_time.php';
+}
+
+function handleInvalidClose() {
+    // Close the modal and redirect
+    closeModal('invalidModal');
+    window.location.href = 'set_time.php';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        window.location.href = 'set_time.php';
+    }
+}
+</script>
+
+
+
+
 </body>
 
 </html>

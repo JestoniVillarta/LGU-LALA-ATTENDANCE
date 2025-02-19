@@ -1,24 +1,37 @@
+// Function to display the success modal
+function showSuccessModal(form) {
+    var modal = document.getElementById("successModal");
+    var span = document.getElementsByClassName("close")[0];
+    var modalMessage = document.getElementById("modalMessage");
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const now = new Date();
-        const hours = now.getHours();
-        const morningIn = document.querySelector("button[name='morning_in']");
-        const morningOut = document.querySelector("button[name='morning_out']");
-        const afternoonIn = document.querySelector("button[name='afternoon_in']");
-        const afternoonOut = document.querySelector("button[name='afternoon_out']");
-        
-        // Define time ranges
-        if (hours >= 6 && hours < 12) {
-            morningIn.style.display = "block";
-        }
-        if (hours >= 12 && hours < 13) {
-            morningOut.style.display = "block";
-        }
-        if (hours >= 13 && hours < 17) {
-            afternoonIn.style.display = "block";
-        }
-        if (hours >= 17 && hours < 22) {
-            afternoonOut.style.display = "block";
-        }
-    });
+    // Set the modal message without the total duty time
+    modalMessage.textContent = "✅ Attendance recorded successfully!";
 
+    // Display the modal
+    modal.style.display = "block";
+
+    // Close the modal when the user clicks on the 'x'
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // Close the modal when the user clicks outside of the modal
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    // Submit the form after showing the modal (e.g., 2 seconds delay)
+    setTimeout(function () {
+        form.submit();
+    }, 1000);
+}
+
+// Add event listener to the form submit event
+document.getElementById("attendanceForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent immediate submission
+
+    // Show the modal and then submit the form
+    showSuccessModal(this);
+});

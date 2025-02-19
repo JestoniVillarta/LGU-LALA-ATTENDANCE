@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
+ 
 }
 
 .container {
@@ -43,7 +43,7 @@ h3 {
 .table-wrapper {
     width: 90%;
     margin: 0 auto; /* Centers the container horizontally */
-    background-color: #f0f2f5;
+
     height: 80vh;
 }
 
