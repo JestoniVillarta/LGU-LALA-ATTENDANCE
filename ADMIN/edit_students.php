@@ -88,42 +88,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="nav">
-        <?php include 'sidenav.php'; ?>
-    </div>
-    <div class="header_text">
-        <h3>Edit Student Information</h3>
-        <a href="student.php" class="back-btn"><i class="fa-solid fa-backward"></i> Back</a>
-    </div>
-    <div class="form-wrapper">
-        <form method="POST">
-            <label>Student ID:</label>
-            <input type="text" name="student_id" value="<?php echo htmlspecialchars($student['STUDENT_ID']); ?>" required>
 
-            <label>First Name:</label>
-            <input type="text" name="first_name" value="<?php echo htmlspecialchars($student['FIRST_NAME']); ?>" required>
+    <div class="container">
 
-            <label>Last Name:</label>
-            <input type="text" name="last_name" value="<?php echo htmlspecialchars($student['LAST_NAME']); ?>" required>
+        <div class="nav">
+            <?php include 'sidenav.php'; ?>
+        </div>
 
-            <label>Gender:</label>
-            <select name="gender" required>
-                <option value="Male" <?php if ($student['GENDER'] == 'Male') echo 'selected'; ?>>Male</option>
-                <option value="Female" <?php if ($student['GENDER'] == 'Female') echo 'selected'; ?>>Female</option>
-            </select>
+        <div class="content-container">
 
-            <label>Email:</label>
-            <input type="email" name="email" value="<?php echo htmlspecialchars($student['EMAIL']); ?>" required>
+            <div class="header_text">
+                <h3>Edit Student Information</h3>
+                <a href="student.php" class="back-btn"><i class="fa-solid fa-backward"></i> Back</a>
+            </div>
+            <div class="form-wrapper">
+                <form method="POST">
+                    <label>Student ID:</label>
+                    <input type="text" name="student_id" value="<?php echo htmlspecialchars($student['STUDENT_ID']); ?>" required>
 
-            <label>Contact:</label>
-            <input type="text" name="contact" value="<?php echo htmlspecialchars($student['CONTACT']); ?>" required>
+                    <label>First Name:</label>
+                    <input type="text" name="first_name" value="<?php echo htmlspecialchars($student['FIRST_NAME']); ?>" required>
 
-            <label>Address:</label>
-            <input type="text" name="address" value="<?php echo htmlspecialchars($student['ADDRESS']); ?>" required>
+                    <label>Last Name:</label>
+                    <input type="text" name="last_name" value="<?php echo htmlspecialchars($student['LAST_NAME']); ?>" required>
 
-            <button type="submit" class="update-btn">Update Student</button>
-        </form>
+                    <label>Gender:</label>
+                    <select name="gender" required>
+                        <option value="Male" <?php if ($student['GENDER'] == 'Male') echo 'selected'; ?>>Male</option>
+                        <option value="Female" <?php if ($student['GENDER'] == 'Female') echo 'selected'; ?>>Female</option>
+                    </select>
+
+                    <label>Email:</label>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($student['EMAIL']); ?>" required>
+
+                    <label>Contact:</label>
+                    <input type="text" name="contact" value="<?php echo htmlspecialchars($student['CONTACT']); ?>" required>
+
+                    <label>Address:</label>
+                    <input type="text" name="address" value="<?php echo htmlspecialchars($student['ADDRESS']); ?>" required>
+
+                    <button type="submit" class="update-btn">Update Student</button>
+                </form>
+            </div>
+
+        </div>
     </div>
     <br>
 </body>
+
 </html>
