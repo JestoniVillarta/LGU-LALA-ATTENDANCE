@@ -30,9 +30,13 @@ $result = $conn->query($sql);
 
 <body>
 
+<div class="container">
+
     <div class="nav">
         <?php include 'sidenav.php'; ?>
     </div>
+
+    <div class="content-container">
 
     <div class="table-button-wrapper">
         <h3>Student List</h3>
@@ -110,6 +114,11 @@ $result = $conn->query($sql);
             </table>
         </div>
     </div>
+
+
+</div>
+</div>
+
 </body>
 
 <script src="JS/students.js"></script>

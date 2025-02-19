@@ -60,9 +60,16 @@ $stmt->close();
 
 </head>
 <body>
+
+
+<div class="container">
+
+
     <div class="nav">
         <?php include 'sidenav.php'; ?>
     </div>
+
+    <div class="content-container">
 
     <div class="table-calendar-wrapper">
         

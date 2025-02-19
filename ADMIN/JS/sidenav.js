@@ -1,56 +1,45 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Sidebar Navigation Active Class
-    const buttons = document.querySelectorAll(".sidebar button");
-    const currentPage = window.location.pathname.split("/").pop();
+$(document).ready(function () {
+    console.log("jQuery loaded!"); // Debugging: Check if jQuery is loaded
 
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            buttons.forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
+    // Toggle submenu when clicking the arrow ONLY
+    $(".menu-link").click(function (e) {
+        let submenu = $(this).next(".submenu");
 
-            const pageUrl = this.getAttribute("data-url");
-            if (pageUrl) {
-                window.location.href = pageUrl;
+        if (submenu.length) {
+            if (!$(e.target).hasClass("arrow")) {
+                // Allow redirection when clicking "Students" text
+                return; 
             }
-        });
-
-        // Set active button based on URL
-        if (button.getAttribute("data-url") === currentPage) {
-            button.classList.add("active");
+            e.preventDefault(); // Prevent default only when clicking the arrow
+            submenu.slideToggle();
+            $(this).find(".arrow").toggleClass("ph-caret-down ph-caret-up");
         }
     });
 
-    // Sidebar Toggle Functionality
-    const sidebar = document.querySelector(".sidebar");
-    const toggleButton = document.getElementById("toggleSidebar");
-
-    if (toggleButton) {
-        toggleButton.addEventListener("click", function () {
-            sidebar.classList.toggle("collapsed");
-        });
-    }
-
-    // Logout Modal
-    const logoutBtn = document.getElementById("logout");
-    const logoutModal = document.getElementById("logoutModal");
-    const confirmLogout = document.getElementById("confirmLogout");
-    const cancelLogout = document.getElementById("cancelLogout");
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-            logoutModal.style.display = "flex";
-        });
-    }
-
-    if (confirmLogout) {
-        confirmLogout.addEventListener("click", function () {
-            window.location.href = "../logout.php";
-        });
-    }
-
-    if (cancelLogout) {
-        cancelLogout.addEventListener("click", function () {
-            logoutModal.style.display = "none";
-        });
-    }
+    // Toggle Sidebar
+    $(".menu-btn").click(function () {
+        $(".sidebar").toggleClass("active");
+        if ($(".sidebar").hasClass("active")) {
+            $(".submenu").slideUp(); // Hide submenu when sidebar is collapsed
+        }
+    });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get current page URL
+    let currentUrl = window.location.pathname.split("/").pop();
+
+    // Select all sidebar links
+    let menuLinks = document.querySelectorAll(".nav ul li a");
+
+    menuLinks.forEach(link => {
+        let linkHref = link.getAttribute("href");
+
+        // Check if the link matches the current URL
+        if (linkHref === currentUrl) {
+            link.classList.add("active");
+        }
+    });
+});
+

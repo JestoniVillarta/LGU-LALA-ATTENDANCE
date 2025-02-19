@@ -7,6 +7,21 @@ body {
     background-color: #f0f2f5;
 }
 
+
+.container {
+    display: flex;
+  
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+
 .header-container, .form_wrapper {
     width: 90%;
     margin: 0 auto;

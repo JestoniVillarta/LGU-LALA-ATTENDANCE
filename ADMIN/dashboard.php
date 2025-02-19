@@ -26,48 +26,62 @@ $conn->close();
 
 <body>
 
-    <div class="nav">
-        <?php include 'sidenav.php'; ?>
-    </div>
+    <div class="container">
+
+
+        <div class="nav">
+            <?php include 'sidenav.php'; ?>
+        </div>
 
 
 
-    <div class="dashboard-wrapper">
-        <h3>Dashboard</h3>
-    </div>
-
-    <div class="table-wrapper">
-        <div class="main-content">
-            <div class="cards">
-                <div class="card blue">
-                    <br>
-
-                    <span class="text-blue total-count"><?php echo $total_students; ?></span>
-
-                    <br>
-                    <br>
-
-                    <span class="text-blue label">Total Students</span>
-
-                    <i class="fa-solid fa-users"></i> <!-- Icon is now separate -->
-                </div>
+        <div class="content-container">
 
 
-                <div class="card green">
-                    <i class="fas fa-check-circle"></i>
-                    <br><span class="text-green">300<br>On Time</span>
-                </div>
-                <div class="card red">
-                    <i class="fas fa-clock"></i>
-                    <br><span class="text-red">100<br>Late</span>
-                </div>
-                <div class="card orange">
-                    <i class="fas fa-user-times"></i>
-                    <br><span class="text-orange">50<br>Absent</span>
+            <div class="dashboard-wrapper">
+                <h3>Dashboard</h3>
+            </div>
+
+
+
+            <div class="table-wrapper">
+                <div class="main-content">
+                    <div class="cards">
+                        <div class="card blue">
+                            <br>
+
+                            <p class="text-blue total-count"><?php echo $total_students; ?></p>
+
+                            <br>
+                            <br>
+
+                            <p class="text-blue label">Total Students</p>
+
+                            <i class="fa-solid fa-users"></i> <!-- Icon is now separate -->
+                        </div>
+
+
+                        <div class="card green">
+                            <i class="fas fa-check-circle"></i>
+                            <br><p class="text-green">300<br>On Time</p>
+                        </div>
+                        <div class="card red">
+                            <i class="fas fa-clock"></i>
+                            <br><p class="text-red">100<br>Late</p>
+                        </div>
+                        <div class="card orange">
+                            <i class="fas fa-user-times"></i>
+                            <br><p class="text-orange">50<br>Absent</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
+
     </div>
+
+
 
 </body>
 

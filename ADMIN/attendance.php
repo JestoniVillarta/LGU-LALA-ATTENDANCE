@@ -51,63 +51,70 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <div class="nav">
-        <?php include 'sidenav.php'; ?>
-    </div>
 
-    <div class="table-button-wrapper">
-        <h3>Student Attendance</h3>
+    <div class="container">
+        
 
-        <!-- Grouping search and calendar filters -->
-        <div class="button-search-group">
-
-            <!-- Date Picker -->
-            <div class="calendar-container">
-                <form method="GET" id="dateForm">
-                    <label for="dateSelect">Select Date:</label>
-                    <input type="date" name="search_date" id="dateSelect"
-                        value="<?php echo htmlspecialchars($search_date); ?>"
-                        min="<?php echo !empty($dates) ? min($dates) : ''; ?>"
-                        max="<?php echo !empty($dates) ? max($dates) : ''; ?>"
-                        onchange="document.getElementById('dateForm').submit()">
-                </form>
-            </div>
-
-            <!-- Search Bar -->
-            <div class="search-container">
-                <form method="GET">
-                    <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
-                    <input type="text" name="search" placeholder="Enter Student ID or Name"
-                        value="<?php echo htmlspecialchars($search); ?>">
-                    <button type="submit">🔍</button>
-                </form>
-            </div>
-
+        <div class="nav">
+            <?php include 'sidenav.php'; ?>
         </div>
-    </div>
 
-    <div class="table-wrapper">
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Student ID</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Morning Time In</th>
-                        <th>Morning Time Out</th>
-                        <th>Afternoon Time In</th>
-                        <th>Afternoon Time Out</th>
-                        <th>Duty Hours</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>
+
+        <div class="content-container">
+
+            <div class="table-button-wrapper">
+                <h3>Student Attendance</h3>
+
+                <!-- Grouping search and calendar filters -->
+                <div class="button-search-group">
+
+                    <!-- Date Picker -->
+                    <div class="calendar-container">
+                        <form method="GET" id="dateForm">
+                            <label for="dateSelect">Select Date:</label>
+                            <input type="date" name="search_date" id="dateSelect"
+                                value="<?php echo htmlspecialchars($search_date); ?>"
+                                min="<?php echo !empty($dates) ? min($dates) : ''; ?>"
+                                max="<?php echo !empty($dates) ? max($dates) : ''; ?>"
+                                onchange="document.getElementById('dateForm').submit()">
+                        </form>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <form method="GET">
+                            <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
+                            <input type="text" name="search" placeholder="Enter Student ID or Name"
+                                value="<?php echo htmlspecialchars($search); ?>">
+                            <button type="submit">🔍</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Morning Time In</th>
+                                <th>Morning Time Out</th>
+                                <th>Afternoon Time In</th>
+                                <th>Afternoon Time Out</th>
+                                <th>Duty Hours</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>
                                     <td>{$row['ID']}</td>
                                     <td>{$row['STUDENT_ID']}</td>
                                     <td>{$row['NAME']}</td>
@@ -119,15 +126,19 @@ $result = $conn->query($sql);
                                     <td>{$row['DUTY_HOURS']}</td>
                                     <td>{$row['DATE']}</td>
                                 </tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='11'>No attendance records found for the selected date.</td></tr>";
-                    }
-                    $conn->close();
-                    ?>
-                </tbody>
-            </table>
+                                }
+                            } else {
+                                echo "<tr><td colspan='11'>No attendance records found for the selected date.</td></tr>";
+                            }
+                            $conn->close();
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </body>
 

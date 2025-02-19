@@ -62,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ssssssss', $start_time_12hr, $start_time_end_12hr, $morning_time_out_12hr, $morning_time_out_end_12hr, $afternoon_time_in_12hr, $afternoon_time_in_end_12hr, $afternoon_time_out_12hr, $afternoon_time_out_end_12hr);
-    
-  
+
+
     $stmt->execute();
     $stmt->close();
 }
@@ -83,66 +83,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <body>
-    <div class="nav">
-        <?php include 'sidenav.php'; ?>
-    </div>
 
-    <div class="header-container">
-        <h3>Set Attendance Time</h3>
-    </div>
+    <div class="container">
 
-    <div class="form_wrapper">
-        <form action="" method="post" onsubmit="showModal(event)">
-            
-            <div class="time-container">
 
-                <div class="time-group">
-                    <label for="start_time">Morning Time In:</label>
-                    <input type="time" id="start_time" name="start_time" value="<?php echo $start_time; ?>" required>
-                    <label for="start_time_end" class="end-label">to</label>
-                    <input type="time" id="start_time_end" name="start_time_end" value="<?php echo $start_time_end; ?>" required>
-                </div>
+        <div class="nav">
+            <?php include 'sidenav.php'; ?>
+        </div>
 
-                <div class="time-group">
-                    <label for="morning_time_out">Morning Time Out:</label>
-                    <input type="time" id="morning_time_out" name="morning_time_out" value="<?php echo $morning_time_out; ?>" required>
-                    <label for="morning_time_out_end" class="end-label">to</label>
-                    <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="<?php echo $morning_time_out_end; ?>" required>
-                </div>
 
-                <br>
-                <br>
-                <br>
+        <div class="content-container">
 
-                <div class="time-group">
-                    <label for="afternoon_time_in">Afternoon Time In:</label>
-                    <input type="time" id="afternoon_time_in" name="afternoon_time_in" value="<?php echo $afternoon_time_in; ?>" required>
-                    <label for="afternoon_time_in_end" class="end-label">to</label>
-                    <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="<?php echo $afternoon_time_in_end; ?>" required>
-                </div>
-
-                <div class="time-group">
-                    <label for="afternoon_time_out">Afternoon Time Out:</label>
-                    <input type="time" id="afternoon_time_out" name="afternoon_time_out" value="<?php echo $afternoon_time_out; ?>" required>
-                    <label for="afternoon_time_out_end" class="end-label">to</label>
-                    <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="<?php echo $afternoon_time_out_end; ?>" required>
-                </div>
-
-                <button type="submit" class="set_time">Set Time</button>
-
+            <div class="header-container">
+                <h3>Set Attendance Time</h3>
             </div>
 
-       
+            <div class="form_wrapper">
+                <form action="" method="post" onsubmit="showModal(event)">
 
-            <!-- Success Modal -->
-            <div id="successModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
-                </div>
+                    <div class="time-container">
+
+                        <div class="time-group">
+                            <label for="start_time">Morning Time In:</label>
+                            <input type="time" id="start_time" name="start_time" value="<?php echo $start_time; ?>" required>
+                            <label for="start_time_end" class="end-label">to</label>
+                            <input type="time" id="start_time_end" name="start_time_end" value="<?php echo $start_time_end; ?>" required>
+                        </div>
+
+                        <div class="time-group">
+                            <label for="morning_time_out">Morning Time Out:</label>
+                            <input type="time" id="morning_time_out" name="morning_time_out" value="<?php echo $morning_time_out; ?>" required>
+                            <label for="morning_time_out_end" class="end-label">to</label>
+                            <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="<?php echo $morning_time_out_end; ?>" required>
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="time-group">
+                            <label for="afternoon_time_in">Afternoon Time In:</label>
+                            <input type="time" id="afternoon_time_in" name="afternoon_time_in" value="<?php echo $afternoon_time_in; ?>" required>
+                            <label for="afternoon_time_in_end" class="end-label">to</label>
+                            <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="<?php echo $afternoon_time_in_end; ?>" required>
+                        </div>
+
+                        <div class="time-group">
+                            <label for="afternoon_time_out">Afternoon Time Out:</label>
+                            <input type="time" id="afternoon_time_out" name="afternoon_time_out" value="<?php echo $afternoon_time_out; ?>" required>
+                            <label for="afternoon_time_out_end" class="end-label">to</label>
+                            <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="<?php echo $afternoon_time_out_end; ?>" required>
+                        </div>
+
+                        <button type="submit" class="set_time">Set Time</button>
+
+                    </div>
+
+
+
+                    <!-- Success Modal -->
+                    <div id="successModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <p><i class="fas fa-check-circle"></i> Attendance time updated successfully!</p>
+                        </div>
+                    </div>
+
+                </form>
             </div>
 
-        </form>
+        </div>
     </div>
 
     <script>

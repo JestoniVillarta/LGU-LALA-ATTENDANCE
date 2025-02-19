@@ -55,52 +55,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-<div class="nav">
-   <?php include 'sidenav.php'; ?>
-</div>
+    <div class="container">
+
+        <div class="nav">
+            <?php include 'sidenav.php'; ?>
+        </div>
+
+        <div class="content-container">
 
 
 
- <div class="header-text">
+            <div class="header-text">
                 <h3>Add Student</h3>
 
                 <a href="student.php" class="back-btn"><i class="fa-solid fa-backward"></i> Back</a>
 
             </div>
 
-         
-                
-        
-<div class="form-wrapper">
-    
-    <form method="POST" action="">    
-
-            <input type="text" id="STUDENT_ID" name="student_id" placeholder="Student ID" required><br><br>
-
-            <div class="name-container">
-
-           <input type="text" id="FIRST_NAME" name="first_name" placeholder="First Name" required>
-          <input type="text" id="LAST_NAME" name="last_name" placeholder="Last Name" required>
-     
-            </div><br><br>
 
 
-            <select id="GENDER" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select><br><br>
 
-            <input type="email" id="EMAIL" name="email" placeholder="Email" required><br><br>
+            <div class="form-wrapper">
 
-            <input type="text" id="PHONE" name="contact" placeholder="Contact" required><br><br>
+                <form method="POST" action="">
 
-            <input type="text" id="ADDRESS" name="address" placeholder="Address" required><br><br>
+                    <input type="text" id="STUDENT_ID" name="student_id" placeholder="Student ID" required><br><br>
 
-           
-            <button type="submit" class="add-btn">Add Student</button>
-    </form>
-</div>
+                    <div class="name-container">
+
+                        <input type="text" id="FIRST_NAME" name="first_name" placeholder="First Name" required>
+                        <input type="text" id="LAST_NAME" name="last_name" placeholder="Last Name" required>
+
+                    </div><br><br>
+
+
+                    <select id="GENDER" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select><br><br>
+
+                    <input type="email" id="EMAIL" name="email" placeholder="Email" required><br><br>
+
+                    <input type="text" id="PHONE" name="contact" placeholder="Contact" required><br><br>
+
+                    <input type="text" id="ADDRESS" name="address" placeholder="Address" required><br><br>
+
+
+                    <button type="submit" class="add-btn">Add Student</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 
 </body>
 

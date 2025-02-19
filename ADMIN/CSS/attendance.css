@@ -5,23 +5,22 @@ body {
     background-color: #f0f2f5;
 }
 
-/* Table wrapper: centers the table container */
-.table-wrapper {
-    max-width: 90%;
-    margin: 0 auto; /* Centers the container horizontally */
-    background-color: #f0f2f5;
-    height: 80vh;
+.container {
+    display: flex;
+  
 }
 
-/* Heading Styling */
-h3 {
-    padding-left: 20px;
-    color: black;
+.content-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    width: 100%;
+    height: 100vh;
 }
 
 /* Button wrapper: aligns the add button to the right */
 .table-button-wrapper {
-    max-width: 90%; /* Match the table wrapper */
+    width: 90%; /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
     margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
@@ -32,6 +31,25 @@ h3 {
     padding-right: 0; /* Remove unnecessary right padding */
     margin-top: 20px;
 }
+
+
+/* Heading Styling */
+h3 {
+    padding-left: 20px;
+    color: black;
+}
+
+/* Table wrapper: centers the table container */
+.table-wrapper {
+    width: 90%;
+    margin: 0 auto; /* Centers the container horizontally */
+    background-color: #f0f2f5;
+    height: 80vh;
+}
+
+
+
+
 
 /* Table container: scrollable container with padding and border */
 .table-container {

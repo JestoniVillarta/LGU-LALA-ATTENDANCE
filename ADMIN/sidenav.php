@@ -1,43 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="CSS/sidenav.css">
-    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="CSS/sidenav.css" />
+
+    <title>Sidebar</title>
 </head>
+
 <body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Menu Button -->
+            <div class="menu-btn">
+                <i class="ph-bold ph-caret-left"></i>
+            </div>
 
-    <!-- Sidebar Navigation -->
-    <div class="sidebar">
-        <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
-        
-        <!-- Admin Panel Title with Icon -->
-        <h2 class="sidebar-header">
-            <i class="fas fa-user-cog admin-icon"></i> 
-            <p class="sidebar-text">Admin Panel</p>
-        </h2>
+            <!-- User Section -->
+            <div class="head">
+                <div class="user-img">
+                    <img src="../img/tonix.jpg" alt="User Image" />
+                </div>
+                <div class="user-details">
+                    <h6 class="title">Web Developer</h6>
+                    <h6 class="name">Jestoni</h6>
+                </div>
+            </div>
 
-        <ul>
-            <li><button data-url="dashboard.php"><i class="fas fa-home"></i> <p class="sidebar-text">Dashboard</p></button></li>
-            <li><button data-url="attendance.php"><i class="fas fa-user-check"></i> <p class="sidebar-text">Attendance</p></button></li>
-            <li><button data-url="student.php"><i class="fas fa-user-graduate"></i> <p class="sidebar-text">Student</p></button></li>
-            <li><button data-url="set_time.php"><i class="fas fa-clock"></i> <p class="sidebar-text">Setup Time</p></button></li>
-            <li><button id="logout"><i class="fas fa-sign-out-alt"></i> <p class="sidebar-text">Logout</p></button></li>
-        </ul>
-    </div>
+            <!-- Navigation Menu -->
+            <div class="nav">
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="dashboard.php">
+                                <i class="icon ph-bold ph-house-simple"></i>
+                                <span class="text">Dashboard</span>
+                            </a>
+                        </li>
 
-    <!-- Logout Confirmation Modal -->
-    <div id="logoutModal" class="logout_modal">
-        <div class="logout_modal-content">
-            <p>Are you sure you want to logout?</p>
-            <button id="confirmLogout">Yes</button>
-            <button id="cancelLogout">Cancel</button>
+                        <li>
+                            <a href="attendance.php">
+                            <i class="icon fa-solid fa-user-check"></i>
+                                <span class="text">Attendance</span>
+                            </a>
+                        </li>
+
+                        <!-- Students Section with Submenu -->
+                        <li class="has-submenu">
+                            <a href="student.php" class="menu-link">
+                                <i class="icon fa-regular fa-address-book"></i>
+                                <span class="text">Students</span>
+                                <i class="arrow ph-bold ph-caret-down"></i> <!-- Arrow moved outside -->
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="add.php">
+                                        <i class="icon ph-bold ph-user-plus"></i>
+                                        <span class="text">Add Student</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="set_time.php">
+                                <i class="icon ph-bold ph-calendar-blank"></i>
+                                <span class="text">Set Time</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="menu">
+                    <h6 class="title">Settings</h6>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="icon ph-bold ph-gear"></i>
+                                <span class="text">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Account Section -->
+            <div class="menu">
+                <h6 class="title">Account</h6>
+                <ul>
+                    <li>
+                        <a href="../logout.php">
+                            <i class="icon ph-bold ph-sign-out"></i>
+                            <span class="text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <script src="JS/sidenav.js"></script>
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
 
+
+    <script src="JS/sidenav.js"></script>
 </body>
+
 </html>

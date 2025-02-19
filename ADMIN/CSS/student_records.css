@@ -9,9 +9,22 @@ body {
     
 }
 
+.container {
+    display: flex;
+  
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
 /* Table wrapper: centers the table container */
 .table-wrapper {
-    max-width: 90%;
+    width: 90%;
     margin: 0 auto; /* Centers the container horizontally */
     background-color: #f0f2f5;
    
@@ -26,7 +39,7 @@ h3 {
 
 /* Table button wrapper: aligns both search bar and add button to the right */
 .table-calendar-wrapper {
-    max-width: 90%; /* Match the table wrapper */
+    width: 90%; /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
     margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
