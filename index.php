@@ -91,7 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
             } elseif (isset($_POST['afternoon_in'])) {
                 $query = "UPDATE attendance_tbl SET AFTERNOON_TIME_IN = ? WHERE STUDENT_ID = ? AND DATE = ?";
             } elseif (isset($_POST['afternoon_out'])) {
-                $query = "UPDATE attendance_tbl SET AFTERNOON_TIME_OUT = ? WHERE STUDENT_ID = ? AND DATE = ?";
             } else {
                 $modalMessage = "❌ Error: Invalid entry.";
                 $showModal = true;
