@@ -180,3 +180,14 @@ table tr:hover {
     padding: 7px 10px;
     font-size: 14px;
 }
+
+
+.absent { 
+    color: red; font-weight: bold;
+    
+ }   /* Red for Absent */
+
+.present {
+     color: green; font-weight: bold;
+
+ } /* Green for Present */

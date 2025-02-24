@@ -48,7 +48,7 @@
 
                         <li>
                             <a href="attendance.php">
-                            <i class="icon fa-solid fa-user-check"></i>
+                                <i class="icon fa-solid fa-user-check"></i>
                                 <span class="text">Attendance</span>
                             </a>
                         </li>
@@ -101,15 +101,33 @@
                 <h6 class="title">Account</h6>
                 <ul>
                     <li>
-                        <a href="../logout.php">
+                        <a href="#" id="logoutButton">
                             <i class="icon ph-bold ph-sign-out"></i>
                             <span class="text">Logout</span>
                         </a>
                     </li>
+
                 </ul>
             </div>
         </div>
     </div>
+
+<!-- Logout Confirmation Modal -->
+<div id="logoutModal" class="sidenav-modal">
+    <div class="sidenav-modal-content">
+    <i class="logout-icon fas fa-exclamation-circle"></i>
+        <h3>Confirm Logout</h3>
+        <h4>Are you sure you want to logout?</h4>
+        <div class="sidenav-modal-buttons">
+            <button id="confirmLogout" class="btn-danger">Logout</button>
+            <button id="cancelLogout" class="btn-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+
 
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

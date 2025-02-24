@@ -43,3 +43,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+$(document).ready(function () {
+    // Make sure modal is hidden initially
+    $("#logoutModal").hide();
+
+    // When logout button is clicked
+    $("#logoutButton").click(function (e) {
+        e.preventDefault(); // Prevent default link behavior
+        $("#logoutModal").fadeIn(); // Show modal
+    });
+
+    // When cancel button is clicked
+    $("#cancelLogout").click(function () {
+        $("#logoutModal").fadeOut(); // Hide modal
+    });
+
+    // When confirm logout is clicked
+    $("#confirmLogout").click(function () {
+        window.location.href = "../logout.php"; // Redirect to logout
+    });
+});
+
+
+
+

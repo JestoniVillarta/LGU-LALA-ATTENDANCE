@@ -118,14 +118,19 @@ $stmt->close();
                     <?php
                     if ($attendance_result->num_rows > 0) {
                         while ($row = $attendance_result->fetch_assoc()) {
+
+                            $morning_status_color = ($row['MORNING_STATUS'] == 'Present') ? 'green' : 'red';
+                            $afternoon_status_color = ($row['AFTERNOON_STATUS'] == 'Present') ? 'green' : 'red';
+
+
                             echo "<tr>
                                 <td>" . htmlspecialchars($row["DATE"]) . "</td>
                                 <td>" . htmlspecialchars($row["MORNING_TIME_IN"]) . "</td>
                                 <td>" . htmlspecialchars($row["MORNING_TIME_OUT"]) . "</td>
-                                <td>" . htmlspecialchars($row["MORNING_STATUS"]) . "</td>
+                                 <td style='color: $morning_status_color; font-weight: bold;'>{$row['MORNING_STATUS']}</td>
                                 <td>" . htmlspecialchars($row["AFTERNOON_TIME_IN"]) . "</td>
                                 <td>" . htmlspecialchars($row["AFTERNOON_TIME_OUT"]) . "</td>
-                                <td>" . htmlspecialchars($row["AFTERNOON_STATUS"]) . "</td>
+                                 <td style='color: $afternoon_status_color; font-weight: bold;'>{$row['AFTERNOON_STATUS']}</td>
                                 <td>" . htmlspecialchars($row["DUTY_HOURS"]) . "</td>
                             </tr>";
                         }

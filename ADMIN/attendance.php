@@ -157,7 +157,7 @@ foreach ($all_students as $student_id => $student_data) {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                              
                                 <th>Student ID</th>
                                 <th>Name</th>
                                 <th>Gender</th>
@@ -167,27 +167,31 @@ foreach ($all_students as $student_id => $student_data) {
                                 <th>Afternoon Time In</th>
                                 <th>Afternoon Time Out</th>
                                 <th>Afternoon Status</th>
-                                <th>Duty Hours</th>
                                 <th>Date</th>
+                                <th>Duty Hours</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>
-                                    <td>{$row['ID']}</td>
+                                while ($row = $result->fetch_assoc()) {       
+                                    
+                                    $morning_status_color = ($row['MORNING_STATUS'] == 'Present') ? 'green' : 'red';
+                                    $afternoon_status_color = ($row['AFTERNOON_STATUS'] == 'Present') ? 'green' : 'red';
+                                    
+                                    echo "<tr>                                  
                                     <td>{$row['STUDENT_ID']}</td>
                                     <td>{$row['NAME']}</td>
                                     <td>{$row['GENDER']}</td>
                                     <td>{$row['MORNING_TIME_IN']}</td>
                                     <td>{$row['MORNING_TIME_OUT']}</td>
-                                    <td>{$row['MORNING_STATUS']}</td>
+                                    <td style='color: $morning_status_color; font-weight: bold;'>{$row['MORNING_STATUS']}</td>
                                     <td>{$row['AFTERNOON_TIME_IN']}</td>
                                     <td>{$row['AFTERNOON_TIME_OUT']}</td>
-                                    <td>{$row['AFTERNOON_STATUS']}</td>
-                                    <td>{$row['DUTY_HOURS']}</td>
+                                    <td style='color: $afternoon_status_color; font-weight: bold;'>{$row['AFTERNOON_STATUS']}</td>
                                     <td>{$row['DATE']}</td>
+                                    <td>{$row['DUTY_HOURS']}</td>
+                              
                                 </tr>";
                                 }
                             } else {
