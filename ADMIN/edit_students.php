@@ -1,26 +1,42 @@
 <?php
 include '../CONNECTION/connection.php';
+session_start(); // Start session for alerts
 
-// Check if student ID is provided in the URL
 if (isset($_GET['id'])) {
     $student_id = $conn->real_escape_string($_GET['id']);
 
-    // Fetch student data
-    $sql = "SELECT * FROM student_tbl WHERE STUDENT_ID = '$student_id'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM student_tbl WHERE STUDENT_ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $student_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $student = $result->fetch_assoc();
     } else {
-        echo "Student not found.";
+        $_SESSION['alert'] = [
+            "title" => "Error!",
+            "text" => "Student not found.",
+            "icon" => "error",
+            "button" => "OK",
+            "redirect" => "student.php"
+        ];
+        header("Location: student.php");
         exit();
     }
+    $stmt->close();
 } else {
-    echo "Invalid student ID.";
+    $_SESSION['alert'] = [
+        "title" => "Invalid!",
+        "text" => "Invalid student ID.",
+        "icon" => "error",
+        "button" => "OK",
+        "redirect" => "student.php"
+    ];
+    header("Location: student.php");
     exit();
 }
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_student_id = $conn->real_escape_string($_POST['student_id']);
     $first_name = $conn->real_escape_string($_POST['first_name']);
@@ -30,51 +46,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $conn->real_escape_string($_POST['contact']);
     $address = $conn->real_escape_string($_POST['address']);
 
-    // Check if student ID has changed
     if ($new_student_id !== $student_id) {
-        // Check if the new ID already exists
-        $check_id_sql = "SELECT * FROM student_tbl WHERE STUDENT_ID = '$new_student_id'";
-        $check_id_result = $conn->query($check_id_sql);
+        $check_id_sql = "SELECT * FROM student_tbl WHERE STUDENT_ID = ?";
+        $check_stmt = $conn->prepare($check_id_sql);
+        $check_stmt->bind_param("s", $new_student_id);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        if ($check_id_result->num_rows > 0) {
-            echo "<script>alert('The new Student ID already exists. Please choose another.');</script>";
+        if ($check_stmt->num_rows > 0) {
+            $_SESSION['alert'] = [
+                "title" => "Oops!",
+                "text" => "The new Student ID already exists. Please choose another.",
+                "icon" => "error",
+                "button" => "Try Again"
+            ];
         } else {
-            // Update with new student ID
-            $update_sql = "UPDATE student_tbl SET 
-                           STUDENT_ID = '$new_student_id',
-                           FIRST_NAME = '$first_name',
-                           LAST_NAME = '$last_name',
-                           GENDER = '$gender',
-                           EMAIL = '$email',
-                           CONTACT = '$contact',
-                           ADDRESS = '$address'
-                           WHERE STUDENT_ID = '$student_id'";
+            $update_sql = "UPDATE student_tbl SET STUDENT_ID = ?, FIRST_NAME = ?, LAST_NAME = ?, GENDER = ?, EMAIL = ?, CONTACT = ?, ADDRESS = ? WHERE STUDENT_ID = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("ssssssss", $new_student_id, $first_name, $last_name, $gender, $email, $contact, $address, $student_id);
 
-            if ($conn->query($update_sql) === TRUE) {
-                echo "<script>alert('Student updated successfully!'); window.location.href='student.php';</script>";
+            if ($update_stmt->execute()) {
+                $_SESSION['alert'] = [
+                    "title" => "Updated!",
+                    "text" => "Student information updated successfully!",
+                    "icon" => "success",
+                    "button" => "OK",
+                    "redirect" => "student.php"
+                ];
             } else {
-                echo "Error updating record: " . $conn->error;
+                $_SESSION['alert'] = [
+                    "title" => "Error!",
+                    "text" => "Failed to update student: " . $conn->error,
+                    "icon" => "error",
+                    "button" => "Close"
+                ];
             }
+            $update_stmt->close();
         }
+        $check_stmt->close();
     } else {
-        // Update without changing student ID
-        $update_sql = "UPDATE student_tbl SET 
-                       FIRST_NAME = '$first_name',
-                       LAST_NAME = '$last_name',
-                       GENDER = '$gender',
-                       EMAIL = '$email',
-                       CONTACT = '$contact',
-                       ADDRESS = '$address'
-                       WHERE STUDENT_ID = '$student_id'";
+        $update_sql = "UPDATE student_tbl SET FIRST_NAME = ?, LAST_NAME = ?, GENDER = ?, EMAIL = ?, CONTACT = ?, ADDRESS = ? WHERE STUDENT_ID = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("sssssss", $first_name, $last_name, $gender, $email, $contact, $address, $student_id);
 
-        if ($conn->query($update_sql) === TRUE) {
-            echo "<script>alert('Student updated successfully!'); window.location.href='student.php';</script>";
+        if ($update_stmt->execute()) {
+            $_SESSION['alert'] = [
+                "title" => "Updated!",
+                "text" => "Student information updated successfully!",
+                "icon" => "success",
+                "button" => "OK",
+                "redirect" => "student.php"
+            ];
         } else {
-            echo "Error updating record: " . $conn->error;
+            $_SESSION['alert'] = [
+                "title" => "Error!",
+                "text" => "Failed to update student: " . $conn->error,
+                "icon" => "error",
+                "button" => "Close"
+            ];
         }
+        $update_stmt->close();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +168,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
     </div>
-    <br>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    <?php
+    if (isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        echo "swal({
+            title: '{$alert['title']}',
+            text: '{$alert['text']}',
+            icon: '{$alert['icon']}',
+            button: '{$alert['button']}'
+        })";
+
+        if (isset($alert['redirect'])) {
+            echo ".then(() => { window.location.href = '{$alert['redirect']}'; });";
+        } else {
+            echo ";";
+        }
+
+        unset($_SESSION['alert']);
+    }
+    ?>
+</script>
+    
 </body>
 
 </html>

@@ -13,6 +13,16 @@
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="CSS/sidenav.css" />
 
+
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>Sidebar</title>
 </head>
 
@@ -21,7 +31,7 @@
         <div class="sidebar">
             <!-- Menu Button -->
             <div class="menu-btn">
-                <i class="ph-bold ph-caret-left"></i>
+                <i class="fa-solid fa-angles-left"></i>
             </div>
 
             <!-- User Section -->
@@ -41,7 +51,7 @@
                     <ul>
                         <li>
                             <a href="dashboard.php">
-                                <i class="icon ph-bold ph-house-simple"></i>
+                                <i class="icon fa-solid fa-house"></i>
                                 <span class="text">Dashboard</span>
                             </a>
                         </li>
@@ -64,7 +74,7 @@
                             <ul class="submenu">
                                 <li>
                                     <a href="add.php">
-                                        <i class="icon ph-bold ph-user-plus"></i>
+                                        <i class="icon fa-solid fa-user-plus"></i>
                                         <span class="text">Add Student</span>
                                     </a>
                                 </li>
@@ -75,7 +85,7 @@
 
                         <li>
                             <a href="set_time.php">
-                                <i class="icon ph-bold ph-calendar-blank"></i>
+                                <i class="icon fa-solid fa-hourglass-end"></i>
                                 <span class="text">Set Time</span>
                             </a>
                         </li>
@@ -102,7 +112,7 @@
                 <ul>
                     <li>
                         <a href="#" id="logoutButton">
-                            <i class="icon ph-bold ph-sign-out"></i>
+                            <i class="icon fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="text">Logout</span>
                         </a>
                     </li>
@@ -112,30 +122,30 @@
         </div>
     </div>
 
-<!-- Logout Confirmation Modal -->
-<div id="logoutModal" class="sidenav-modal">
-    <div class="sidenav-modal-content">
-    <i class="logout-icon fas fa-exclamation-circle"></i>
-        <h3>Confirm Logout</h3>
-        <h4>Are you sure you want to logout?</h4>
-        <div class="sidenav-modal-buttons">
-            <button id="confirmLogout" class="btn-danger">Logout</button>
-            <button id="cancelLogout" class="btn-secondary">Cancel</button>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-    <!-- Jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-
 
     <script src="JS/sidenav.js"></script>
+    <script src="JS/sweetalert.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#logoutButton').click(function(e) {
+                e.preventDefault();
+                swal({
+                    title: "Are you sure?",
+                    text: "You will be logged out!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willLogout) => {
+                    if (willLogout) {
+                        window.location.href = "logout.php"; // Change this to your actual logout URL
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

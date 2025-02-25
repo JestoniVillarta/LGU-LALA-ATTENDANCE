@@ -1,5 +1,6 @@
 <?php
 include '../CONNECTION/connection.php';
+session_start(); // Start session to store messages
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student_id = $_POST['student_id'];
@@ -18,7 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_stmt->store_result();
 
     if ($check_stmt->num_rows > 0) {
-        echo "<script>alert('Student ID already exists!');</script>";
+        $_SESSION['alert'] = [
+            "text" => "Student ID already exists!",
+            "icon" => "error",
+            "button" => "Try Again"
+        ];
     } else {
         // Use Prepared Statements to prevent SQL injection
         $sql = "INSERT INTO student_tbl (STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS) 
@@ -28,9 +33,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sssssss", $student_id, $first_name, $last_name, $gender, $email, $contact, $address);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Student added successfully!');</script>";
+            $_SESSION['alert'] = [
+               
+                "text" => "Student added successfully!",
+                "icon" => "success",
+                "button" => "OK",
+                "redirect" => "student.php"
+            ];
         } else {
-            echo "<script>alert('Error adding student: " . $stmt->error . "');</script>";
+            $_SESSION['alert'] = [
+                "text" => "Error adding student: " . $stmt->error,
+                "icon" => "error",
+                "button" => "Close"
+            ];
         }
 
         $stmt->close();
@@ -40,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -109,8 +125,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+
+    <!-- Include SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        <?php
+        if (isset($_SESSION['alert'])) {
+            $alert = $_SESSION['alert'];
+            echo "swal({
+            text: '{$alert['text']}',
+            icon: '{$alert['icon']}',
+            button: '{$alert['button']}'
+        })";
+
+            // If a redirect is set, reload the page after clicking OK
+            if (isset($alert['redirect'])) {
+                echo ".then(() => { window.location.href = '{$alert['redirect']}'; });";
+            } else {
+                echo ";";
+            }
+
+            unset($_SESSION['alert']); // Clear session alert after displaying
+        }
+        ?>
+    </script>
+
 </body>
 
-<script src="JS/add.js"></script>
+
 
 </html>

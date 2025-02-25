@@ -138,63 +138,24 @@ h1 {
     background: #0e5e4e;
 }
 
-/* CSS for Success Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-  
+
+
+
+/* Center text inside SweetAlert */
+.swal-text, .swal-title {
+    text-align: center !important;
+
+}
+
+.custom-success-btn {
+    background-color: #28a745 !important; /* Green success background */
+    color: white !important; /* White text */
+    border: none !important; /* Remove border */
+    box-shadow: none !important; /* Remove shadow */
+    padding: 10px 20px !important; /* Adjust padding */
+    font-size: 16px !important; /* Adjust text size */
 }
 
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    color: #333; /* Add this line to set the text color */
-    margin-left: 50%;
-    margin-right: 50%;
-}
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* CSS for Success Modal with Icon */
-.modal-content p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-}
-
-.modal-content .fas {
-    margin-right: 10px;
-    color: green;
-    font-size: 24px;
-}

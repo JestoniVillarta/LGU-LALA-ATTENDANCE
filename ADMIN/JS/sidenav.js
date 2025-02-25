@@ -7,8 +7,7 @@ $(document).ready(function () {
 
         if (submenu.length) {
             if (!$(e.target).hasClass("arrow")) {
-                // Allow redirection when clicking "Students" text
-                return; 
+                return; // Allow redirection when clicking "Students" text
             }
             e.preventDefault(); // Prevent default only when clicking the arrow
             submenu.slideToggle();
@@ -19,12 +18,21 @@ $(document).ready(function () {
     // Toggle Sidebar
     $(".menu-btn").click(function () {
         $(".sidebar").toggleClass("active");
-        if ($(".sidebar").hasClass("active")) {
-            $(".submenu").slideUp(); // Hide submenu when sidebar is collapsed
+        
+        if (!$(".sidebar").hasClass("active")) {
+            $(".submenu").slideUp(); // Hide submenus when sidebar is collapsed
+        }
+    });
+
+    // Keep submenu open if an active link is inside
+    $(".submenu a").each(function () {
+        if ($(this).hasClass("active")) {
+            $(this).closest(".submenu").show(); // Keep submenu open
+            $(this).closest(".submenu").prev(".menu-link").find(".arrow")
+                .removeClass("ph-caret-down").addClass("ph-caret-up");
         }
     });
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get current page URL
@@ -44,26 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-$(document).ready(function () {
-    // Make sure modal is hidden initially
-    $("#logoutModal").hide();
-
-    // When logout button is clicked
-    $("#logoutButton").click(function (e) {
-        e.preventDefault(); // Prevent default link behavior
-        $("#logoutModal").fadeIn(); // Show modal
-    });
-
-    // When cancel button is clicked
-    $("#cancelLogout").click(function () {
-        $("#logoutModal").fadeOut(); // Hide modal
-    });
-
-    // When confirm logout is clicked
-    $("#confirmLogout").click(function () {
-        window.location.href = "../logout.php"; // Redirect to logout
-    });
-});
 
 
 

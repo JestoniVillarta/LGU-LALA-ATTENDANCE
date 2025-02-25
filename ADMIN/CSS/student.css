@@ -365,3 +365,11 @@ table tr:hover {
     opacity: 0;
     transition: opacity 0.3s;
 }
+
+.swal-delete .swal-text {
+    text-align: center !important;
+}
+
+.swal-delete .swal-title {
+    text-align: center !important;
+}
