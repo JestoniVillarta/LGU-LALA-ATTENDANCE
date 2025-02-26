@@ -66,7 +66,7 @@
                             <a href="student.php" class="menu-link">
                                 <i class="icon fa-regular fa-address-book"></i>
                                 <span class="text">Students</span>
-                                <i class="arrow ph-bold ph-caret-down"></i> <!-- Arrow moved outside -->
+                                <i class="arrow fa-solid fa-angle-down"></i> 
                             </a>
 
                             <ul class="submenu">

@@ -2,16 +2,36 @@
 include '../CONNECTION/connection.php';
 
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+$search_date = isset($_GET['search_date']) ? $conn->real_escape_string($_GET['search_date']) : date("Y-m-d");
 
-$sql = "SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS FROM student_tbl";
+$sql = "SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS 
+        FROM student_tbl";
+
+$conditions = [];
 
 if (!empty($search)) {
-    $sql .= " WHERE STUDENT_ID LIKE '%$search%' 
-              OR FIRST_NAME LIKE '%$search%' 
-              OR LAST_NAME LIKE '%$search%'";
+    if (is_numeric($search)) {
+        // Exact match for Student ID
+        $conditions[] = "STUDENT_ID = '$search'";
+    } else {
+        // Partial match for First Name or Last Name
+        $conditions[] = "(FIRST_NAME LIKE '%$search%' 
+                         OR LAST_NAME LIKE '%$search%')";
+    }
+}
+
+if (!empty($search_date)) {
+    $conditions[] = "STUDENT_ID IN (SELECT STUDENT_ID FROM attendance_tbl WHERE DATE = '$search_date')";
+}
+
+// Append conditions if any exist
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
 }
 
 $result = $conn->query($sql);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +46,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery -->
+    
 </head>
 
 <body>

@@ -11,7 +11,7 @@ $(document).ready(function () {
             }
             e.preventDefault(); // Prevent default only when clicking the arrow
             submenu.slideToggle();
-            $(this).find(".arrow").toggleClass("ph-caret-down ph-caret-up");
+            $(this).find(".arrow").toggleClass("fa-angle-down fa-angle-up"); // Proper toggle
         }
     });
 
@@ -29,10 +29,11 @@ $(document).ready(function () {
         if ($(this).hasClass("active")) {
             $(this).closest(".submenu").show(); // Keep submenu open
             $(this).closest(".submenu").prev(".menu-link").find(".arrow")
-                .removeClass("ph-caret-down").addClass("ph-caret-up");
+                .removeClass("fa-angle-down").addClass("fa-angle-up");
         }
     });
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get current page URL
