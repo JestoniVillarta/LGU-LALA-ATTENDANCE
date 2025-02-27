@@ -1,16 +1,12 @@
 <?php
 include '../CONNECTION/connection.php';
 
-// Get search input and prevent SQL injection
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 $search_date = isset($_GET['search_date']) ? $conn->real_escape_string($_GET['search_date']) : date("Y-m-d");
 
-// Base SQL query
 $sql = "SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS FROM student_tbl";
-
 $conditions = [];
 
-// Filter by search term (Student ID, First Name, or Last Name)
 if (!empty($search)) {
     if (is_numeric($search)) {
         $conditions[] = "STUDENT_ID = '$search'";
@@ -19,11 +15,35 @@ if (!empty($search)) {
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $student_id = $conn->real_escape_string($_POST['student_id']);
+    $first_name = $conn->real_escape_string($_POST['first_name']);
+    $last_name = $conn->real_escape_string($_POST['last_name']);
+    $gender = $conn->real_escape_string($_POST['gender']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $contact = $conn->real_escape_string($_POST['contact']);
+    $address = $conn->real_escape_string($_POST['address']);
+
+    $check_sql = "SELECT STUDENT_ID FROM student_tbl WHERE STUDENT_ID = '$student_id'";
+    $check_result = $conn->query($check_sql);
+
+    if ($check_result->num_rows > 0) {
+        echo "error: Student ID already exists!";
+    } else {
+        $sql = "INSERT INTO student_tbl (STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS) 
+                VALUES ('$student_id', '$first_name', '$last_name', '$gender', '$email', '$contact', '$address')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "success";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    $conn->close();
+    exit;
+}
 
 $result = $conn->query($sql);
-
-// Debugging: Uncomment this to check the generated SQL query
-// echo "Generated Query: " . $sql . "<br>";
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +56,8 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="CSS/student.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery -->
 
@@ -134,7 +156,7 @@ $result = $conn->query($sql);
             <h2>Add Student</h2>
 
 
-            <form id="addStudentForm" method="POST" action="add.php">
+            <form id="addStudentForm" method="POST" action="">
 
 
                 <div class="name-container">
@@ -177,197 +199,55 @@ $result = $conn->query($sql);
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" required>
 
-                <button type="submit">Add Student</button>
+                <button type="submit" class="add-button">Add Student</button>
 
             </form>
         </div>
     </div>
 
 
-    <!-- JavaScript for Modal -->
     <script>
-        function openModal() {
-            document.getElementById('addStudentModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('addStudentModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            var modal = document.getElementById('addStudentModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        $(document).ready(function() {
-            $('#addStudentForm').submit(function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: 'add.php',
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        alert('Student added successfully!');
-                        closeModal();
-                        location.reload();
-                    },
-                    error: function() {
-                        alert('Error adding student.');
-                    }
-                });
-            });
-        });
-    </script>
-
-    <!-- CSS for Modal -->
-    <style>
-        .modal {
-            display: none;
-            /* Initially hidden */
-            position: fixed;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            width: 40%;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .name-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            /* Adds spacing between first and last name fields */
-        }
-
-        .contact-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            /* Space between fields */
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            /* Stack label on top of input */
-            width: 48%;
-            /* Adjust width to fit side by side */
-        }
-
-        .input-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            /* Adds space between label and input */
-        }
-
-        .id-gender-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            /* Space between fields */
-        }
-
-        .modal .modal-content label {
-            display: block;
-            margin: 10px 0 5px;
-            text-align: left;
-            color: #555;
-        }
-
-        .modal-content input,
-        .modal-content select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .modal-btn {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .modal-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #555;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-    </style>
-
-    <script>
-        function confirmDelete(studentId) {
-            swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this student record!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                    className: "swal-delete" // Add a custom class
-
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: 'delete_students.php',
-                            type: 'GET',
-                            data: {
-                                id: studentId
-                            },
-                            success: function(response) {
-                                swal("Student has been deleted!", {
-                                    icon: "success",
-                                }).then(() => {
-                                    $("#row_" + studentId).fadeOut(500, function() {
-                                        $(this).remove();
-                                    });
-                                });
-                            },
-                            error: function() {
-                                swal("Error!", "Failed to delete student.", "error");
-                            }
+    function openModal() {
+        document.getElementById('addStudentModal').style.display = 'flex';
+    }
+    function closeModal() {
+        document.getElementById('addStudentModal').style.display = 'none';
+    }
+    $(document).ready(function() {
+        $('#addStudentForm').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: 'student.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.trim() === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Student Added!',
+                            text: 'The student has been successfully added.',
+                        }).then(() => location.reload());
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response,
                         });
                     }
-                });
-        }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                }
+            });
+        });
+    });
     </script>
 
+   
 </body>
 
 </html>

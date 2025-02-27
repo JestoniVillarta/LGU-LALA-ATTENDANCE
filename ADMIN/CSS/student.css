@@ -9,7 +9,7 @@ body {
 
 .container {
     display: flex;
-  
+
 }
 
 .content-container {
@@ -37,21 +37,25 @@ h3 {
 
 /* Table button wrapper: aligns both search bar and add button to the right */
 .table-button-wrapper {
-    width: 90%; /* Match the table wrapper */
+    width: 90%;
+    /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
-    margin: 0 auto 5px; /* Centers horizontally and adds bottom margin */
+    margin: 0 auto 5px;
+    /* Centers horizontally and adds bottom margin */
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding-right: 0; /* Remove unnecessary right padding */
+    padding-right: 0;
+    /* Remove unnecessary right padding */
     margin-top: 20px;
 }
 
 /* Add Employee Button */
 .add-btn {
-    padding: 10px 30px; /* Increase right padding */
+    padding: 10px 30px;
+    /* Increase right padding */
     margin-right: 10px;
     background-color: #009879;
     color: #fff;
@@ -116,10 +120,12 @@ table th {
 
 }
 
-table th, table td {
+table th,
+table td {
     padding: 12px 15px;
     border: 1px solid #ddd;
-    white-space: nowrap; /* Ensures that long content does not break into multiple lines */
+    white-space: nowrap;
+    /* Ensures that long content does not break into multiple lines */
 }
 
 /* Table Data Cell Styling */
@@ -372,4 +378,140 @@ table tr:hover {
 
 .swal-delete .swal-title {
     text-align: center !important;
+}
+
+
+
+.modal {
+    display: none;
+    /* Initially hidden */
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    width: 40%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.name-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Adds spacing between first and last name fields */
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Space between fields */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    /* Stack label on top of input */
+    width: 48%;
+    /* Adjust width to fit side by side */
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    /* Adds space between label and input */
+}
+
+.id-gender-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Space between fields */
+}
+
+.add-button {
+    display: block;
+    margin: 20px auto;
+    /* Centers the button */
+    padding: 15px;
+    /* Adjusts padding */
+    width: 50%;
+    /* Adjust width (50% of the form) */
+    background-color: #009879;
+    /* Solid background for visibility */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Button hover effect */
+.add-button:hover {
+    background-color: #117a65;
+    /* Solid background for visibility */
+}
+
+
+.modal .modal-content label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.modal-btn:hover {
+    background-color: #0056b3;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #555;
+}
+
+.close:hover {
+    color: #000;
 }

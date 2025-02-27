@@ -73,8 +73,8 @@
             // Student has an attendance record, check if present or absent
             $attendance_data = $check_result->fetch_assoc();
 
-            $morning_status = (!empty($attendance_data['MORNING_TIME_IN']) && !empty($attendance_data['MORNING_TIME_OUT'])) ? 'Present' : 'Absent';
-            $afternoon_status = (!empty($attendance_data['AFTERNOON_TIME_IN']) && !empty($attendance_data['AFTERNOON_TIME_OUT'])) ? 'Present' : 'Absent';
+            $morning_status = (!empty($attendance_data['MORNING_TIME_IN']) ) ? 'Present' : 'Absent';
+            $afternoon_status = (!empty($attendance_data['AFTERNOON_TIME_IN']) ) ? 'Present' : 'Absent';
 
             // Update the attendance record with the correct status
             $update_status_sql = "UPDATE `attendance_tbl` 
