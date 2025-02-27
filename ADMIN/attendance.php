@@ -143,21 +143,23 @@
                     <h3>Student Attendance</h3>
 
 
+
+
+                    <div class="button-search-group">
+                        
                     <div class="status-filter-container">
                         <form method="GET">
                             <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
                             <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
                             <label for="statusSelect">Select Status:</label>
-                            <select name="status" id="statusSelect" onchange="this.form.submit()">
+                            <select name="status" id="statusSelect" onchange="this.form.submit()" >
                                 <option value="all" <?php echo (isset($_GET['status']) && $_GET['status'] === 'all') ? 'selected' : ''; ?>>All</option>
                                 <option value="present" <?php echo (isset($_GET['status']) && $_GET['status'] === 'present') ? 'selected' : ''; ?>>Present</option>
                                 <option value="absent" <?php echo (isset($_GET['status']) && $_GET['status'] === 'absent') ? 'selected' : ''; ?>>Absent</option>
                             </select>
                         </form>
                     </div>
-
-
-                    <div class="button-search-group">
+                    
                         <div class="calendar-container">
                             <form method="GET" id="dateForm">
                                 <label for="dateSelect">Select Date:</label>

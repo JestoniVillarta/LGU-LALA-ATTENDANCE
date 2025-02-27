@@ -62,21 +62,20 @@ form {
 input[type="text"] {
     width: 80%;
     padding: 30px 200px 30px 25px;
-    /* 0 sa left padding */
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 30px;
+    font-weight: 800;
     text-align: left;
 }
 
 input[type="text"]::placeholder {
     text-align: left;
-    /* Sigurado nga wala */
+    font-weight: 100;
     font-size: 30px;
     color: #888;
-    padding-left: 0;
-    /* Sigurado nga duol sa gilay-on sa input */
+    padding-left: 0; 
 }
 
 

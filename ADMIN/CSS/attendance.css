@@ -146,14 +146,19 @@ table tr:hover {
 /* Adjusted search input size */
 .search-container input {
     width: 180px;
+    border: 1.9px solid rgb(133, 129, 129);
     padding: 8px 12px;
     font-size: 14px;
+    border-radius: 50px;
 }
 
 /* Adjust search button size */
 .search-container button {
-    padding: 7px 12px;
+    padding: 7px 7px;
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
     font-size: 14px;
+  
 }
 
 /* Calendar container: placed near search button */
@@ -174,9 +179,11 @@ table tr:hover {
 
 /* Adjusted calendar input size */
 .calendar-container input {
-    width: 140px; /* Adjust width as needed */
+    width: 160px; /* Adjust width as needed */
     padding: 7px 10px;
     font-size: 14px;
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
 }
 
 
@@ -189,3 +196,27 @@ table tr:hover {
      color: green; font-weight: bold;
 
  } /* Green for Present */
+
+
+
+
+
+ /* Dropdown Styling */
+.status-filter-container select {
+    padding: 5px 12px;
+    width: 150px;
+    font-size: 16px;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
+
+}
+
+
+
+

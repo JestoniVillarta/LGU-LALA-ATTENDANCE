@@ -70,7 +70,7 @@ body {
 }
 
 .nav ul li a.active {
-  background-color: #3498db; /* Pwede nimo usbon ang color */
+  background-color: #3498db; 
   color: #fff;
   border-radius: 5px;
 }

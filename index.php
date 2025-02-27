@@ -105,7 +105,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
             $modalMessage = "❌ Error: Duplicate entry detected for today.";
             $showModal = true;
         }
-         else {
+
+              // ✅ Prevent "Time Out" before "Time In"
+              elseif (
+                (isset($_POST['morning_out']) && empty($attendance['MORNING_TIME_IN'])) ||
+                (isset($_POST['afternoon_out']) && empty($attendance['AFTERNOON_TIME_IN']))
+            ) {
+                $modalMessage = "❌ Error: You must time in first before time out.";
+                $showModal = true;
+
+            } else {
             // Process attendance update
             if (isset($_POST['morning_in'])) {
                 $query = "UPDATE attendance_tbl SET MORNING_TIME_IN = ?, MORNING_STATUS = 'Present' WHERE STUDENT_ID = ? AND DATE = ?";

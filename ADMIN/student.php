@@ -100,14 +100,14 @@ $result = $conn->query($sql);
                     <table>
                         <thead>
                             <tr>
-                                <th>Student ID</th>
+                                <th class="student">Student ID</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Gender</th>
                                 <th>Email</th>
                                 <th>Contact</th>
                                 <th>Address</th>
-                                <th>Action</th>
+                                <th class="action">Action</th>
                             </tr>
                         </thead>
                         <tbody>

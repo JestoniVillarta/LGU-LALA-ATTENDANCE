@@ -57,7 +57,7 @@ h3 {
     padding: 10px 30px;
     /* Increase right padding */
     margin-right: 10px;
-    background-color: #009879;
+    background-color: #3498db; 
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -66,21 +66,20 @@ h3 {
 }
 
 .add-btn:hover {
-    background-color: #007f65;
+    background-color: #1c699c; 
 }
 
 /* Table container: scrollable container with padding and border */
 .table-container {
+
     position: relative;
-    background-color: #fff;
-    border: 1px solid #ddd;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 95%;
     overflow-y: auto;
     overflow-x: auto;
     padding-bottom: 20px;
     overflow: overlay;
+    border-radius: 10px;
 
 }
 
@@ -92,6 +91,7 @@ table {
     border-collapse: collapse;
     text-align: left;
     color: black;
+    border-radius: 3px;
 
 }
 
@@ -106,6 +106,7 @@ thead th {
     color: #ffffff;
     padding: 12px 15px;
     border: 1px solid #ddd;
+    
 }
 
 
@@ -122,44 +123,50 @@ table th {
 
 table th,
 table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+    padding: 12px 15px;  
+ 
     white-space: nowrap;
-    /* Ensures that long content does not break into multiple lines */
 }
 
 /* Table Data Cell Styling */
 table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+    margin-top: 100px;
+    padding: 20px 15px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    background-clip: padding-box; /* Ensures background does not cover border */
+    background-color: white; /* Adjust based on your design */
 }
 
-/* Alternate Row Background Color */
-table tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
+
 
 /* Hover Effect for Table Rows */
 table tr:hover {
-    background-color: #f3f3f3;
+    background-color: #eaf0f1;
 
+}
+
+.action {
+    border-top-right-radius: 10px;
+}
+
+.student {
+    border-top-left-radius: 10px;
+    
 }
 
 
 
-
-/* Container for search bar and add button */
 .button-search-group {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Adjust spacing between search and button */
+   
 }
 
-/* Adjusted search bar styling */
+
 .search-container {
     margin: 0;
-    /* Remove margin to align properly */
+  
 }
 
 .search-container form {
@@ -170,23 +177,23 @@ table tr:hover {
     gap: 1px;
 }
 
-/* Adjusted search input size */
+
 .search-container input {
     width: 180px;
-    /* Reduce width (adjust as needed) */
     padding: 8px 12px;
-    /* Adjust padding */
     font-size: 14px;
-    /* Smaller font */
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
 
 }
 
-/* Adjust search button size */
+
 .search-container button {
-    padding: 7px 12px;
-    /* Adjust button padding */
+    padding: 7px 7px;
     font-size: 14px;
-    /* Match input font size */
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
+
 
 
 }
