@@ -29,13 +29,31 @@
             FROM `attendance_tbl`
             WHERE `DATE` = ?";
 
+
+    $status = 'all';
+
     // Apply search filter if provided
     if (isset($_GET['search']) && $_GET['search'] !== "") {
         $search = $_GET['search'];
         $sql .= " AND (`STUDENT_ID` LIKE ? OR `NAME` LIKE ?)";
     }
 
+
+    // Check if a status filter is applied
+    $status = 'all'; // Default to 'all' if not set
+    if (isset($_GET['status']) && $_GET['status'] !== "") {
+        $status = $_GET['status'];
+    }
+
+    // Modify the SQL query to include status filter
+    if ($status === 'present') {
+        $sql .= " AND (`MORNING_STATUS` = 'Present' OR `AFTERNOON_STATUS` = 'Present')";
+    } elseif ($status === 'absent') {
+        $sql .= " AND (`MORNING_STATUS` = 'Absent' AND `AFTERNOON_STATUS` = 'Absent')";
+    }
+
     $stmt = $conn->prepare($sql);
+
     if ($search !== "") {
         $like_search = "%$search%";
         $stmt->bind_param("sss", $search_date, $like_search, $like_search);
@@ -73,8 +91,8 @@
             // Student has an attendance record, check if present or absent
             $attendance_data = $check_result->fetch_assoc();
 
-            $morning_status = (!empty($attendance_data['MORNING_TIME_IN']) ) ? 'Present' : 'Absent';
-            $afternoon_status = (!empty($attendance_data['AFTERNOON_TIME_IN']) ) ? 'Present' : 'Absent';
+            $morning_status = (!empty($attendance_data['MORNING_TIME_IN'])) || (!empty($attendance_data['MORNING_TIME_OUT'])) ? 'Present' : 'Absent';
+            $afternoon_status = (!empty($attendance_data['AFTERNOON_TIME_IN'])) || (!empty($attendance_data['AFTERNOON_TIME_OUT']))  ? 'Present' : 'Absent';
 
             // Update the attendance record with the correct status
             $update_status_sql = "UPDATE `attendance_tbl` 
@@ -123,6 +141,22 @@
             <div class="content-container">
                 <div class="table-button-wrapper">
                     <h3>Student Attendance</h3>
+
+
+                    <div class="status-filter-container">
+                        <form method="GET">
+                            <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
+                            <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
+                            <label for="statusSelect">Select Status:</label>
+                            <select name="status" id="statusSelect" onchange="this.form.submit()">
+                                <option value="all" <?php echo (isset($_GET['status']) && $_GET['status'] === 'all') ? 'selected' : ''; ?>>All</option>
+                                <option value="present" <?php echo (isset($_GET['status']) && $_GET['status'] === 'present') ? 'selected' : ''; ?>>Present</option>
+                                <option value="absent" <?php echo (isset($_GET['status']) && $_GET['status'] === 'absent') ? 'selected' : ''; ?>>Absent</option>
+                            </select>
+                        </form>
+                    </div>
+
+
                     <div class="button-search-group">
                         <div class="calendar-container">
                             <form method="GET" id="dateForm">
@@ -130,10 +164,13 @@
                                 <input type="date" name="search_date" id="dateSelect" value="<?php echo htmlspecialchars($search_date); ?>" onchange="document.getElementById('dateForm').submit()">
                             </form>
                         </div>
+
+
+
                         <div class="search-container">
                             <form method="GET">
                                 <input type="hidden" name="search_date" value="<?php echo htmlspecialchars($search_date); ?>">
-                                <input type="text" name="search" placeholder="Enter Student ID or Name" value="<?php echo htmlspecialchars($search); ?>">
+                                <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
                                 <button type="submit">🔍</button>
                             </form>
                         </div>
@@ -180,7 +217,7 @@
                                 } else {
                                     echo "<tr><td colspan='11'>No attendance records found for the selected date.</td></tr>";
                                 }
-                               
+
                                 ?>
                             </tbody>
                         </table>

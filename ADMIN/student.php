@@ -4,9 +4,11 @@ include '../CONNECTION/connection.php';
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 $search_date = isset($_GET['search_date']) ? $conn->real_escape_string($_GET['search_date']) : date("Y-m-d");
 
+// Base SQL query
 $sql = "SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS FROM student_tbl";
 $conditions = [];
 
+// Add conditions based on the search input
 if (!empty($search)) {
     if (is_numeric($search)) {
         $conditions[] = "STUDENT_ID = '$search'";
@@ -15,6 +17,12 @@ if (!empty($search)) {
     }
 }
 
+// Append conditions to the SQL query if any are present
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(' AND ', $conditions);
+}
+
+// Handle the POST request for adding a new student
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student_id = $conn->real_escape_string($_POST['student_id']);
     $first_name = $conn->real_escape_string($_POST['first_name']);
@@ -24,12 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $conn->real_escape_string($_POST['contact']);
     $address = $conn->real_escape_string($_POST['address']);
 
+    // Check if the student ID already exists
     $check_sql = "SELECT STUDENT_ID FROM student_tbl WHERE STUDENT_ID = '$student_id'";
     $check_result = $conn->query($check_sql);
 
     if ($check_result->num_rows > 0) {
         echo "error: Student ID already exists!";
     } else {
+        // Insert new student record
         $sql = "INSERT INTO student_tbl (STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS) 
                 VALUES ('$student_id', '$first_name', '$last_name', '$gender', '$email', '$contact', '$address')";
 
@@ -43,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 
+// Execute the SQL query
 $result = $conn->query($sql);
 ?>
 
