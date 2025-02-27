@@ -178,30 +178,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
 <body>
 
 
+<div class="container">
+
+<h1 class="title">TRAINEE ATTENDANCE SYSTEM</h1>
+
+<h2>  <?php echo $attendanceMessage; ?>  </h2>
 
 
-    <h1 class="title">TRAINEE ATTENDANCE SYSTEM</h1>
+<form action="" method="post">
 
-    <h2>  <?php echo $attendanceMessage; ?>  </h2>
+    <input type="text" id="STUDENT_ID" placeholder="ENTER YOUR ID:" name="student_id" required>
 
-    
-    <form action="" method="post">
+    <br>
 
-        <input type="text" id="STUDENT_ID" placeholder="ENTER YOUR ID:" name="student_id" required>
+    <div class="submit-btn">
 
-        <br>
+    <?php if ($show_morning_in) echo '<button type="submit" name="morning_in" >Morning Time In</button>'; ?>
+    <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" class="morning_out">Morning Time Out</button>'; ?>
+    <?php if ($show_afternoon_in) echo '<button type="submit" name="afternoon_in">Afternoon Time In</button>'; ?>
+    <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out" class="afternoon_out">Afternoon Time Out</button>'; ?>
 
-        <div class="submit-btn">
+    </div>
+   
 
-        <?php if ($show_morning_in) echo '<button type="submit" name="morning_in" >Morning Time In</button>'; ?>
-        <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" class="morning_out">Morning Time Out</button>'; ?>
-        <?php if ($show_afternoon_in) echo '<button type="submit" name="afternoon_in">Afternoon Time In</button>'; ?>
-        <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out" class="afternoon_out">Afternoon Time Out</button>'; ?>
+</form>
 
-        </div>
-       
+</div>
 
-    </form>
+
 
     <div id="successModal" class="modal" style="display: none;">
         <div class="modal-content">

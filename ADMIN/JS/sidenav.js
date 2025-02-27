@@ -1,19 +1,3 @@
-$(document).ready(function () {
-    console.log("jQuery loaded!"); // Debugging: Check if jQuery is loaded
-
-    // Toggle submenu when clicking the arrow ONLY
-    $(".menu-link").click(function (e) {
-        let submenu = $(this).next(".submenu");
-
-        if (submenu.length) {
-            if (!$(e.target).hasClass("arrow")) {
-                return; // Allow redirection when clicking "Students" text
-            }
-            e.preventDefault(); // Prevent default only when clicking the arrow
-            submenu.slideToggle();
-            $(this).find(".arrow").toggleClass("fa-angle-down fa-angle-up"); // Proper toggle
-        }
-    });
 
     // Toggle Sidebar
     $(".menu-btn").click(function () {
@@ -32,7 +16,7 @@ $(document).ready(function () {
                 .removeClass("fa-angle-down").addClass("fa-angle-up");
         }
     });
-});
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -66,20 +66,7 @@
                             <a href="student.php" class="menu-link">
                                 <i class="icon fa-regular fa-address-book"></i>
                                 <span class="text">Students</span>
-                                <i class="arrow fa-solid fa-angle-down"></i> 
                             </a>
-
-                            <ul class="submenu">
-                                <li>
-                                    <a href="add.php">
-                                        <i class="icon fa-solid fa-user-plus"></i>
-                                        <span class="text">Add Student</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-
 
                         <li>
                             <a href="set_time.php">
