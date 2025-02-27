@@ -1,5 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: #dbe2f4;
     text-align: center;
     display: flex;
@@ -10,39 +12,48 @@ body {
     margin: 0;
 }
 
-h1 {
-    padding: 15px;
-    margin: 0;
+.title {
+    padding-bottom: 20px;
+    font-size: 50px;
 }
 
-p {
-    font-size: 18px;
-    margin: 20px 0;
+h2 {
+    font-size: 30px;
 }
+
+
 
 form {
     max-width: 400px;
     width: 100%;
     display: flex;
-    flex-direction: column;
+  flex-direction: column;
     align-items: center;
+}
+
+.submit-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 input[type="text"] {
     width: 80%;
-    padding: 20px 100px 20px 15px;
+    padding: 30px 200px 30px 25px;
     /* 0 sa left padding */
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 30px;
     text-align: left;
 }
 
 input[type="text"]::placeholder {
     text-align: left;
     /* Sigurado nga wala */
-    font-size: 16px;
+    font-size: 30px;
     color: #888;
     padding-left: 0;
     /* Sigurado nga duol sa gilay-on sa input */
@@ -87,7 +98,6 @@ button:hover {
     display: none; /* Hide by default */
     position: fixed;
     z-index: 1000; /* Ensure it appears above everything */
-
     left: 0;
     top: 0;
     width: 100%;
@@ -123,8 +133,8 @@ button:hover {
 
 
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     form {
-        width: 70%;
+        width: 40%;
     }
 }

@@ -36,6 +36,22 @@ $show_afternoon_out = ($current_time_24 >= date("H:i", strtotime($row['AFTERNOON
 $modalMessage = "";
 $showModal = false;
 
+// Determine the title
+$currentHour = date('H');  // Gets the current hour in 24-hour format.
+
+
+$currentHour = date('G'); // Gets the current hour in 24-hour format without leading zeros
+
+// Initialize a variable to hold the message
+$attendanceMessage = '';
+
+// Determine the message based on the current hour
+if ($currentHour < 12) {
+    $attendanceMessage = 'Morning Attendance';
+} else {
+    $attendanceMessage = 'Afternoon Attendance';
+}
+
 
 
 // Process attendance submission
@@ -160,15 +176,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
-    <h1>TRAINEE ATTENDANCE SYSTEM</h1>
+
+
+
+
+    <h1 class="title">TRAINEE ATTENDANCE SYSTEM</h1>
+
+    <h2>  <?php echo $attendanceMessage; ?>  </h2>
+
     
     <form action="" method="post">
+
         <input type="text" id="STUDENT_ID" placeholder="ENTER YOUR ID:" name="student_id" required>
+
         <br>
+
+        <div class="submit-btn">
+
         <?php if ($show_morning_in) echo '<button type="submit" name="morning_in" >Morning Time In</button>'; ?>
         <?php if ($show_morning_out) echo '<button type="submit" name="morning_out" class="morning_out">Morning Time Out</button>'; ?>
         <?php if ($show_afternoon_in) echo '<button type="submit" name="afternoon_in">Afternoon Time In</button>'; ?>
         <?php if ($show_afternoon_out) echo '<button type="submit" name="afternoon_out" class="afternoon_out">Afternoon Time Out</button>'; ?>
+
+        </div>
+       
+
     </form>
 
     <div id="successModal" class="modal" style="display: none;">
