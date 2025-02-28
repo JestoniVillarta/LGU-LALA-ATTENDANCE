@@ -3,7 +3,7 @@ body {
 
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
+    height: 100vh;
 
 }
 
@@ -15,18 +15,10 @@ body {
 .content-container {
     display: flex;
     flex-direction: column;
-    margin-top: 0;
     width: 100%;
     height: 100%;
 }
 
-/* Table wrapper: centers the table container */
-.table-wrapper {
-    width: 90%;
-    margin: 0 auto;
-    height: 90vh;
-
-}
 
 h3 {
     padding-left: 20px;
@@ -37,25 +29,21 @@ h3 {
 
 /* Table button wrapper: aligns both search bar and add button to the right */
 .table-button-wrapper {
-    width: 90%;
-    /* Match the table wrapper */
+    width: 90%; /* Match the table wrapper */
     border-radius: 4px;
     background-color: #f8f9fa;
-    margin: 0 auto 5px;
-    /* Centers horizontally and adds bottom margin */
+    margin: 0 auto 5px;/* Centers horizontally and adds bottom margin */
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding-right: 0;
-    /* Remove unnecessary right padding */
+    padding-right: 0; /* Remove unnecessary right padding */
     margin-top: 20px;
 }
 
 /* Add Employee Button */
 .add-btn {
-    padding: 10px 30px;
-    /* Increase right padding */
+    padding: 10px 30px;/* Increase right padding */
     margin-right: 10px;
     background-color: #3498db; 
     color: #fff;
@@ -67,6 +55,15 @@ h3 {
 
 .add-btn:hover {
     background-color: #1c699c; 
+}
+
+
+/* Table wrapper: centers the table container */
+.table-wrapper {
+    width: 90%;
+    margin: 0 auto;
+    height: 85vh;
+
 }
 
 /* Table container: scrollable container with padding and border */
@@ -84,11 +81,15 @@ h3 {
 }
 
 
+
+
+
 /* Table Styling */
 table {
     width: 100%;
     table-layout: auto;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 3px;
     text-align: left;
     color: black;
     border-radius: 3px;
@@ -99,13 +100,11 @@ table {
 /* Sticky Table Header */
 thead th {
     position: sticky;
-    top: 0;
-    /* Ensures header stays above table rows */
-    background-color: #222d33;
-    /* Solid background for visibility */
+    top: 0;  /* Ensures header stays above table rows */
+    background-color: #222d33;/* Solid background for visibility */
     color: #ffffff;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+    padding: 20px 15px;
+
     
 }
 
@@ -114,44 +113,31 @@ thead th {
 /* Table Header Styling */
 table th {
     background-color: #222d33;
+    top: 0;
     color: #ffffff;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+    padding: 20px 15px;
     z-index: 1;
 
 }
 
 table th,
 table td {
-    padding: 12px 15px;  
- 
+    padding: 20px 15px;  
     white-space: nowrap;
 }
 
 /* Table Data Cell Styling */
 table td {
-    margin-top: 100px;
     padding: 20px 15px;
-    border-bottom: 4px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
-    background-clip: padding-box; /* Ensures background does not cover border */
     background-color: white; /* Adjust based on your design */
 }
 
 
 
 /* Hover Effect for Table Rows */
-table tr:hover {
-    background-color: #eaf0f1;
+table tr:hover td{
+    background-color: #eff7f7;
 
-}
-
-.action {
-    border-top-right-radius: 10px;
-}
-
-.student {
-    border-top-left-radius: 10px;
-    
 }
 
 
@@ -194,9 +180,37 @@ table tr:hover {
     border: 1.9px solid rgb(133, 129, 129);
     border-radius: 50px;
 
-
-
 }
+
+
+
+.student {
+  
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #ddd; 
+}
+
+.action {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid #ddd; 
+}
+
+
+ .student-td {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #ddd; 
+}
+
+
+.action-cell {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid #ddd; 
+} 
+
 
 
 .actions {
@@ -217,8 +231,7 @@ table tr:hover {
 
 .actions a:hover {
 
-    transform: scale(1.2);
-    /* Slight zoom effect */
+    transform: scale(1.2); /* Slight zoom effect */
     transition: all 0.2s ease-in-out;
 }
 

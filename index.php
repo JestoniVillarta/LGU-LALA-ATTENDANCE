@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
                 (isset($_POST['morning_out']) && empty($attendance['MORNING_TIME_IN'])) ||
                 (isset($_POST['afternoon_out']) && empty($attendance['AFTERNOON_TIME_IN']))
             ) {
-                $modalMessage = "❌ Error: You must time in first before time out.";
+                $modalMessage = "❌ Error: You have not timed in today!";
                 $showModal = true;
 
             } else {
@@ -242,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
             modal.style.display = "block";
             setTimeout(function () {
                 modal.style.display = "none";
-            }, 1000);
+            }, 2000);
         }
 
         successCloseButton.addEventListener("click", function () {

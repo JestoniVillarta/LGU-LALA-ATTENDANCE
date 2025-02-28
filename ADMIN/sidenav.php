@@ -62,7 +62,7 @@
                         </li>
 
                         <!-- Students Section with Submenu -->
-                        <li class="has-submenu">
+                        <li>
                             <a href="student.php" class="menu-link">
                                 <i class="icon fa-regular fa-address-book"></i>
                                 <span class="text">Students</span>

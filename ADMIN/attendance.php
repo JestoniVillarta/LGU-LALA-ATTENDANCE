@@ -203,7 +203,7 @@
                                         $morning_status_color = ($row['MORNING_STATUS'] == 'Present') ? 'green' : 'red';
                                         $afternoon_status_color = ($row['AFTERNOON_STATUS'] == 'Present') ? 'green' : 'red';
                                         echo "<tr>";
-                                        echo "<td>{$row['STUDENT_ID']}</td>";
+                                        echo "<td class='student-td'>{$row['STUDENT_ID']}</td>";
                                         echo "<td>{$row['NAME']}</td>";
                                         echo "<td>{$row['GENDER']}</td>";
                                         echo "<td>{$row['MORNING_TIME_IN']}</td>";
