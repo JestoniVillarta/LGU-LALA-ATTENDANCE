@@ -129,6 +129,7 @@ table td {
 /* Table Data Cell Styling */
 table td {
     padding: 20px 15px;
+    font-size: 15px;
     background-color: white; /* Adjust based on your design */
 }
 
