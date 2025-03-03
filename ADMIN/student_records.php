@@ -34,8 +34,8 @@ if (isset($_GET['search_date']) && $_GET['search_date'] !== "") {
 }
 
 // Build the SQL query to filter attendance by date
-$sql = "SELECT `DATE`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, 
-                `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `DUTY_HOURS`
+$sql = "SELECT `DATE`, `MORNING_TIME_IN`, `MORNING_TIME_OUT`, `MORNING_STATUS`,
+                `AFTERNOON_TIME_IN`, `AFTERNOON_TIME_OUT`, `AFTERNOON_STATUS`, `DUTY_HOURS`
         FROM `attendance_tbl`
         WHERE `DATE` = ? AND `STUDENT_ID` = ?";
 
@@ -107,8 +107,10 @@ $stmt->close();
                         <th>Date</th>
                         <th>Morning In</th>
                         <th>Morning Out</th>
+                        <th>Morning Status</th>
                         <th>Afternoon In</th>
                         <th>Afternoon Out</th>
+                        <th>Afternoon Status</th>
                         <th>Duty Hours</th>
                     </tr>
                 </thead>
@@ -120,8 +122,10 @@ $stmt->close();
                                 <td>" . htmlspecialchars($row["DATE"]) . "</td>
                                 <td>" . htmlspecialchars($row["MORNING_TIME_IN"]) . "</td>
                                 <td>" . htmlspecialchars($row["MORNING_TIME_OUT"]) . "</td>
+                                <td>" . htmlspecialchars($row["MORNING_STATUS"]) . "</td>
                                 <td>" . htmlspecialchars($row["AFTERNOON_TIME_IN"]) . "</td>
                                 <td>" . htmlspecialchars($row["AFTERNOON_TIME_OUT"]) . "</td>
+                                <td>" . htmlspecialchars($row["AFTERNOON_STATUS"]) . "</td>
                                 <td>" . htmlspecialchars($row["DUTY_HOURS"]) . "</td>
                             </tr>";
                         }

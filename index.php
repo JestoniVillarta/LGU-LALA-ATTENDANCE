@@ -36,6 +36,8 @@ $show_afternoon_out = ($current_time_24 >= date("H:i", strtotime($row['AFTERNOON
 $modalMessage = "";
 $showModal = false;
 
+
+
 // Process attendance submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
     $student_id = trim($_POST['student_id']);
@@ -76,26 +78,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['student_id'])) {
         }
 
         // Prevent duplicate submission
-        if ((isset($_POST['morning_in']) && !empty($attendance['MORNING_TIME_IN'])) ||
-            (isset($_POST['morning_out']) && !empty($attendance['MORNING_TIME_OUT'])) ||
-            (isset($_POST['afternoon_in']) && !empty($attendance['AFTERNOON_TIME_IN'])) ||
-            (isset($_POST['afternoon_out']) && !empty($attendance['AFTERNOON_TIME_OUT']))) {
-            $modalMessage = "❌ Error: Duplicate entry detected.";
+        $date_today = date('Y-m-d'); // Get the current date
+
+        if (
+            (isset($_POST['morning_in']) && !empty($attendance['MORNING_TIME_IN']) && $attendance['DATE'] === $date_today) ||
+            (isset($_POST['morning_out']) && !empty($attendance['MORNING_TIME_OUT']) && $attendance['DATE'] === $date_today) ||
+            (isset($_POST['afternoon_in']) && !empty($attendance['AFTERNOON_TIME_IN']) && $attendance['DATE'] === $date_today) ||
+            (isset($_POST['afternoon_out']) && !empty($attendance['AFTERNOON_TIME_OUT']) && $attendance['DATE'] === $date_today)
+        ) {
+            $modalMessage = "❌ Error: Duplicate entry detected for today.";
             $showModal = true;
-        } else {
+        }
+         else {
             // Process attendance update
             if (isset($_POST['morning_in'])) {
-                $query = "UPDATE attendance_tbl SET MORNING_TIME_IN = ? WHERE STUDENT_ID = ? AND DATE = ?";
+                $query = "UPDATE attendance_tbl SET MORNING_TIME_IN = ?, MORNING_STATUS = 'Present' WHERE STUDENT_ID = ? AND DATE = ?";
             } elseif (isset($_POST['morning_out'])) {
                 $query = "UPDATE attendance_tbl SET MORNING_TIME_OUT = ? WHERE STUDENT_ID = ? AND DATE = ?";
             } elseif (isset($_POST['afternoon_in'])) {
-                $query = "UPDATE attendance_tbl SET AFTERNOON_TIME_IN = ? WHERE STUDENT_ID = ? AND DATE = ?";
+                $query = "UPDATE attendance_tbl SET AFTERNOON_TIME_IN = ?, AFTERNOON_STATUS = 'Present' WHERE STUDENT_ID = ? AND DATE = ?";
             } elseif (isset($_POST['afternoon_out'])) {
                 $query = "UPDATE attendance_tbl SET AFTERNOON_TIME_OUT = ? WHERE STUDENT_ID = ? AND DATE = ?";
             } else {
                 $modalMessage = "❌ Error: Invalid entry.";
                 $showModal = true;
             }
+    
 
             if (!empty($query)) {
                 $stmt = $conn->prepare($query);
