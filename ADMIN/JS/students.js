@@ -1,35 +1,28 @@
 
+function openEditModal(studentId, firstName, lastName, gender, email, contact, address) {
+    // Set values in the form
+    document.getElementById('originalStudentId').value = studentId;
+    document.getElementById('editStudentId').value = studentId;
+    document.getElementById('editFirstName').value = firstName;
+    document.getElementById('editLastName').value = lastName;
+    document.getElementById('editGender').value = gender;
+    document.getElementById('editEmail').value = email;
+    document.getElementById('editContact').value = contact;
+    document.getElementById('editAddress').value = address;
+    
+    // Display the modal using flex instead of block
+    document.getElementById('editModal').style.display = 'flex';
+}
 
-    function openModal() {
-        document.getElementById('addStudentModal').style.display = 'flex';
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+// Close modal when clicking outside the content
+window.onclick = function(event) {
+    let modal = document.getElementById('editModal');
+    
+    if (event.target === modal) {
+        closeEditModal();
     }
-
-    function closeModal() {
-        document.getElementById('addStudentModal').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        var modal = document.getElementById('addStudentModal');
-        if (event.target === modal) {
-            closeModal();
-        }
-    }
-
-    $(document).ready(function() {
-        $('#addStudentForm').submit(function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: 'student.php',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    alert('Student added successfully!');
-                    closeModal();
-                    location.reload();
-                },
-                error: function() {
-                    alert('Error adding student.');
-                }
-            });
-        });
-    });
+};

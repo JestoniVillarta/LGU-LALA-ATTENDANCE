@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $conn->real_escape_string($_POST['email']);
     $contact = $conn->real_escape_string($_POST['contact']);
     $address = $conn->real_escape_string($_POST['address']);
-    
+
     // Check if this is an edit operation
     if (isset($_POST['original_student_id'])) {
         // EDIT operation
         $original_student_id = $conn->real_escape_string($_POST['original_student_id']);
         $response = ["status" => "error", "message" => "Something went wrong!"];
-        
+
         // Check if new ID is already in use (but only if ID is being changed)
         if ($student_id !== $original_student_id) {
             $checkDuplicateQuery = "SELECT STUDENT_ID FROM student_tbl WHERE STUDENT_ID = ?";
@@ -71,8 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
         echo json_encode($response);
         exit;
-    } 
-    else {
+    } else {
         // ADD operation
         // Check if the student ID already exists
         $check_sql = "SELECT STUDENT_ID FROM student_tbl WHERE STUDENT_ID = '$student_id'";
@@ -271,11 +270,11 @@ $result = $conn->query($sql);
 
 
     <div id="editModal" class="edit-modal">
-        <div class="edit-modal-content">
+        <div class="modal-content">
             <span class="close" onclick="closeEditModal()">&times;</span>
             <h2>Edit Student</h2>
 
-            <form id="editStudentForm" method="POST" action="" class="form">
+            <form id="editStudentForm" method="POST" action="">
                 <!-- Hidden field to store the original Student ID -->
                 <input type="hidden" id="originalStudentId" name="original_student_id">
 
@@ -315,143 +314,114 @@ $result = $conn->query($sql);
                     </div>
                 </div>
 
-                <label for="editAddress">Address:</label>
-                <input type="text" id="editAddress" name="address" required>
+                <div class="input-group">
+                    <label for="editAddress">Address:</label>
+                    <input type="text" id="editAddress" name="address" required>
+                </div>
 
                 <button type="submit" class="edit-button">Save</button>
             </form>
-
         </div>
     </div>
 
-
-
-
     <script>
-function openEditModal(studentId, firstName, lastName, gender, email, contact, address) {
-        document.getElementById('originalStudentId').value = studentId;
-        document.getElementById('editStudentId').value = studentId;
-        document.getElementById('editFirstName').value = firstName;
-        document.getElementById('editLastName').value = lastName;
-        document.getElementById('editGender').value = gender;
-        document.getElementById('editEmail').value = email;
-        document.getElementById('editContact').value = contact;
-        document.getElementById('editAddress').value = address;
-
-        document.getElementById('editModal').style.display = 'block';
-    }
-
-    function closeEditModal() {
-        document.getElementById('editModal').style.display = 'none';
-    }
-
-    // Close modal when clicking outside the content
-    window.onclick = function(event) {
-        let modal = document.getElementById('editModal');
-        let modalContent = document.querySelector('.modal-content');
-
-        if (event.target === modal) {
-            closeEditModal();
-        }
-    };
-
-
-
-
         function openModal() {
             document.getElementById('addStudentModal').style.display = 'flex';
         }
+
 
         function closeModal() {
             document.getElementById('addStudentModal').style.display = 'none';
         }
 
 
-        
+
+
         $(document).ready(function() {
-    // Add student form handler
-    $('#addStudentForm').submit(function(event) {
-        event.preventDefault();
-        submitStudentForm($(this), 'add');
-    });
-    
-    // Edit student form handler
-    $('#editStudentForm').submit(function(event) {
-        event.preventDefault();
-        submitStudentForm($(this), 'edit');
-    });
-    
-    // Unified form submission function
-    function submitStudentForm(form, formType) {
-        let formData = new FormData(form[0]);
-        
-        // For jQuery ajax with FormData we need these options
-        let ajaxSettings = {
-            url: 'student.php',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: formData,
-            error: function() {
+            // Add student form handler
+            $('#addStudentForm').submit(function(event) {
+                event.preventDefault();
+                submitStudentForm($(this), 'add');
+            });
+
+            // Edit student form handler
+            $('#editStudentForm').submit(function(event) {
+                event.preventDefault();
+                submitStudentForm($(this), 'edit');
+            });
+
+            // Unified form submission function
+            function submitStudentForm(form, formType) {
+                let formData = new FormData(form[0]);
+
+                // For jQuery ajax with FormData we need these options
+                let ajaxSettings = {
+                    url: 'student.php',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                };
+
+                // Handle different response formats based on form type
+                if (formType === 'add') {
+                    ajaxSettings.success = function(response) {
+                        if (response.trim() === 'success') {
+                            showSuccessAlert('Student Added!', 'The student has been successfully added.');
+                        } else {
+                            showErrorAlert('Error!', response);
+                        }
+                    };
+                } else { // edit form
+                    ajaxSettings.dataType = 'json';
+                    ajaxSettings.success = function(data) {
+                        if (data.status === 'success') {
+                            showSuccessAlert('Success!', data.message);
+                        } else {
+                            showErrorAlert('Oops...', data.message);
+                        }
+                    };
+                }
+
+                // Execute the AJAX request
+                $.ajax(ajaxSettings);
+            }
+
+            // Helper functions for SweetAlert
+            function showSuccessAlert(title, text) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
+                    icon: 'success',
+                    title: title,
+                    text: text,
+                    showConfirmButton: true
+                }).then(() => {
+                    location.reload(); // Reload the page after success
                 });
             }
-        };
-        
-        // Handle different response formats based on form type
-        if (formType === 'add') {
-            ajaxSettings.success = function(response) {
-                if (response.trim() === 'success') {
-                    showSuccessAlert('Student Added!', 'The student has been successfully added.');
-                } else {
-                    showErrorAlert('Error!', response);
-                }
-            };
-        } else { // edit form
-            ajaxSettings.dataType = 'json';
-            ajaxSettings.success = function(data) {
-                if (data.status === 'success') {
-                    showSuccessAlert('Success!', data.message);
-                } else {
-                    showErrorAlert('Oops...', data.message);
-                }
-            };
-        }
-        
-        // Execute the AJAX request
-        $.ajax(ajaxSettings);
-    }
-    
-    // Helper functions for SweetAlert
-    function showSuccessAlert(title, text) {
-        Swal.fire({
-            icon: 'success',
-            title: title,
-            text: text,
-            showConfirmButton: true
-        }).then(() => {
-            location.reload(); // Reload the page after success
-        });
-    }
-    
-    function showErrorAlert(title, text) {
-        Swal.fire({
-            icon: 'error',
-            title: title,
-            text: text
-        });
-    }
-});
- 
 
+            function showErrorAlert(title, text) {
+                Swal.fire({
+                    icon: 'error',
+                    title: title,
+                    text: text
+                });
+            }
+        });
     </script>
 
 
+    <script src="JS/students.js"></script>
 
-   
+
+
+
 
 
 </body>
