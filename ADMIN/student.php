@@ -1,6 +1,5 @@
 <?php
 include '../CONNECTION/connection.php';
-
 // Search functionality
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 $search_date = isset($_GET['search_date']) ? $conn->real_escape_string($_GET['search_date']) : date("Y-m-d");
@@ -12,7 +11,7 @@ $conditions = [];
 // Add conditions based on the search input
 if (!empty($search)) {
     if (is_numeric($search)) {
-        $conditions[] = "STUDENT_ID = '$search'";
+        $conditions[] = "STUDENT_ID LIKE '%$search%'";
     } else {
         $conditions[] = "(FIRST_NAME LIKE '%$search%' OR LAST_NAME LIKE '%$search%')";
     }
@@ -23,8 +22,65 @@ if (!empty($conditions)) {
     $sql .= " WHERE " . implode(' AND ', $conditions);
 }
 
+// Get search and gender filter values from URL parameters
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+$gender_filter = isset($_GET['gender']) ? $conn->real_escape_string($_GET['gender']) : '';
+
+// Base SQL query
+$sql = "SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, GENDER, EMAIL, CONTACT, ADDRESS FROM student_tbl WHERE 1";
+
+// Add search condition
+if (!empty($search)) {
+    if (is_numeric($search)) {
+        $sql .= " AND STUDENT_ID LIKE '%$search%'";
+    } else {
+        $sql .= " AND (FIRST_NAME LIKE '%$search%' OR LAST_NAME LIKE '%$search%')";
+    }
+}
+
+// Add gender filter condition
+if (!empty($gender_filter)) {
+    $sql .= " AND GENDER = '$gender_filter'";
+}
+
+// Execute the query
+$result = $conn->query($sql);
+
+
+// Handle DELETE request
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'delete') {
+    // Sanitize the student ID
+    $student_id = $conn->real_escape_string($_POST['student_id']);
+
+    // Prepare the delete statement
+    $delete_query = "DELETE FROM student_tbl WHERE STUDENT_ID = ?";
+    $stmt = $conn->prepare($delete_query);
+    $stmt->bind_param("s", $student_id);
+
+    $response = ["status" => "error", "message" => "Something went wrong!"];
+
+    // Execute the delete query
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows > 0) {
+            $response = ["status" => "success", "message" => "Student deleted successfully!"];
+        } else {
+            $response = ["status" => "error", "message" => "No student found with the given ID."];
+        }
+    } else {
+        $response = ["status" => "error", "message" => "Error deleting student: " . $stmt->error];
+    }
+
+    // Close statement
+    $stmt->close();
+
+    // Send JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+}
+
 // Handle POST requests (Add or Edit)
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && (!isset($_POST['action']) || $_POST['action'] != 'delete')) {
     $student_id = $conn->real_escape_string($_POST['student_id']);
     $first_name = $conn->real_escape_string($_POST['first_name']);
     $last_name = $conn->real_escape_string($_POST['last_name']);
@@ -97,8 +153,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Execute the SQL query for displaying students
 $result = $conn->query($sql);
-
-// The page continues with displaying the results...
 ?>
 
 
@@ -127,9 +181,24 @@ $result = $conn->query($sql);
         </div>
 
         <div class="content-container">
+
             <div class="table-button-wrapper">
+
                 <h3>Student List</h3>
+
+                
                 <div class="button-search-group">
+
+                    <div class="search-gender">
+                        <form method="GET">
+                            <select name="gender" onchange="this.form.submit()"> <!-- No need for JS -->
+                                <option value="">All Genders</option>
+                                <option value="Male" <?= ($gender_filter == "Male") ? "selected" : "" ?>>Male</option>
+                                <option value="Female" <?= ($gender_filter == "Female") ? "selected" : "" ?>>Female</option>
+                            </select>
+                        </form>
+                    </div>
+
                     <div class="search-container">
                         <form method="GET">
                             <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>">
@@ -170,20 +239,20 @@ $result = $conn->query($sql);
                                     <td class='action-cell'>
 
                                         <div class='actions'>
-
+ 
                                           <a href='#' onclick='openEditModal(\"" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['FIRST_NAME'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['LAST_NAME'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['GENDER'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['EMAIL'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['CONTACT'], ENT_QUOTES, 'UTF-8') . "\", \"" . htmlspecialchars($row['ADDRESS'], ENT_QUOTES, 'UTF-8') . "\")' class='edit'>
-                    <span class='tooltip'>
-                        <i class='fa-sharp fa-solid fa-pen icon-background'></i>
-                        <span class='tooltiptext'>Edit Student</span>
-                    </span>
-                </a>
-
-                                            <a href='#' onclick='confirmDelete(" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . ")' class='delete'>
-                                                <span class='tooltip'>
-                                                    <i class='fa-solid fa-trash'></i>
-                                                    <span class='tooltiptext'>Delete Student</span>
+                                                 <span class='tooltip'>
+                                                 <i class='fa-sharp fa-solid fa-pen icon-background'></i>
+                                               <span class='tooltiptext'>Edit Student</span>
                                                 </span>
-                                            </a>
+                                                 </a>
+
+                                               <a href='#' onclick='confirmDelete(\"" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "\")' class='delete'>
+                                               <span class='tooltip'>
+                                              <i class='fa-solid fa-trash'></i>
+                                              <span class='tooltiptext'>Delete Student</span>
+                                              </span>
+                                              </a>
 
                                             <a href='student_records.php?id=" . htmlspecialchars($row['STUDENT_ID'], ENT_QUOTES, 'UTF-8') . "' class='view'>
                                                 <span class='tooltip'>
@@ -324,37 +393,130 @@ $result = $conn->query($sql);
         </div>
     </div>
 
+
+
     <script>
-        function openModal() {
-            document.getElementById('addStudentModal').style.display = 'flex';
-        }
-
-
-        function closeModal() {
-            document.getElementById('addStudentModal').style.display = 'none';
-        }
-
-
-
-
         $(document).ready(function() {
-            // Add student form handler
-            $('#addStudentForm').submit(function(event) {
-                event.preventDefault();
-                submitStudentForm($(this), 'add');
-            });
+            // Open Add Student Modal
+            function openModal() {
+                document.getElementById('addStudentModal').style.display = 'flex';
+            }
 
-            // Edit student form handler
-            $('#editStudentForm').submit(function(event) {
-                event.preventDefault();
-                submitStudentForm($(this), 'edit');
-            });
+            // Close Add Student Modal
+            function closeModal() {
+                document.getElementById('addStudentModal').style.display = 'none';
+            }
 
-            // Unified form submission function
+            // Confirm Delete Function
+            function confirmDelete(studentId) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this deletion!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform delete operation
+                        deleteStudent(studentId);
+                    }
+                });
+            }
+
+            // Delete Student Function
+            function deleteStudent(studentId) {
+                $.ajax({
+                    url: '', // Current page
+                    method: 'POST',
+                    data: {
+                        action: 'delete',
+                        student_id: studentId
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Show success sweet alert
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+
+                            // Remove the row from the table
+                            $('#row_' + studentId).fadeOut(500, function() {
+                                $(this).remove();
+                            });
+                        } else {
+                            // Show error sweet alert
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.message,
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function() {
+                        // Handle network or other errors
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Something went wrong with the deletion.',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                });
+            }
+
+            // Helper functions for SweetAlert
+            function showSuccessAlert(title, text, rowId = null) {
+                Swal.fire({
+                    icon: 'success',
+                    title: title,
+                    text: text,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    if (rowId) {
+                        // Fade out the row and then remove it
+                        $(rowId).fadeOut(500, function() {
+                            $(this).remove();
+                            location.reload(); // Optional: reload the page
+                        });
+                    } else {
+                        location.reload(); // Reload the page after success
+                    }
+                });
+            }
+
+            function showErrorAlert(title, text) {
+                Swal.fire({
+                    icon: 'error',
+                    title: title,
+                    text: text,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+
+            // Add and Edit Student Form Handler
             function submitStudentForm(form, formType) {
                 let formData = new FormData(form[0]);
+                let rowId = null;
 
-                // For jQuery ajax with FormData we need these options
+                // For edit, capture the row ID to fade out
+                if (formType === 'edit') {
+                    rowId = '#row_' + formData.get('original_student_id');
+                }
+
+                // jQuery ajax settings
                 let ajaxSettings = {
                     url: 'student.php',
                     type: 'POST',
@@ -366,6 +528,8 @@ $result = $conn->query($sql);
                             icon: 'error',
                             title: 'Oops...',
                             text: 'Something went wrong!',
+                            showConfirmButton: false,
+                            timer: 1500
                         });
                     }
                 };
@@ -383,7 +547,7 @@ $result = $conn->query($sql);
                     ajaxSettings.dataType = 'json';
                     ajaxSettings.success = function(data) {
                         if (data.status === 'success') {
-                            showSuccessAlert('Success!', data.message);
+                            showSuccessAlert('Updated!', data.message, rowId);
                         } else {
                             showErrorAlert('Oops...', data.message);
                         }
@@ -394,25 +558,21 @@ $result = $conn->query($sql);
                 $.ajax(ajaxSettings);
             }
 
-            // Helper functions for SweetAlert
-            function showSuccessAlert(title, text) {
-                Swal.fire({
-                    icon: 'success',
-                    title: title,
-                    text: text,
-                    showConfirmButton: true
-                }).then(() => {
-                    location.reload(); // Reload the page after success
-                });
-            }
+            // Form submission event handlers
+            $('#addStudentForm').submit(function(event) {
+                event.preventDefault();
+                submitStudentForm($(this), 'add');
+            });
 
-            function showErrorAlert(title, text) {
-                Swal.fire({
-                    icon: 'error',
-                    title: title,
-                    text: text
-                });
-            }
+            $('#editStudentForm').submit(function(event) {
+                event.preventDefault();
+                submitStudentForm($(this), 'edit');
+            });
+
+            // Expose functions globally if needed
+            window.openModal = openModal;
+            window.closeModal = closeModal;
+            window.confirmDelete = confirmDelete;
         });
     </script>
 

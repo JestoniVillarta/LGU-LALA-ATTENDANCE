@@ -150,6 +150,40 @@ table tr:hover td{
    
 }
 
+.search-gender {
+    margin: 0;
+}
+
+.search-gender form{
+    border-radius: 25px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    
+}
+
+.search-gender select {
+    width: 180px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1.9px solid rgb(133, 129, 129);
+    border-radius: 50px;
+
+    padding-right: 30px; /* Adjust the space for the dropdown arrow */
+    appearance: none; /* Remove default styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>'); 
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Adjust icon position */
+    background-size: 15px;
+
+}
+
+
+
+
 
 .search-container {
     margin: 0;
